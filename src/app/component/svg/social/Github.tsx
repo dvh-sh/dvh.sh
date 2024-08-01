@@ -2,7 +2,12 @@ import React from 'react';
 
 const Github = ({ link }: { link: string }) => {
     return (
-        <a className="mx-1.5 hover:text-slate-200 text-slate-300 transition-colors duration-300 transform" href={link}>
+        <a 
+         className="mx-1.5 hover:text-slate-200
+         text-slate-300 transition-colors duration-300 transform"
+         href={link}
+         aria-label="Github Redirect"
+        >
             <svg className="w-9 h-10 fill-current" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                 <path d="M5.315 2.1c.791 -.113 1.9 .145 3.333 .966l.272 .161l.16 .1l.397 -.083a13.3 13.3 0 0 1 4.59
