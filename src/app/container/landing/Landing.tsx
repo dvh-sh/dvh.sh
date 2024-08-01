@@ -33,7 +33,7 @@ const Landing = () => {
                 </CardBody>
                 <CardFooter className="flex justify-around">
                     <Github link="https://github.com/dvhsh" />
-                    <Email link="mailto:david@haruhime.holdings" />
+                    <Email link="mailto:david@dvh.sh" />
                 </CardFooter>
             </Card>
         </div>
