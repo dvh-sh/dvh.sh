@@ -22,12 +22,12 @@ const Landing = () => {
                             <h1 className="text-white text-xl font-bold">
                                 <TextTyper />
                             </h1>
-                            <h3 className="text-slate-400 mt-2">
+                            <h2 className="text-slate-400 mt-2">
                                 Cheif Technical Officer @{' '}
                                 <Link isExternal href="https://haruhime.holdings" className="hover:underline text-slate-300">
                                     Haruhime Holdings
                                 </Link>
-                            </h3>
+                            </h2>
                         </div>
                     </div>
                 </CardBody>
