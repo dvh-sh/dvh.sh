@@ -7,7 +7,7 @@ import TextTyper                                   from "@component/text/TextTyp
 
 const Landing = () => {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black p-6">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black p-6 overflow-hidden">
             <Card isBlurred shadow="lg"
                   className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl shadow-xl p-6">
                 <CardBody>
@@ -20,9 +20,8 @@ const Landing = () => {
                             className="rounded-full border-4 border-gray-700"
                         />
                         <div className="flex flex-col">
-                            <div className="text-white text-lg font-bold"
-                                 style={{width: '200px', whiteSpace: 'nowrap'}}>
-                                <TextTyper/>
+                            <div className="text-white text-lg font-bold flex-grow overflow-hidden">
+                                <TextTyper />
                             </div>
                             <h2 className="text-slate-400 mt-2">
                                 CTO @{' '}
@@ -35,8 +34,8 @@ const Landing = () => {
                     </div>
                 </CardBody>
                 <CardFooter className="flex justify-around">
-                    <Github link="https://github.com/dvhsh"/>
-                    <Email link="mailto:david@dvh.sh"/>
+                    <Github link="https://github.com/dvhsh" />
+                    <Email link="mailto:david@dvh.sh" />
                 </CardFooter>
             </Card>
         </div>
