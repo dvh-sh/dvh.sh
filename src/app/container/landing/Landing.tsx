@@ -20,7 +20,7 @@ const Landing = () => {
                             className="rounded-full border-4 border-gray-700"
                         />
                         <div className="flex flex-col">
-                            <div className="text-white text-lg font-bold flex-grow overflow-hidden">
+                            <div className="text-white text-sm font-bold flex-grow overflow-hidden">
                                 <TextTyper />
                             </div>
                             <h2 className="text-slate-400 mt-2">
