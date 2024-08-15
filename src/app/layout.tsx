@@ -16,24 +16,17 @@ export const metadata: Metadata = {
 }
 
 
-// RootLayout component
-export default function RootLayout({
-                                       children,
-                                   }: {
-    children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-        <body>
+        <body className={inter.className}>
         <NextUIProvider>
-            <div>
-                <Header/>
-            </div>
-            <div>
-                {children}
-            </div>
-            <div>
-                <Footer/>
+            <div className="flex flex-col min-h-screen">
+                <Header />
+                <div className="flex-grow">
+                    {children}
+                </div>
+                <Footer />
             </div>
         </NextUIProvider>
         </body>
