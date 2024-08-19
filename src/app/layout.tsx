@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <meta property="og:site_name" content="David Portfolio" />
             <meta property="og:type" content="website" />
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:site" content="@HaruhimeHoldings" />
+            <meta name="twitter:site" content="@HaruHoldings" />
             <meta name="twitter:title" content="David | Full-Stack Developer Portfolio" />
             <meta name="twitter:description" content="Explore David’s portfolio, highlighting his expertise in full-stack development across a range of modern technologies." />
         </head>
