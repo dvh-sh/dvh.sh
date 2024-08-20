@@ -39,23 +39,31 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
             <meta charSet="UTF-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <meta name="robots" content="index, follow"/>
-            <link rel="canonical" href="https://dvh.sh"/>
+
             <meta name="description"
                   content="Explore David’s personal portfolio showcasing skills and experience in full-stack development, with expertise in various modern technologies."/>
             <meta name="keywords"
                   content="David, Full-Stack Developer, Software Engineer, Web Development, Backend, Frontend, CSIS Student"/>
+
             <meta name="author" content="David"/>
+
             <meta property="og:title" content="David | Full-Stack Developer Portfolio"/>
             <meta property="og:description"
                   content="Explore David’s portfolio, highlighting his expertise in full-stack development across a range of modern technologies."/>
             <meta property="og:url" content="https://dvh.sh"/>
             <meta property="og:site_name" content="David Portfolio"/>
             <meta property="og:type" content="website"/>
+
             <meta name="twitter:card" content="summary_large_image"/>
             <meta name="twitter:site" content="@HaruHoldings"/>
             <meta name="twitter:title" content="David | Full-Stack Developer Portfolio"/>
             <meta name="twitter:description"
                   content="Explore David’s portfolio, highlighting his expertise in full-stack development across a range of modern technologies."/>
+
+            <meta name="theme-color" content="#121212"/>
+
+            <link rel="canonical" href="https://dvh.sh"/>
+            <link rel="manifest" href="/manifest.json"/>
         </head>
         <body className={`${inter.className}`}>
         <NextUIProvider>
