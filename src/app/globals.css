@@ -27,8 +27,5 @@ a {
 }
 
 a:hover {
-  color: #f0f0f0;
+  color: #f0f0f0; /* lighter color for hover */
 }
-
-
-
