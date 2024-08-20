@@ -25,6 +25,17 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
     return (
         <html lang="en">
         <head>
+
+            <link
+                rel="preload"
+                href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+                as="style"
+            />
+
+            <noscript>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"/>
+            </noscript>
+
             <meta charSet="UTF-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <meta name="robots" content="index, follow"/>

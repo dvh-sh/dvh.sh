@@ -21,3 +21,11 @@
 body {
   background-color: #121212;
 }
+
+a {
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #f0f0f0; /* lighter color for hover */
+}
