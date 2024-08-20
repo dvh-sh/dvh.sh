@@ -15,7 +15,10 @@ import {
     SiGmail,
 }                                               from "react-icons/si";
 
-import { Card, CardBody, Image, Link, Divider } from "@nextui-org/react";
+import { Card, CardBody }                       from "@nextui-org/card";
+import { Divider }                              from "@nextui-org/divider";
+import { Image }                                from "@nextui-org/image";
+import { Link }                                 from "@nextui-org/link";
 
 import TextTyper                                from "@component/text/TextTyper";
 

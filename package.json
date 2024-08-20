@@ -9,8 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@nextui-org/react": "^2.3.6",
+    "@nextui-org/card": "^2.0.33",
+    "@nextui-org/divider": "^2.0.31",
+    "@nextui-org/image": "^2.0.31",
+    "@nextui-org/link": "^2.0.34",
+    "@nextui-org/system": "^2.2.5",
+    "@nextui-org/theme": "^2.2.9",
     "autoprefixer": "^10.4.20",
+    "framer-motion": "^11.3.28",
     "next": "14.1.1",
     "react": "^18",
     "react-dom": "^18",

@@ -1,7 +1,7 @@
-import {NextUIProvider} from "@nextui-org/react";
+import { NextUIProvider } from "@nextui-org/system";
 
-import type {Metadata} from 'next'
-import {Inter} from 'next/font/google'
+import type { Metadata }  from 'next'
+import      { Inter }     from 'next/font/google'
 
 import './globals.css'
 
