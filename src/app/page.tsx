@@ -26,7 +26,6 @@ import SkillsSection                            from "@container/SkillsSection";
 import ConnectSection                           from "@container/ConnectSection";
 
 export default function Page() {
-    const year = new Date().getFullYear();
 
     const languages = [
         { Icon: SiJavascript , label: "JavaScript" , color: "text-yellow-400" },
@@ -75,18 +74,22 @@ export default function Page() {
 
                     <Divider className="my-3 sm:my-4 bg-gray-500 opacity-20"/>
 
-                    <h2 className="text-white text-lg sm:text-xl font-semibold mb-3">Connect with Me</h2>
+                    <h2 className="text-white text-md sm:text-lg font-semibold mb-3">Connect with Me</h2>
                     <ConnectSection connections={connections} />
                 </CardBody>
             </Card>
 
             <footer
-                className="flex justify-center items-center py-3 text-slate-400 mt-4 hover:text-white transition-colors duration-300">
-                <a href="https://github.com/dvh-sh/dvh.sh" target="_blank"
-                   className="fill-slate-400 transition-colors duration-300" aria-label="Source Redirect">
-                    <SiGithub className="h-5 sm:h-6 w-5 sm:w-6 hover:scale-125 transition-transform duration-300"/>
-                </a>
-                <p className="ml-2 text-xs sm:text-sm">&copy; dvh.sh {year}</p>
+                className="flex justify-center items-center py-3 mt-4 hover:text-white transition-colors duration-300">
+                <Link
+                    isExternal
+                    href="https://github.com/dvh-sh/dvh.sh"
+                    target="_blank"
+                    aria-label="Source Redirect"
+                    className="transition-colors duration-300"
+                >
+                    <p className="ml-2 text-xs sm:text-sm text-slate-400 hover:underline">&copy; dvh.sh {new Date().getFullYear()}</p>
+                </Link>
             </footer>
         </div>
     );
