@@ -68,12 +68,12 @@ export default function Page() {
                         Founder & CTO @ <Link isExternal href="https://haruhime.holdings" className="hover:underline text-blue-400">Haruhime Holdings</Link>
                     </p>
 
-                    <Divider className="my-3 sm:my-4 bg-gray-500 transition-opacity duration-500 hover:opacity-80"/>
+                    <Divider className="my-3 sm:my-4 bg-gray-500 opacity-20"/>
 
                     <SkillsSection title="Languages" skills={languages} iconSize="w-8 sm:w-9 h-8 sm:h-9" />
                     <SkillsSection title="Tools" skills={tools} iconSize="w-8 sm:w-9 h-8 sm:h-9" />
 
-                    <Divider className="my-3 sm:my-4 bg-gray-500 transition-opacity duration-500 hover:opacity-80"/>
+                    <Divider className="my-3 sm:my-4 bg-gray-500 opacity-20"/>
 
                     <h2 className="text-white text-lg sm:text-xl font-semibold mb-3">Connect with Me</h2>
                     <ConnectSection connections={connections} />
