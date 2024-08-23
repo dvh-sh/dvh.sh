@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const ConnectSection = ({ connections }: { connections: { Icon: React.ComponentType<any>, label: string, link: string, color: string }[] }) => {
     return (
