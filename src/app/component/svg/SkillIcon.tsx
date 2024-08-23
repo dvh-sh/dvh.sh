@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const SkillIcon = ({ Icon, label, color, iconSize }: { Icon: React.ComponentType<any>, label: string, color: string, iconSize?: string }) => {
     return (
