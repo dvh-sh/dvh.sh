@@ -1,7 +1,7 @@
 'use client';
 
-import { TypeAnimation } from "react-type-animation"
-import React             from 'react'
+import { TypeAnimation } from "react-type-animation";
+import React             from "react";
 
 const TextTyper = () => {
     return (
