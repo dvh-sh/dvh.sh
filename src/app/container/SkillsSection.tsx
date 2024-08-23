@@ -1,6 +1,6 @@
-import React     from 'react';
+import React     from "react";
 
-import SkillIcon from '@component/svg/SkillIcon';
+import SkillIcon from "@component/svg/SkillIcon";
 
 const SkillsSection = ({ title, skills, iconSize }: { title: string, skills: { Icon: React.ComponentType<any>, label: string, color: string }[], iconSize?: string }) => {
     return (
