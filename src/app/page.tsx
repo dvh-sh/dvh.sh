@@ -63,7 +63,7 @@ export default function Page() {
                     />
                     <h1 className="text-center text-white text-lg sm:text-xl font-bold mb-2 sm:mb-3"><TextTyper/></h1>
                     <p className="text-gray-300 text-center text-sm sm:text-base mb-1 sm:mb-2">
-                        CSIS Student, Software Developer, and Entrepreneur <br/>
+                        CSIS Student, Software Engineer, and Entrepreneur <br/>
                         Founder & CTO @ <Link isExternal href="https://haruhime.holdings" className="hover:underline text-blue-400">Haruhime Holdings</Link>
                     </p>
 
