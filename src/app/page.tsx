@@ -11,6 +11,7 @@ import {
     SiKotlin,
     SiCplusplus,
     SiGithub,
+    SiLeetcode,
     SiLinkedin,
     SiGmail,
 }                                               from "react-icons/si";
@@ -46,6 +47,7 @@ export default function Page() {
 
     const connections = [
         { Icon: SiGithub   , label: "GitHub"   , link: "https://github.com/dvhsh"          , color: "text-gray-400" },
+        { Icon: SiLeetcode , label: "LeetCode" , link: "https://leetcode.com/u/dvhsh"      , color: "text-gray-400" },
         { Icon: SiLinkedin , label: "LinkedIn" , link: "https://www.linkedin.com/in/dvhsh" , color: "text-gray-400" },
         { Icon: SiGmail    , label: "Email"    , link: "mailto:david@dvh.sh"               , color: "text-gray-400" },
     ];
