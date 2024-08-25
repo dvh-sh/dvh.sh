@@ -33,7 +33,6 @@ export const metadata: Metadata = {
         title: 'David | Full-Stack Developer Portfolio',
         description: 'Explore David’s portfolio, highlighting his expertise in full-stack development across a range of modern technologies.'
     },
-    themeColor: '#303446',
     manifest: '/manifest.json',
     icons: {
         icon: '/favicon.ico',
@@ -46,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <head>
                 <link rel="canonical" href="https://dvh.sh" />
+                <meta name="theme-color" content="#303446" />
             </head>
             <body className={`${inter.className} frappe bg-base text-text`}>
                 <NextUIProvider>
