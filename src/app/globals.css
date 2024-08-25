@@ -19,7 +19,7 @@
 }
 
 body {
-  background-color: #121212;
+  background-color: bg-base;
 }
 
 a {
@@ -27,5 +27,6 @@ a {
 }
 
 a:hover {
-  color: #f0f0f0; /* lighter color for hover */
+  color: var(--catppuccin-text);
 }
+

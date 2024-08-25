@@ -19,7 +19,12 @@ const config: Config = {
     },
   },
   darkMode: 'class',
-  plugins: [nextui()]
+  plugins: [
+    nextui(),
+    require("@catppuccin/tailwindcss")({
+      defaultFlavor: 'Frappe',
+    })
+  ]
 }
 
 export default config;
