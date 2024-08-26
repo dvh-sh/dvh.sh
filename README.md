@@ -60,5 +60,3 @@ This project is built with Next.js and uses TypeScript for type safety. The proj
 ## License
 
 This project is licensed under the GNU GPL 3.0 License. See the [LICENSE](https://choosealicense.com/licenses/gpl-3.0/) file for details.
-
-![Repo Beats](https://repobeats.axiom.co/api/embed/8a62d6efadd36d03a6154b56d7a24257420c713c.svg "Repobeats analytics image")
