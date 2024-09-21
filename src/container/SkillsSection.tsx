@@ -1,17 +1,16 @@
-import React     from "react";
-
+import React from "react";
 import SkillIcon from "@component/svg/SkillIcon";
 
 interface Skill {
-  Icon  : React.ComponentType<any>;
-  label : string;
-  color : string;
+  Icon: React.ComponentType<any>;
+  label: string;
+  color: string;
 }
 
 interface SkillsSectionProps {
-  title     : string;
-  skills    : Skill[];
-  iconSize? : string;
+  title: string;
+  skills: Skill[];
+  iconSize?: string;
 }
 
 const SkillsSection: React.FC<SkillsSectionProps> = ({
@@ -20,11 +19,9 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({
   iconSize = "w-8 sm:w-9 h-8 sm:h-9",
 }) => {
   return (
-    <>
-      <h2 className="text-subtext1 text-xl font-semibold mb-4">
-        {title}
-      </h2>
-      <div className="flex justify-center space-x-6 mb-6">
+    <div className="mb-8">
+      <h3 className="text-xl font-semibold mb-4 text-subtext0">{title}</h3>
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
         {skills.map((skill, index) => (
           <SkillIcon
             key={index}
@@ -35,10 +32,10 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
 export default SkillsSection;
 
-// path: src/app/container/SkillsSection.tsx
+// path: src/container/SkillsSection.tsx

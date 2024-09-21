@@ -1,10 +1,10 @@
 import React from "react";
 
 interface SkillIconProps {
-  Icon      : React.ComponentType<any>;
-  label     : string;
-  color     : string;
-  iconSize? : string;
+  Icon: React.ComponentType<any>;
+  label: string;
+  color: string;
+  iconSize?: string;
 }
 
 const SkillIcon: React.FC<SkillIconProps> = ({
@@ -27,4 +27,4 @@ const SkillIcon: React.FC<SkillIconProps> = ({
 
 export default SkillIcon;
 
-// path: src/app/component/svg/SkillIcon.tsx
+// path: src/component/svg/SkillIcon.tsx

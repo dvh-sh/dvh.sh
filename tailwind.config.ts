@@ -4,27 +4,27 @@ const { nextui } = require("@nextui-org/theme");
 
 const config: Config = {
   content: [
-    './src/container/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/component/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+    "./src/container/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/component/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
-  darkMode: 'class',
+  darkMode: "class",
   plugins: [
     nextui(),
     require("@catppuccin/tailwindcss")({
-      defaultFlavor: 'Mocha',
-    })
-  ]
-}
+      defaultFlavor: "Mocha",
+    }),
+  ],
+};
 
 export default config;

@@ -1,15 +1,15 @@
 import React from "react";
 
 interface Connection {
-  Icon  : React.ComponentType<any>;
-  label : string;
-  link  : string;
-  color : string;
+  Icon: React.ComponentType<any>;
+  label: string;
+  link: string;
+  color: string;
 }
 
 interface ConnectSectionProps {
-  connections : Connection[];
-  iconSize?   : string;
+  connections: Connection[];
+  iconSize?: string;
 }
 
 const ConnectSection: React.FC<ConnectSectionProps> = ({
@@ -17,10 +17,9 @@ const ConnectSection: React.FC<ConnectSectionProps> = ({
   iconSize = "w-6 sm:w-8 h-6 sm:h-8",
 }) => {
   return (
-    <>
-      <h2 className="text-subtext1 text-md sm:text-lg font-semibold mb-3">
-        Connect with Me
-      </h2>
+    <div className="mt-auto pt-4">
+      {" "}
+      {/* Added margin-top auto and padding-top */}
       <div className="flex justify-center space-x-4 sm:space-x-6">
         {connections.map((connection, index) => (
           <a
@@ -35,10 +34,10 @@ const ConnectSection: React.FC<ConnectSectionProps> = ({
           </a>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
 export default ConnectSection;
 
-// path: src/app/container/ConnectSection.tsx
+// path: src/container/ConnectSection.tsx
