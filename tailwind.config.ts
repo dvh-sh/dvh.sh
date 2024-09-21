@@ -4,8 +4,8 @@ const { nextui } = require("@nextui-org/theme");
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/container/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/component/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
@@ -22,7 +22,7 @@ const config: Config = {
   plugins: [
     nextui(),
     require("@catppuccin/tailwindcss")({
-      defaultFlavor: 'Frappe',
+      defaultFlavor: 'Mocha',
     })
   ]
 }
