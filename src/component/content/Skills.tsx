@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import * as SiIcons from "react-icons/si";
 import SkillsSection from "@container/SkillsSection";
 import { Skill } from "@types";
 
@@ -37,10 +36,6 @@ export default function Skills() {
       });
   }, []);
 
-  const getIcon = (iconName: string) => {
-    return SiIcons[iconName as keyof typeof SiIcons];
-  };
-
   if (error) return <div>Error loading skills: {error}</div>;
   if (!skills) return <div>Loading skills...</div>;
 
@@ -49,34 +44,22 @@ export default function Skills() {
       <h2 className="text-3xl font-bold mb-4 text-pink">Skills</h2>
       <SkillsSection
         title="Programming Languages"
-        skills={skills.programmingLanguages.map((skill) => ({
-          ...skill,
-          Icon: getIcon(skill.icon),
-        }))}
+        skills={skills.programmingLanguages}
         iconSize="w-10 h-10"
       />
       <SkillsSection
         title="Frameworks & Libraries"
-        skills={skills.frameworks.map((skill) => ({
-          ...skill,
-          Icon: getIcon(skill.icon),
-        }))}
+        skills={skills.frameworks}
         iconSize="w-10 h-10"
       />
       <SkillsSection
         title="Cloud & Databases"
-        skills={skills.cloud.map((skill) => ({
-          ...skill,
-          Icon: getIcon(skill.icon),
-        }))}
+        skills={skills.cloud}
         iconSize="w-10 h-10"
       />
       <SkillsSection
         title="DevOps & Tools"
-        skills={skills.tools.map((skill) => ({
-          ...skill,
-          Icon: getIcon(skill.icon),
-        }))}
+        skills={skills.tools}
         iconSize="w-10 h-10"
       />
     </section>

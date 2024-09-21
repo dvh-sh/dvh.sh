@@ -25,6 +25,17 @@ const config: Config = {
       defaultFlavor: "Mocha",
     }),
   ],
+  safelist: [
+    "text-yellow",
+    "text-blue",
+    "text-mauve",
+    "text-green",
+    "text-red",
+    "text-peach",
+    "text-gray",
+    "text-pink",
+    "text-gray",
+  ],
 };
 
 export default config;

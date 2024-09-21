@@ -1,12 +1,17 @@
 import React from "react";
 import SkillIcon from "@component/svg/SkillIcon";
 import { Skill } from "@types";
+import * as SiIcons from "react-icons/si";
 
 interface SkillsSectionProps {
   title: string;
   skills: Skill[];
   iconSize?: string;
 }
+
+const getIcon = (iconName: string) => {
+  return SiIcons[iconName as keyof typeof SiIcons];
+};
 
 const SkillsSection: React.FC<SkillsSectionProps> = ({
   title,
@@ -20,7 +25,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({
         {skills.map((skill, index) => (
           <SkillIcon
             key={index}
-            Icon={skill.Icon}
+            Icon={getIcon(skill.icon)}
             label={skill.label}
             color={skill.color}
             iconSize={iconSize}
