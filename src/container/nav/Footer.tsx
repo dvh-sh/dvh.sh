@@ -18,14 +18,15 @@ export function Footer() {
 
   return (
     <footer className="bg-mantle text-text py-4 mt-8 md:ml-64">
-      {" "}
-      {/* Added md:ml-64 */}
       <div className="container mx-auto px-4">
         <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
           <p className="text-sm">
-            &copy; {currentYear} dvh.sh. All rights reserved.
+            &copy; {currentYear} dvh.sh
           </p>
-          <div className="group relative">
+          <p className="text-sm text-center flex-1">
+            Hello from ☀️ Southern California
+          </p>
+          <div className="group relative flex items-center">
             <div className="flex items-center space-x-2 text-subtext0 cursor-pointer">
               <SiNextdotjs size={16} />
               <SiReact size={16} />
