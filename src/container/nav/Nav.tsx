@@ -23,8 +23,8 @@ const navItems: {
     Icon: FaHome,
     subItems: [
       { name: "About", href: "/#about", Icon: FaUser },
-      { name: "Skills", href: "/#skills", Icon: FaCogs },
       { name: "Projects", href: "/#projects", Icon: FaProjectDiagram },
+      { name: "Skills", href: "/#skills", Icon: FaCogs },
     ],
   },
   { name: "Software", href: "/software", Icon: FaLaptopCode },
