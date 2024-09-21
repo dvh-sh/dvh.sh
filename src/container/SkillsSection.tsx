@@ -1,11 +1,6 @@
 import React from "react";
 import SkillIcon from "@component/svg/SkillIcon";
-
-interface Skill {
-  Icon: React.ComponentType<any>;
-  label: string;
-  color: string;
-}
+import { Skill } from "@types";
 
 interface SkillsSectionProps {
   title: string;

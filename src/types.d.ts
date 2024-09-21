@@ -16,4 +16,10 @@ interface Software {
   subSoftware?: Software[];
 }
 
-export type { Project, Software };
+interface Skill {
+  icon: string;
+  label: string;
+  color: string;
+}
+
+export type { Project, Software, Skill };

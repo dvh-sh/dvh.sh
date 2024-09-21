@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import * as SiIcons from "react-icons/si";
 import SkillsSection from "@container/SkillsSection";
-
-interface Skill {
-  icon: string;
-  label: string;
-  color: string;
-}
+import { Skill } from "@types";
 
 interface SkillsData {
   programmingLanguages: Skill[];
@@ -17,19 +12,36 @@ interface SkillsData {
 
 export default function Skills() {
   const [skills, setSkills] = useState<SkillsData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch(
       "https://raw.githubusercontent.com/dvh-sh/.github/refs/heads/main/assets/skills.json",
     )
-      .then((response) => response.json())
-      .then((data) => setSkills(data.skills));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data && data.skills) {
+          setSkills(data.skills);
+        } else {
+          throw new Error("Data structure is not as expected");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching skills:", error);
+        setError(error.message);
+      });
   }, []);
 
   const getIcon = (iconName: string) => {
     return SiIcons[iconName as keyof typeof SiIcons];
   };
 
+  if (error) return <div>Error loading skills: {error}</div>;
   if (!skills) return <div>Loading skills...</div>;
 
   return (

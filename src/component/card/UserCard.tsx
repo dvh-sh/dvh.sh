@@ -7,8 +7,8 @@ export function UserCard() {
         <Image
           src="https://avatars1.githubusercontent.com/u/175678329?v=4"
           alt="David"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: 'cover' }}
           className="rounded-full border-4 border-pink"
         />
       </div>

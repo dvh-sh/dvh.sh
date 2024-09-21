@@ -12,8 +12,9 @@ const ProjectCard: React.FC<Project> = ({
 }) => {
   return (
     <div className="bg-surface0 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full relative">
-      <div className="absolute top-4 right-4 flex space-x-3">
-        {demoLink && (
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-xl font-semibold text-pink">{title}</h3>
+        <div className="flex space-x-3">
           <a
             href={demoLink}
             className="text-subtext0 hover:text-pink transition-colors duration-200"
@@ -23,8 +24,6 @@ const ProjectCard: React.FC<Project> = ({
           >
             <FaExternalLinkAlt size={20} />
           </a>
-        )}
-        {sourceLink && (
           <a
             href={sourceLink}
             className="text-subtext0 hover:text-pink transition-colors duration-200"
@@ -34,10 +33,8 @@ const ProjectCard: React.FC<Project> = ({
           >
             <FaGithub size={20} />
           </a>
-        )}
+        </div>
       </div>
-
-      <h3 className="text-xl font-semibold mb-3 text-pink pr-16">{title}</h3>
       <p className="text-text mb-4">{description}</p>
       <div className="mt-auto">
         {technologies.map((tech, index) => (
