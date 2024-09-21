@@ -22,4 +22,9 @@ interface Skill {
   color: string;
 }
 
-export type { Project, Software, Skill };
+type Catppuccin = {
+  flavor: string;
+  setFlavor: (flavor: string) => void;
+}
+
+export type { Project, Software, Skill, Catppuccin };

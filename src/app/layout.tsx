@@ -1,3 +1,5 @@
+import React, { useContext } from 'react';
+
 import { NextUIProvider } from "@nextui-org/system";
 
 import type { Metadata } from "next";
@@ -9,6 +11,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 import { Sidebar } from "@container/nav/Sidebar";
 import { Footer } from "@container/nav/Footer";
+
+import { ThemeProvider } from "../provider/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "David | Full-Stack Developer Portfolio",
@@ -43,7 +47,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   icons: {
     icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    apple: "/icons/icon.png",
   },
 };
 
@@ -58,16 +62,18 @@ export default function RootLayout({
         <link rel="canonical" href="https://dvh.sh" />
         <meta name="theme-color" content="#1e1e2e" />
       </head>
-      <body className={`${inter.className} mocha bg-base text-text`}>
-        <NextUIProvider>
-          <div className="flex min-h-screen">
-            <Sidebar />
-            <div className="flex-1 transition-all duration-300 ease-in-out">
-              <main className="p-4 md:p-8">{children}</main>
-              <Footer />
+      <body className={inter.className}>
+        <ThemeProvider>
+          <NextUIProvider>
+            <div className="flex min-h-screen">
+              <Sidebar />
+              <div className="flex-1 flex flex-col">
+                <main className="flex-grow">{children}</main>
+                <Footer />
+              </div>
             </div>
-          </div>
-        </NextUIProvider>
+          </NextUIProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

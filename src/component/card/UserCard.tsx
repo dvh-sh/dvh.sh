@@ -12,7 +12,7 @@ export function UserCard() {
           className="rounded-full border-4 border-pink"
         />
       </div>
-      <h1 className="text-xl font-bold mb-2">David</h1>
+      <h1 className="text-xl font-bold mb-2 text-text">David</h1>
       <p className="text-sm text-subtext0">Software Engineer</p>
     </div>
   );
