@@ -71,6 +71,9 @@ export const PostContent: React.FC<PostContentProps> = ({ content }) => {
         {...props}
       />
     ),
+    code: (props) => (
+      <code className="bg-surface1 text-subtext0 rounded px-1" {...props} />
+    ),
   };
 
   return (
