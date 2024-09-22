@@ -1,4 +1,4 @@
-import { getPostData, getSortedPostsData } from "@lib/posts";
+import { getPostData } from "@lib/posts";
 import { PostHeader } from "@component/blog/PostHeader";
 import { PostContent } from "@component/blog/PostContent";
 
@@ -25,11 +25,6 @@ export default async function Post({ params }: PostProps) {
       </div>
     </div>
   );
-}
-
-export async function generateStaticParams() {
-  const posts = await getSortedPostsData();
-  return posts.map((post) => ({ id: post.id }));
 }
 
 // Path: src/app/blog/[id]/page.tsx
