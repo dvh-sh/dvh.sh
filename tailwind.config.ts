@@ -24,6 +24,7 @@ const config: Config = {
     require("@catppuccin/tailwindcss")({
       defaultFlavor: "Mocha",
     }),
+    require("@tailwindcss/typography"),
   ],
   safelist: [
     "text-yellow",

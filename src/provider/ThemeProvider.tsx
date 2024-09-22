@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { ThemeContext } from '@container/ThemeContext';
-import { Catppuccin } from '@types';
+import React, { useState, useEffect } from "react";
+import { ThemeContext } from "@container/ThemeContext";
+import { Catppuccin } from "@types";
 
 interface ThemeProviderProps {
   children: React.ReactNode;
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<Catppuccin["flavor"]>('mocha');
+  const [theme, setTheme] = useState<Catppuccin["flavor"]>("mocha");
 
   useEffect(() => {
-    document.body.classList.remove('latte', 'frappe', 'macchiato', 'mocha');
+    document.body.classList.remove("latte", "frappe", "macchiato", "mocha");
     document.body.classList.add(theme);
   }, [theme]);
 

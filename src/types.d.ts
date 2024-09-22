@@ -16,6 +16,14 @@ interface Software {
   subSoftware?: Software[];
 }
 
+interface Post {
+  id: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  content: string;
+}
+
 interface Skill {
   icon: string;
   label: string;
@@ -25,6 +33,6 @@ interface Skill {
 type Catppuccin = {
   flavor: string;
   setFlavor: (flavor: string) => void;
-}
+};
 
-export type { Project, Software, Skill, Catppuccin };
+export type { Project, Software, Post, Skill, Catppuccin };

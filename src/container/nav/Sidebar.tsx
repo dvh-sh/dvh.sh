@@ -92,6 +92,6 @@ export const Sidebar = () => {
       )}
     </>
   );
-}
+};
 
 // path: src/container/nav/Sidebar.tsx

@@ -9,6 +9,7 @@ import {
   FaCogs,
   FaUser,
   FaChevronRight,
+  FaBook,
 } from "react-icons/fa";
 
 const navItems: {
@@ -29,6 +30,7 @@ const navItems: {
   },
   { name: "Software", href: "/software", Icon: FaLaptopCode },
   { name: "Resume", href: "/resume", Icon: FaFileAlt },
+  { name: "Blog", href: "/blog", Icon: FaBook },
 ];
 
 export default function Nav() {
