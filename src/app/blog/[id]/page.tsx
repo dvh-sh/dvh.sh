@@ -19,7 +19,7 @@ export default async function Post({ params }: PostProps) {
 
   return (
     <div className="w-full min-h-screen bg-base p-4 sm:p-6 md:pl-72 py-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto mt-8">
         <PostHeader title={post.title} date={post.date} />
         <PostContent content={post.content} />
       </div>
