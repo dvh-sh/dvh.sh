@@ -10,7 +10,11 @@ export default async function Post({ params }: PostProps) {
   const post = await getPostData(params.id);
 
   if (!post) {
-    return <div className="w-full min-h-screen bg-base p-4 md:p-8 md:pl-72 text-text">Post not found. Ratelimited?</div>;
+    return (
+      <div className="w-full min-h-screen bg-base p-4 md:p-8 md:pl-72 text-text">
+        Post not found. Ratelimited?
+      </div>
+    );
   }
 
   return (
