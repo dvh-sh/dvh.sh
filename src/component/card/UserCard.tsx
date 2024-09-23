@@ -9,7 +9,7 @@ export function UserCard() {
           alt="David"
           fill
           style={{ objectFit: "cover" }}
-          className="rounded-full border-4 border-pink"
+          className="rounded-full border-4 border-accent"
         />
       </div>
       <h1 className="text-xl font-bold mb-2 text-text">David</h1>

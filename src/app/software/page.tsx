@@ -39,7 +39,7 @@ export default function SoftwarePage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-base to-mantle p-4 sm:p-6 md:ml-64">
       <div className="max-w-6xl w-full">
-        <h2 className="text-4xl font-bold mb-8 text-pink text-center">
+        <h2 className="text-4xl font-bold mb-8 text-accent text-center">
           Software
         </h2>
         {Object.keys(softwareList).map((category) => (

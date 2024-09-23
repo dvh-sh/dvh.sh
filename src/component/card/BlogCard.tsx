@@ -15,7 +15,7 @@ const BlogCard: React.FC<Post> = ({ id, title, date, excerpt }) => {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold text-pink">{title}</h3>
+        <h3 className="text-xl font-semibold text-accent">{title}</h3>
         <div className="flex items-center text-subtext0">
           <FaCalendarAlt size={16} className="mr-2" />
           <span className="text-sm">{new Date(date).toLocaleDateString()}</span>
@@ -24,7 +24,7 @@ const BlogCard: React.FC<Post> = ({ id, title, date, excerpt }) => {
       <p className="text-text mb-4 flex-grow">{excerpt}</p>
       <Link
         href={`/blog/${id}`}
-        className="text-blue hover:text-pink transition-colors duration-200 flex items-center mt-auto group"
+        className="text-blue hover:text-accent transition-colors duration-200 flex items-center mt-auto group"
       >
         Read more
         <FaArrowRight
@@ -33,7 +33,7 @@ const BlogCard: React.FC<Post> = ({ id, title, date, excerpt }) => {
         />
       </Link>
       <div
-        className="absolute inset-0 bg-gradient-to-r from-pink to-blue opacity-0 transition-opacity duration-300 pointer-events-none"
+        className="absolute inset-0 bg-gradient-to-r from-accent to-blue opacity-0 transition-opacity duration-300 pointer-events-none"
         style={{ opacity: isHovered ? 0.1 : 0 }}
       ></div>
     </div>

@@ -17,7 +17,7 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="bg-mantle text-text py-4 mt-8 md:ml-64 mt-auto">
+    <footer className="bg-mantle text-text py-4 md:ml-64 mt-auto">
       <div className="container mx-auto px-4">
         <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
           <p className="text-sm">&copy; {currentYear} dvh.sh</p>
@@ -40,7 +40,7 @@ export function Footer() {
                   href={`https://github.com/dvh-sh/dvh.sh/commit/${gitHash}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center mt-1 text-blue hover:text-pink transition-colors duration-200"
+                  className="flex items-center mt-1 text-blue hover:text-accent transition-colors duration-200"
                 >
                   <SiGithub className="mr-1" /> View commit
                 </a>

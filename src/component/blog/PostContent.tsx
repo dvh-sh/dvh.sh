@@ -67,7 +67,7 @@ export const PostContent: React.FC<PostContentProps> = ({ content }) => {
     li: (props) => <li className="mb-2" {...props} />,
     blockquote: (props) => (
       <blockquote
-        className="border-l-4 border-pink pl-4 italic mb-4"
+        className="border-l-4 border-accent pl-4 italic mb-4"
         {...props}
       />
     ),

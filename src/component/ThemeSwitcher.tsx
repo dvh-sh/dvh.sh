@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { ThemeContext } from "@container/ThemeContext";
 import { Catppuccin } from "@types";
+import { flavors } from "@catppuccin/palette";
 
 export const ThemeSwitcher = () => {
-  const { theme, setTheme } = React.useContext(ThemeContext);
+  const { theme, setTheme, accent, setAccent } = React.useContext(ThemeContext);
+  const [showPalette, setShowPalette] = useState(false);
 
   const themes: { name: Catppuccin["flavor"]; emoji: string }[] = [
     { name: "latte", emoji: "🌻" },
@@ -12,20 +14,44 @@ export const ThemeSwitcher = () => {
     { name: "mocha", emoji: "🌿" },
   ];
 
+  const accentColors = Object.keys(flavors.mocha.colors).filter(
+    (color) =>
+      flavors.mocha.colors[color as keyof typeof flavors.mocha.colors].accent,
+  );
+
   return (
-    <div className="flex items-center space-x-4">
-      {themes.map((t) => (
-        <button
-          key={t.name}
-          onClick={() => setTheme(t.name)}
-          className={`p-2 rounded-full bg-surface0 text-text hover:bg-overlay0 hover:text-overlay2 ${
-            theme === t.name ? "ring-2 ring-accent" : ""
-          }`}
-          aria-label={`Switch to ${t.name} theme`}
-        >
-          {t.emoji}
-        </button>
-      ))}
+    <div
+      className="relative inline-block"
+      onMouseEnter={() => setShowPalette(true)}
+      onMouseLeave={() => setShowPalette(false)}
+    >
+      {showPalette && (
+        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 p-2 bg-surface0 rounded-lg shadow-lg flex flex-wrap gap-2 z-10 w-48">
+          {accentColors.map((color) => (
+            <button
+              key={color}
+              onClick={() => setAccent(color)}
+              className={`w-6 h-6 rounded-full ${color === accent ? "ring-2 ring-text" : ""}`}
+              style={{ backgroundColor: `var(--${color})` }}
+              aria-label={`Set accent color to ${color}`}
+            />
+          ))}
+        </div>
+      )}
+      <div className="flex items-center space-x-4">
+        {themes.map((t) => (
+          <button
+            key={t.name}
+            onClick={() => setTheme(t.name)}
+            className={`p-2 rounded-full bg-surface0 text-text hover:bg-overlay0 hover:text-overlay2 ${
+              theme === t.name ? "ring-2 ring-accent" : ""
+            }`}
+            aria-label={`Switch to ${t.name} theme`}
+          >
+            {t.emoji}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

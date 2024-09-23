@@ -13,11 +13,11 @@ const ProjectCard: React.FC<Project> = ({
   return (
     <div className="bg-surface0 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full relative">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold text-pink">{title}</h3>
+        <h3 className="text-xl font-semibold text-accent">{title}</h3>
         <div className="flex space-x-3">
           <a
             href={demoLink}
-            className="text-subtext0 hover:text-pink transition-colors duration-200"
+            className="text-subtext0 hover:text-accent transition-colors duration-200"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="View project demo"
@@ -26,7 +26,7 @@ const ProjectCard: React.FC<Project> = ({
           </a>
           <a
             href={sourceLink}
-            className="text-subtext0 hover:text-pink transition-colors duration-200"
+            className="text-subtext0 hover:text-accent transition-colors duration-200"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="View source code"
@@ -40,7 +40,7 @@ const ProjectCard: React.FC<Project> = ({
         {technologies.map((tech, index) => (
           <span
             key={index}
-            className="inline-block bg-surface1 text-subtext0 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2 transition-colors duration-200 hover:bg-pink hover:text-base"
+            className="inline-block bg-surface1 text-subtext0 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2 transition-colors duration-200 hover:bg-accent hover:text-base"
           >
             {tech}
           </span>

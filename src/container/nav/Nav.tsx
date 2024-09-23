@@ -52,8 +52,8 @@ export default function Nav() {
                 flex items-center py-2 px-4 rounded-lg transition-colors duration-200
                 ${
                   isActive(item.href)
-                    ? "bg-pink text-base font-medium"
-                    : "text-text hover:bg-surface0 hover:text-pink"
+                    ? "bg-accent text-base font-medium"
+                    : "text-text hover:bg-surface0 hover:text-accent"
                 }
               `}
               aria-current={isActive(item.href) ? "page" : undefined}
@@ -71,15 +71,15 @@ export default function Nav() {
                         flex items-center py-1 px-4 rounded-lg transition-colors duration-200
                         ${
                           pathname === subItem.href
-                            ? "text-pink font-medium"
-                            : "text-text hover:text-pink"
+                            ? "text-accent font-medium"
+                            : "text-text hover:text-accent"
                         }
                       `}
                       aria-current={
                         pathname === subItem.href ? "page" : undefined
                       }
                     >
-                      <FaChevronRight className="mr-2 text-sm" />
+                      {/*<FaChevronRight className="mr-2 text-sm" />*/}
                       <subItem.Icon className="mr-2 text-sm" />
                       <span className="text-sm">{subItem.name}</span>
                     </Link>
