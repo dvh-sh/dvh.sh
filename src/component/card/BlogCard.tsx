@@ -1,8 +1,9 @@
 "use client";
 
-import { FaCalendarAlt, FaArrowRight } from "react-icons/fa";
-import React, { useState } from "react";
 import Link from "next/link";
+import React, { useState } from "react";
+import { FaCalendarAlt, FaArrowRight } from "react-icons/fa";
+
 import { Post } from "@types";
 
 const BlogCard: React.FC<Post> = ({ id, title, date, excerpt }) => {

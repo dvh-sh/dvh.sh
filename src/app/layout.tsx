@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import { NextUIProvider } from "@nextui-org/system";
 
@@ -7,12 +7,12 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+import { ThemeProvider } from "@provider/ThemeProvider";
 
 import { Sidebar } from "@container/nav/Sidebar";
 import { Footer } from "@container/nav/Footer";
 
-import { ThemeProvider } from "../provider/ThemeProvider";
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "David | Full-Stack Developer Portfolio",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://dvh.sh/og-image.jpg",
+        url: "https://dvh.sh/icons/icon.png",
         width: 1200,
         height: 630,
         alt: "David Portfolio",

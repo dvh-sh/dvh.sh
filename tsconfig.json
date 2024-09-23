@@ -19,6 +19,7 @@
       }
     ],
     "paths": {
+      "@provider/*": ["./src/provider/*"],
       "@component/*": ["./src/component/*"],
       "@container/*": ["./src/container/*"],
       "@types": ["./src/types.d.ts"],

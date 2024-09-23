@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+
 import SkillsSection from "@container/SkillsSection";
+
 import { Skill } from "@types";
 
 interface SkillsData {
@@ -41,27 +43,17 @@ export default function Skills() {
 
   return (
     <section id="skills" className="mb-16">
-      <h2 className="text-3xl font-bold mb-4 text-accent">Skills</h2>
+      <h2 className="text-2xl font-bold mb-6 text-accent">Skills</h2>
       <SkillsSection
         title="Programming Languages"
         skills={skills.programmingLanguages}
-        iconSize="w-10 h-10"
       />
       <SkillsSection
         title="Frameworks & Libraries"
         skills={skills.frameworks}
-        iconSize="w-10 h-10"
       />
-      <SkillsSection
-        title="Cloud & Databases"
-        skills={skills.cloud}
-        iconSize="w-10 h-10"
-      />
-      <SkillsSection
-        title="DevOps & Tools"
-        skills={skills.tools}
-        iconSize="w-10 h-10"
-      />
+      <SkillsSection title="Cloud & Databases" skills={skills.cloud} />
+      <SkillsSection title="DevOps & Tools" skills={skills.tools} />
     </section>
   );
 }

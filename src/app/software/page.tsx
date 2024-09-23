@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+
 import SoftwareCard from "@component/card/SoftwareCard";
 import { Software } from "@types";
 

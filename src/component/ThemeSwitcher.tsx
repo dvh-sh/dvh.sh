@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { flavors } from "@catppuccin/palette";
+
 import { ThemeContext } from "@container/ThemeContext";
 import { Catppuccin } from "@types";
-import { flavors } from "@catppuccin/palette";
 
 export const ThemeSwitcher = () => {
   const { theme, setTheme, accent, setAccent } = React.useContext(ThemeContext);

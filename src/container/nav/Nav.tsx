@@ -1,5 +1,6 @@
-import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 import { IconType } from "react-icons";
 import {
   FaHome,
@@ -8,7 +9,6 @@ import {
   FaFileAlt,
   FaCogs,
   FaUser,
-  FaChevronRight,
   FaBook,
 } from "react-icons/fa";
 

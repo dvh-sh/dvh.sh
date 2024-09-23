@@ -1,6 +1,6 @@
-import { getSortedPostsData } from "@lib/posts";
 import BlogCard from "@component/card/BlogCard";
 
+import { getSortedPostsData } from "@lib/posts";
 import { Post } from "@types";
 
 export default async function Blog() {

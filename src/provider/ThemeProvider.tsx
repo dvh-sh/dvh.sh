@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { flavors } from "@catppuccin/palette";
+
 import { ThemeContext } from "@container/ThemeContext";
 import { Catppuccin } from "@types";
-import { flavors } from "@catppuccin/palette";
 
 interface ThemeProviderProps {
   children: React.ReactNode;

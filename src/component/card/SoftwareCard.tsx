@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaExternalLinkAlt, FaCopy } from "react-icons/fa";
+
 import { Software } from "@types";
 
 const SoftwareCard: React.FC<Software> = ({

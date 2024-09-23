@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import { SiGithub, SiGmail, SiLinkedin } from "react-icons/si";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { UserCard } from "@component/card/UserCard";
-import { ThemeSwitcher } from "@component/ThemeSwitcher";
+
 import ConnectSection from "@container/ConnectSection";
 import Nav from "@container/nav/Nav";
+
+import { UserCard } from "@component/card/UserCard";
+import { ThemeSwitcher } from "@component/ThemeSwitcher";
 
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);

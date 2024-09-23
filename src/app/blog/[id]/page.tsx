@@ -1,6 +1,7 @@
-import { getPostData } from "@lib/posts";
 import { PostHeader } from "@component/blog/PostHeader";
 import { PostContent } from "@component/blog/PostContent";
+
+import { getPostData } from "@lib/posts";
 
 interface PostProps {
   params: { id: string };
