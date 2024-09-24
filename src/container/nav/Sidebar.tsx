@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { SiGithub, SiGmail, SiLinkedin } from "react-icons/si";
 import { FaBars, FaTimes } from "react-icons/fa";
 
@@ -10,7 +10,7 @@ import Nav from "@container/nav/Nav";
 import { UserCard } from "@component/card/UserCard";
 import { ThemeSwitcher } from "@component/ThemeSwitcher";
 
-export const Sidebar = () => {
+const SidebarContent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -98,6 +98,20 @@ export const Sidebar = () => {
       )}
     </>
   );
+};
+
+export const Sidebar = () => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+
+  return <SidebarContent />;
 };
 
 // path: src/container/nav/Sidebar.tsx
