@@ -32,7 +32,7 @@ const PositionCard: React.FC<Position> = ({
         {technologies.map((tech, index) => (
           <motion.span
             key={index}
-            className="inline-block bg-surface1 text-subtext0 px-2 py-1 text-sm font-bold uppercase tracking-wide"
+            className="inline-block bg-surface1 text-subtext1 px-2 py-1 text-sm font-bold uppercase tracking-wide"
             whileHover={{ scale: 1.05, rotate: Math.random() * 5 - 2.5 }}
           >
             {tech}
