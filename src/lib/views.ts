@@ -1,4 +1,4 @@
-import { cache } from 'react';
+import { cache } from "react";
 import connectDB from "@util/db.util";
 import Blog from "@model/blog.model";
 
@@ -25,8 +25,8 @@ export const updateViewCount = async (slug: string) => {
 export const getAllBlogViews = cache(async () => {
   try {
     await connectDB();
-    const blogs = await Blog.find({}, 'slug views');
-    
+    const blogs = await Blog.find({}, "slug views");
+
     return blogs.reduce(
       (acc: Record<string, number>, blog: { slug: string; views: number }) => {
         acc[blog.slug] = blog.views;
@@ -39,3 +39,5 @@ export const getAllBlogViews = cache(async () => {
     return {};
   }
 });
+
+// path: src/lib/views.ts
