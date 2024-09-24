@@ -1,3 +1,12 @@
+interface Position {
+  title: string;
+  shortDescription: string;
+  technologies: string[];
+  link: string;
+  positionTitle: string;
+  date: string;
+}
+
 interface Project {
   title: string;
   description: string;
@@ -37,4 +46,4 @@ type Catppuccin = {
   setFlavor: (flavor: string) => void;
 };
 
-export type { Project, Software, Post, Skill, Catppuccin };
+export type { Position, Project, Software, Post, Skill, Catppuccin };

@@ -24,6 +24,7 @@ const navItems: {
     Icon: FaHome,
     subItems: [
       { name: "About", href: "/#about", Icon: FaUser },
+      { name: "Positions", href: "/#positions", Icon: FaFileAlt },
       { name: "Projects", href: "/#projects", Icon: FaProjectDiagram },
       { name: "Skills", href: "/#skills", Icon: FaCogs },
     ],
