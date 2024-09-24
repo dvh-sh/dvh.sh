@@ -65,13 +65,15 @@ export default function RootLayout({
       <body className={`${inter.className} flex flex-col min-h-screen`}>
         <ThemeProvider>
           <NextUIProvider>
-            <div className="flex flex-grow">
-              <Sidebar />
-              <div className="flex-1 flex flex-col">
-                <main className="flex-grow">{children}</main>
+            <>
+              <div className="flex flex-grow">
+                <Sidebar />
+                <div className="flex-1 flex flex-col">
+                  <main className="flex-grow">{children}</main>
+                </div>
               </div>
-            </div>
-            <Footer />
+              <Footer />
+            </>
           </NextUIProvider>
         </ThemeProvider>
       </body>
