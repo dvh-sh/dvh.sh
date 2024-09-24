@@ -52,23 +52,17 @@ main {
   0% {
     transform: rotate(0deg);
   }
-  10% {
-    transform: rotate(14deg);
-  }
   20% {
-    transform: rotate(-8deg);
-  }
-  30% {
     transform: rotate(14deg);
   }
   40% {
-    transform: rotate(-4deg);
-  }
-  50% {
-    transform: rotate(10deg);
+    transform: rotate(-8deg);
   }
   60% {
-    transform: rotate(0deg);
+    transform: rotate(14deg);
+  }
+  80% {
+    transform: rotate(-4deg);
   }
   100% {
     transform: rotate(0deg);
@@ -76,19 +70,70 @@ main {
 }
 
 .animate-wave {
-  animation: wave 2.5s infinite;
+  animation: wave 2.5s ease-in-out infinite;
   transform-origin: 70% 70%;
-}
-
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  display: inline-block;
 }
 
 .animate-spin-slow {
   animation: spin-slow 4s linear infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 5s ease infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.wavy-title .wavy-letter {
+  display: inline-block;
+  animation: float 3s ease-in-out infinite alternate;
+}
+
+.blog-card-container {
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

@@ -13,8 +13,7 @@ export default function AboutMe() {
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        Hi, I'm David{" "}
-        <span className="inline-block animate-spin-slow pl-4">👋</span>
+        Hi, I'm David <span className="inline-block animate-wave pl-4">👋</span>
       </motion.h2>
 
       <div className="relative z-10">
