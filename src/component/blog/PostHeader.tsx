@@ -1,13 +1,18 @@
 import Link from "next/link";
 
-import { FaArrowLeft, FaCalendarAlt } from "react-icons/fa";
+import { FaArrowLeft, FaCalendarAlt, FaEye } from "react-icons/fa";
 
 interface PostHeaderProps {
   title: string;
   date: string;
+  views: number;
 }
 
-export const PostHeader: React.FC<PostHeaderProps> = ({ title, date }) => (
+export const PostHeader: React.FC<PostHeaderProps> = ({
+  title,
+  date,
+  views,
+}) => (
   <div className="mb-8 bg-surface0 rounded-lg p-6 shadow-lg">
     <div className="flex justify-between items-center mb-4">
       <Link
@@ -17,9 +22,15 @@ export const PostHeader: React.FC<PostHeaderProps> = ({ title, date }) => (
         <FaArrowLeft className="mr-2" />
         Back to all posts
       </Link>
-      <div className="flex items-center text-subtext0">
-        <FaCalendarAlt className="mr-2" />
-        <time dateTime={date}>{new Date(date).toLocaleDateString()}</time>
+      <div className="flex items-center space-x-4 text-subtext0">
+        <div className="flex items-center">
+          <FaCalendarAlt className="mr-2" />
+          <time dateTime={date}>{new Date(date).toLocaleDateString()}</time>
+        </div>
+        <div className="flex items-center">
+          <FaEye className="mr-2" />
+          <span>{views} views</span>
+        </div>
       </div>
     </div>
     <h1 className="text-4xl font-bold text-accent">{title}</h1>

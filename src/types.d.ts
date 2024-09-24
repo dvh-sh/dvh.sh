@@ -22,6 +22,7 @@ interface Post {
   date: string;
   excerpt: string;
   content: string;
+  views?: number;
 }
 
 interface Skill {

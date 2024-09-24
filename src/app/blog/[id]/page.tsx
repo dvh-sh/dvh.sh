@@ -1,6 +1,7 @@
 import { PostHeader } from "@component/blog/PostHeader";
 import { PostContent } from "@component/blog/PostContent";
 
+import { updateViewCount } from "@lib/views";
 import { getPostData } from "@lib/posts";
 
 interface PostProps {
@@ -9,6 +10,15 @@ interface PostProps {
 
 export default async function Post({ params }: PostProps) {
   const post = await getPostData(params.id);
+
+  let views = 0;
+
+  if (post) {
+    try {
+      const entry = await updateViewCount(params.id);
+      views = entry.blog.views;
+    } catch (error) {}
+  }
 
   if (!post) {
     return (
@@ -21,7 +31,7 @@ export default async function Post({ params }: PostProps) {
   return (
     <div className="w-full min-h-screen bg-base p-4 sm:p-6 md:pl-72 py-8">
       <div className="max-w-4xl mx-auto mt-8">
-        <PostHeader title={post.title} date={post.date} />
+        <PostHeader title={post.title} date={post.date} views={views} />
         <PostContent content={post.content} />
       </div>
     </div>

@@ -22,7 +22,9 @@
       "@provider/*": ["./src/provider/*"],
       "@component/*": ["./src/component/*"],
       "@container/*": ["./src/container/*"],
+      "@model/*": ["./src/model/*"],
       "@types": ["./src/types.d.ts"],
+      "@util/*": ["./src/util/*"],
       "@lib/*": ["./src/lib/*"]
     }
   },
