@@ -36,14 +36,7 @@ export default function Positions() {
 
   return (
     <section id="positions" className="mb-16">
-      <motion.h2
-        className="text-8xl font-bold mb-16 text-accent transform -skew-x-12"
-        initial={{ x: -100, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        Positions
-      </motion.h2>
+      <h2 className="text-6xl font-bold mb-4 text-accent">Positions</h2>
       <div className="space-y-24">
         {positions.map((position, index) => (
           <motion.div

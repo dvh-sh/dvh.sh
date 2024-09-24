@@ -46,7 +46,7 @@ const PositionCard: React.FC<Position> = ({
         className="inline-flex items-center text-accent hover:underline text-lg font-bold"
         whileHover={{ scale: 1.05, x: 5 }}
       >
-        Learn more
+        Company Website
         <FaExternalLinkAlt className="ml-2" size={18} />
       </motion.a>
     </motion.div>

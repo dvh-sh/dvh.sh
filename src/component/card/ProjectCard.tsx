@@ -22,7 +22,7 @@ const ProjectCard: React.FC<Project> = ({
         {technologies.map((tech, index) => (
           <span
             key={index}
-            className="inline-block bg-surface1 text-subtext0 px-3 py-1 text-sm font-bold uppercase tracking-wider transform -skew-x-12"
+            className="inline-block bg-surface1 text-subtext1 px-3 py-1 text-sm font-bold uppercase tracking-wider transform -skew-x-12"
           >
             {tech}
           </span>
