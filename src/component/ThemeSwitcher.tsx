@@ -32,7 +32,7 @@ export const ThemeSwitcher = () => {
             <button
               key={color}
               onClick={() => setAccent(color)}
-              className={`w-6 h-6 rounded-full ${color === accent ? "ring-2 ring-text" : ""}`}
+              className={`w-6 h-6 rounded-full transition-transform duration-300 hover:scale-110 ${color === accent ? "ring-2 ring-text" : ""}`}
               style={{ backgroundColor: `var(--${color})` }}
               aria-label={`Set accent color to ${color}`}
             />
@@ -44,8 +44,8 @@ export const ThemeSwitcher = () => {
           <button
             key={t.name}
             onClick={() => setTheme(t.name)}
-            className={`p-2 rounded-full bg-surface0 text-text hover:bg-overlay0 hover:text-overlay2 ${
-              theme === t.name ? "ring-2 ring-accent" : ""
+            className={`p-2 rounded-full bg-surface0 text-text hover:bg-overlay0 hover:text-overlay2 transition-all duration-300 hover:rotate-45 ${
+              theme === t.name ? "ring-2 ring-accent animate-bounce" : ""
             }`}
             aria-label={`Switch to ${t.name} theme`}
           >

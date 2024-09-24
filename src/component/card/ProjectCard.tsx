@@ -11,41 +11,52 @@ const ProjectCard: React.FC<Project> = ({
   sourceLink,
 }) => {
   return (
-    <div className="bg-surface0 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full relative">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xl font-semibold text-accent">{title}</h3>
-        <div className="flex space-x-3">
-          <a
-            href={demoLink}
-            className="text-subtext0 hover:text-accent transition-colors duration-200"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View project demo"
-          >
-            <FaExternalLinkAlt size={20} />
-          </a>
-          <a
-            href={sourceLink}
-            className="text-subtext0 hover:text-accent transition-colors duration-200"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View source code"
-          >
-            <FaGithub size={20} />
-          </a>
-        </div>
-      </div>
-      <p className="text-text mb-4">{description}</p>
-      <div className="mt-auto">
+    <div className="relative bg-surface0 border-4 border-accent p-6 transform rotate-1 hover:rotate-0 transition-all duration-300">
+      <h3 className="text-2xl font-bold text-accent mb-4 uppercase tracking-wider">
+        {title}
+      </h3>
+
+      <p className="text-text mb-6 font-mono">{description}</p>
+
+      <div className="flex flex-wrap gap-2 mb-6">
         {technologies.map((tech, index) => (
           <span
             key={index}
-            className="inline-block bg-surface1 text-subtext0 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2 transition-colors duration-200 hover:bg-accent hover:text-base"
+            className="inline-block bg-surface1 text-subtext0 px-3 py-1 text-sm font-bold uppercase tracking-wider transform -skew-x-12"
           >
             {tech}
           </span>
         ))}
       </div>
+
+      <div className="flex justify-between items-center">
+        <a
+          href={demoLink}
+          className="group flex items-center space-x-2 text-subtext0 hover:text-accent transition-colors duration-200"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View project demo"
+        >
+          <FaExternalLinkAlt size={20} />
+          <span className="font-bold uppercase tracking-wider group-hover:underline">
+            Demo
+          </span>
+        </a>
+        <a
+          href={sourceLink}
+          className="group flex items-center space-x-2 text-subtext0 hover:text-accent transition-colors duration-200"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View source code"
+        >
+          <FaGithub size={20} />
+          <span className="font-bold uppercase tracking-wider group-hover:underline">
+            Source
+          </span>
+        </a>
+      </div>
+
+      <div className="absolute inset-0 bg-gradient-to-br from-accent to-transparent opacity-10 pointer-events-none" />
     </div>
   );
 };

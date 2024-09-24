@@ -18,8 +18,6 @@ const ConnectSection: React.FC<ConnectSectionProps> = ({
 }) => {
   return (
     <div className="mt-auto pt-4">
-      {" "}
-      {/* Added margin-top auto and padding-top */}
       <div className="flex justify-center space-x-4 sm:space-x-6">
         {connections.map((connection, index) => (
           <a
@@ -27,10 +25,12 @@ const ConnectSection: React.FC<ConnectSectionProps> = ({
             href={connection.link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`fill-overlay0 ${connection.color} hover:text-text hover:scale-110 transition-transform duration-300`}
+            className={`fill-overlay0 ${connection.color} hover:text-text hover:scale-110 transition-all duration-300 hover:rotate-12`}
             aria-label={`${connection.label} Redirect`}
           >
-            <connection.Icon className={iconSize} />
+            <connection.Icon
+              className={`${iconSize} transform hover:skew-y-12`}
+            />
           </a>
         ))}
       </div>

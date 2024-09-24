@@ -1,5 +1,4 @@
 import Link from "next/link";
-
 import { FaArrowLeft, FaCalendarAlt, FaEye } from "react-icons/fa";
 
 interface PostHeaderProps {
@@ -13,27 +12,33 @@ export const PostHeader: React.FC<PostHeaderProps> = ({
   date,
   views,
 }) => (
-  <div className="mb-8 bg-surface0 rounded-lg p-6 shadow-lg">
-    <div className="flex justify-between items-center mb-4">
+  <div className="mb-12 bg-surface0 p-6 shadow-lg transform -skew-x-2">
+    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
       <Link
         href="/blog"
-        className="inline-flex items-center text-blue hover:text-accent transition-colors duration-200"
+        className="inline-flex items-center text-blue hover:text-accent transition-colors duration-200 mb-4 md:mb-0"
       >
-        <FaArrowLeft className="mr-2" />
-        Back to all posts
+        <FaArrowLeft className="mr-2 animate-pulse" />
+        <span className="uppercase tracking-wide font-bold">
+          Back to all posts
+        </span>
       </Link>
       <div className="flex items-center space-x-4 text-subtext0">
         <div className="flex items-center">
           <FaCalendarAlt className="mr-2" />
-          <time dateTime={date}>{new Date(date).toLocaleDateString()}</time>
+          <time dateTime={date} className="font-mono">
+            {new Date(date).toLocaleDateString()}
+          </time>
         </div>
         <div className="flex items-center">
           <FaEye className="mr-2" />
-          <span>{views} views</span>
+          <span className="font-mono">{views} views</span>
         </div>
       </div>
     </div>
-    <h1 className="text-4xl font-bold text-accent">{title}</h1>
+    <h1 className="text-4xl md:text-5xl font-black text-accent uppercase tracking-wide leading-tight transform hover:skew-x-2 transition-transform duration-300">
+      {title}
+    </h1>
   </div>
 );
 

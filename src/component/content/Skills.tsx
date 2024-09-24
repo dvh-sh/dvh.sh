@@ -43,7 +43,7 @@ export default function Skills() {
 
   return (
     <section id="skills" className="mb-16">
-      <h2 className="text-2xl font-bold mb-6 text-accent">Skills</h2>
+      <h2 className="text-6xl font-bold mb-6 text-accent">Skills</h2>
       <SkillsSection
         title="Programming Languages"
         skills={skills.programmingLanguages}

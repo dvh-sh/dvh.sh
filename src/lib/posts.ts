@@ -5,6 +5,7 @@ import { Post } from "@types";
 
 const GITHUB_API_URL = "https://api.github.com/repos/dvh-sh/blog/contents";
 const EXCERPT_SEPARATOR = "<!-- end -->";
+const WORDS_PER_MINUTE = 250; // Average reading speed
 
 const fetchAndParseMd = async (
   url: string,
@@ -26,12 +27,16 @@ const createPost = (
       .trim();
   }
 
+  const wordCount = content.split(/\s+/).length;
+  const readingTime = Math.ceil(wordCount / WORDS_PER_MINUTE).toString();
+
   return {
     slug,
     title: matterResult.data.title,
     date: matterResult.data.date,
     excerpt: matterResult.excerpt?.trim() || "",
     content,
+    readingTime,
   };
 };
 

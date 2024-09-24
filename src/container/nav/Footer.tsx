@@ -17,30 +17,43 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="bg-mantle text-text py-4 md:ml-64 mt-auto">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
-          <p className="text-sm">&copy; {currentYear} dvh.sh</p>
-          <p className="text-sm text-center flex-1">
-            Hello from ☀️ Southern California
+    <footer className="bg-mantle text-text py-3 md:ml-64 relative">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex flex-wrap justify-between items-center gap-2">
+          <p className="text-xs font-mono transform hover:-skew-x-6 transition-transform duration-300">
+            &copy; {currentYear} dvh.sh
           </p>
-          <div className="group relative flex items-center">
-            <div className="flex items-center space-x-2 text-subtext0 cursor-pointer">
-              <SiNextdotjs size={16} />
-              <SiReact size={16} />
-              <SiTailwindcss size={16} />
-              <span className="text-xs">
-                {gitHash ? `#${gitHash}` : "Loading..."}
+          <p className="text-xs font-bold uppercase tracking-wider">
+            Hello from ☀️ SoCal
+          </p>
+          <div className="group relative">
+            <div className="flex items-center space-x-2 text-subtext0 cursor-pointer bg-surface0 p-1 rounded-md hover:bg-surface1 transition-colors duration-300">
+              <SiNextdotjs
+                size={16}
+                className="hover:rotate-180 transition-transform duration-300"
+              />
+              <SiReact
+                size={16}
+                className="hover:rotate-180 transition-transform duration-300"
+              />
+              <SiTailwindcss
+                size={16}
+                className="hover:rotate-180 transition-transform duration-300"
+              />
+              <span className="text-xs font-mono">
+                {gitHash ? `#${gitHash}` : "..."}
               </span>
             </div>
-            <div className="absolute bottom-full mb-2 right-0 bg-surface0 text-text p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs whitespace-nowrap">
-              <p>Built with Next.js, React, and Tailwind CSS</p>
+            <div className="absolute bottom-full right-0 mb-2 bg-surface0 text-text p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs whitespace-nowrap z-50">
+              <p className="font-mono mb-1">
+                Built with Next.js, React, and Tailwind CSS
+              </p>
               {gitHash && (
                 <a
                   href={`https://github.com/dvh-sh/dvh.sh/commit/${gitHash}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center mt-1 text-blue hover:text-accent transition-colors duration-200"
+                  className="flex items-center mt-1 text-blue hover:text-accent transition-colors duration-200 font-bold uppercase tracking-wide"
                 >
                   <SiGithub className="mr-1" /> View commit
                 </a>
@@ -49,6 +62,9 @@ export function Footer() {
           </div>
         </div>
       </div>
+      <div className="absolute inset-0 bg-gradient-to-r from-accent to-blue opacity-5"></div>
+      <div className="absolute top-0 left-0 w-full h-px bg-accent"></div>
+      <div className="absolute bottom-0 right-0 w-full h-px bg-blue"></div>
     </footer>
   );
 }
