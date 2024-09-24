@@ -57,23 +57,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.className}>
       <head>
         <link rel="canonical" href="https://dvh.sh" />
         <meta name="theme-color" content="#1e1e2e" />
       </head>
-      <body className={`${inter.className} flex flex-col min-h-screen`}>
+      <body className="flex flex-col min-h-screen">
         <ThemeProvider>
           <NextUIProvider>
-            <>
-              <div className="flex flex-grow">
-                <Sidebar />
-                <div className="flex-1 flex flex-col">
-                  <main className="flex-grow">{children}</main>
-                </div>
+            <div className="flex flex-grow">
+              <Sidebar />
+              <div className="flex-1 flex flex-col">
+                <main className="flex-grow">{children}</main>
               </div>
-              <Footer />
-            </>
+            </div>
+            <Footer />
           </NextUIProvider>
         </ThemeProvider>
       </body>
