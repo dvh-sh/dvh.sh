@@ -11,7 +11,7 @@ interface BlogCardProps extends Post {
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({
-  id,
+  slug,
   title,
   date,
   excerpt,
@@ -35,7 +35,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
       <p className="text-text mb-4 flex-grow">{excerpt}</p>
       <div className="flex justify-between items-center mt-auto">
         <Link
-          href={`/blog/${id}`}
+          href={`/blog/${slug}`}
           className="text-blue hover:text-accent transition-colors duration-200 flex items-center group"
         >
           Read more

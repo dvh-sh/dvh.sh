@@ -12,7 +12,7 @@ export default async function Blog() {
 
   const postsWithViews = posts.map((post: Post) => ({
     ...post,
-    views: viewCounts[post.id] || 0,
+    views: viewCounts[post.slug] || 0,
   }));
 
   return (
@@ -22,7 +22,7 @@ export default async function Blog() {
         {postsWithViews.length > 0 ? (
           <div className="space-y-6">
             {postsWithViews.map((post: Post & { views: number }) => (
-              <BlogCard key={post.id} {...post} />
+              <BlogCard key={post.slug} {...post} />
             ))}
           </div>
         ) : (

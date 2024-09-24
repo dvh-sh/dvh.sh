@@ -14,7 +14,7 @@ const fetchAndParseMd = async (
 };
 
 const createPost = (
-  id: string,
+  slug: string,
   matterResult: matter.GrayMatterFile<string>,
   removeExcerpt = false,
 ): Post => {
@@ -27,7 +27,7 @@ const createPost = (
   }
 
   return {
-    id,
+    slug,
     title: matterResult.data.title,
     date: matterResult.data.date,
     excerpt: matterResult.excerpt?.trim() || "",
@@ -58,13 +58,13 @@ export const getSortedPostsData = async (): Promise<Post[]> => {
   }
 };
 
-export const getPostData = async (id: string): Promise<Post | null> => {
+export const getPostData = async (slug: string): Promise<Post | null> => {
   try {
-    const { data } = await axios.get(`${GITHUB_API_URL}/${id}.md`);
+    const { data } = await axios.get(`${GITHUB_API_URL}/${slug}.md`);
     const matterResult = await fetchAndParseMd(data.download_url);
-    return createPost(id, matterResult, true);
+    return createPost(slug, matterResult, true);
   } catch (error) {
-    console.error(`Error fetching post ${id}:`, error);
+    console.error(`Error fetching post ${slug}:`, error);
     return null;
   }
 };

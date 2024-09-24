@@ -7,17 +7,17 @@ import { updateViewCount } from "@lib/views";
 export const dynamic = "force-dynamic";
 
 interface PostProps {
-  params: { id: string };
+  params: { slug: string };
 }
 
 export default async function Post({ params }: PostProps) {
-  const post = await getPostData(params.id);
+  const post = await getPostData(params.slug);
 
   let views = 0;
 
   if (post) {
     try {
-      const entry = await updateViewCount(params.id);
+      const entry = await updateViewCount(params.slug);
       views = entry.blog.views;
     } catch (error) {
       console.error("Failed to update view count:", error);
