@@ -1,12 +1,16 @@
-import { headers } from "next/headers";
+import { cache } from "react";
+
+const getBaseUrl = () => {
+  if (typeof window !== "undefined") return "";
+  if (process.env.PRODUCTION_URL) return process.env.PRODUCTION_URL;
+  return `http://localhost:${process.env.PORT ?? 3000}`;
+};
 
 export const updateViewCount = async (slug: string) => {
   try {
-    const headersList = headers();
-    const protocol = headersList.get("x-forwarded-proto") || "http";
-    const host = headersList.get("host") || "localhost:3000";
+    const url = `${getBaseUrl()}/api/blog/views`;
 
-    const response = await fetch(`${protocol}://${host}/api/blog/views`, {
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -14,36 +18,29 @@ export const updateViewCount = async (slug: string) => {
       body: JSON.stringify({ slug }),
     });
 
-    const responseText = await response.text();
-
     if (!response.ok) {
       throw new Error(
         `Failed to update view count: ${response.status} ${response.statusText}`,
       );
     }
 
-    try {
-      const data = JSON.parse(responseText);
-      return data;
-    } catch (parseError) {
-      throw new Error("Invalid JSON response");
-    }
+    const data = await response.json();
+    return data;
   } catch (error) {
     throw error;
   }
 };
 
-export const getAllBlogViews = async () => {
+export const getAllBlogViews = cache(async () => {
   try {
-    const headersList = headers();
-    const protocol = headersList.get("x-forwarded-proto") || "http";
-    const host = headersList.get("host") || "localhost:3000";
+    const url = `${getBaseUrl()}/api/blog/views`;
 
-    const response = await fetch(`${protocol}://${host}/api/blog/views`, {
+    const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
     });
 
     if (!response.ok) {
@@ -59,9 +56,8 @@ export const getAllBlogViews = async () => {
       {},
     );
   } catch (error) {
-    console.error("Error fetching blog views:", error);
     return {};
   }
-};
+});
 
 // path: src/lib/views.ts

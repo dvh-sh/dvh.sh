@@ -4,6 +4,9 @@ import { PostContent } from "@component/blog/PostContent";
 import { updateViewCount } from "@lib/views";
 import { getPostData } from "@lib/posts";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 60;
+
 interface PostProps {
   params: { id: string };
 }
