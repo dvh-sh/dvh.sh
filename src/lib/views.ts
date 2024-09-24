@@ -1,54 +1,33 @@
-import { cache } from "react";
-
-const getBaseUrl = () => {
-  if (typeof window !== "undefined") return "";
-  if (process.env.PRODUCTION_URL) return process.env.PRODUCTION_URL;
-  return `http://localhost:${process.env.PORT ?? 3000}`;
-};
+import { cache } from 'react';
+import connectDB from "@util/db.util";
+import Blog from "@model/blog.model";
 
 export const updateViewCount = async (slug: string) => {
   try {
-    const url = `${getBaseUrl()}/api/blog/views`;
+    await connectDB();
+    const blog = await Blog.findOne({ slug });
 
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ slug }),
-    });
-
-    if (!response.ok) {
-      throw new Error(
-        `Failed to update view count: ${response.status} ${response.statusText}`,
-      );
+    if (!blog) {
+      const newBlog = new Blog({ slug, views: 1 });
+      await newBlog.save();
+      return { blog: { slug, views: 1 } };
+    } else {
+      blog.views++;
+      await blog.save();
+      return { blog: { slug: blog.slug, views: blog.views } };
     }
-
-    const data = await response.json();
-    return data;
   } catch (error) {
+    console.error("Error updating view count:", error);
     throw error;
   }
 };
 
 export const getAllBlogViews = cache(async () => {
   try {
-    const url = `${getBaseUrl()}/api/blog/views`;
-
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch blog views");
-    }
-
-    const data = await response.json();
-    return data.blogs.reduce(
+    await connectDB();
+    const blogs = await Blog.find({}, 'slug views');
+    
+    return blogs.reduce(
       (acc: Record<string, number>, blog: { slug: string; views: number }) => {
         acc[blog.slug] = blog.views;
         return acc;
@@ -56,8 +35,7 @@ export const getAllBlogViews = cache(async () => {
       {},
     );
   } catch (error) {
+    console.error("Error fetching blog views:", error);
     return {};
   }
 });
-
-// path: src/lib/views.ts

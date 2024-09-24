@@ -1,11 +1,10 @@
 import { PostHeader } from "@component/blog/PostHeader";
 import { PostContent } from "@component/blog/PostContent";
 
-import { updateViewCount } from "@lib/views";
 import { getPostData } from "@lib/posts";
+import { updateViewCount } from "@lib/views";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 interface PostProps {
   params: { id: string };
@@ -20,7 +19,9 @@ export default async function Post({ params }: PostProps) {
     try {
       const entry = await updateViewCount(params.id);
       views = entry.blog.views;
-    } catch (error) {}
+    } catch (error) {
+      console.error('Failed to update view count:', error);
+    }
   }
 
   if (!post) {
