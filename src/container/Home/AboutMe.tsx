@@ -1,25 +1,48 @@
-import React from "react";
-
-const text =
-  "I'm a self-taught full-stack software engineer with 7+ years of experience, juggling coding with full-time studies. When not immersed in tech, I'm hiking, snapping photos, or tending to plants. I unwind with Tetris, dabble in OSINT and reverse engineering, and have a knack for DevOps and low-level optimization.";
-
-const sentences = text.split(".").filter((sentence) => sentence.trim());
+import React, { useMemo } from "react";
+import { motion } from "framer-motion";
 
 export default function AboutMe() {
+  const text = useMemo(
+    () =>
+      "I'm a self-taught full-stack software engineer with 7+ years of experience, juggling coding with full-time studies. When not immersed in tech, I'm hiking, snapping photos, or tending to plants. I unwind with Tetris, dabble in OSINT and reverse engineering, and have a knack for DevOps and low-level optimization.",
+    [],
+  );
+
+  const sentences = useMemo(
+    () => text.split(".").filter((sentence) => sentence.trim()),
+    [text],
+  );
+
   return (
     <section id="about" className="mb-16 mt-12 relative overflow-hidden">
-      <h2 className="text-4xl sm:text-5xl md:text-6xl font-black mb-8 text-accent uppercase tracking-tighter transform -skew-x-6">
+      <motion.h2
+        className="text-6xl font-black mb-8 text-accent uppercase tracking-tighter transform -skew-x-6"
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
         Hi, I'm David <span className="inline-block animate-wave pl-4">👋</span>
-      </h2>
+      </motion.h2>
 
-      <div className="relative z-10 p-2">
-        <div className="bg-surface0 p-6 border-4 border-accent shadow-lg transform rotate-1 transition-transform hover:rotate-0 duration-300">
+      <div className="relative z-10">
+        <motion.div
+          className="bg-surface0 p-6 border-4 border-accent shadow-lg transform rotate-1"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           {sentences.map((sentence, index) => (
-            <p key={index} className="mb-2 last:mb-0 font-mono text-sm">
+            <motion.p
+              key={index}
+              className="mb-2 last:mb-0 font-mono text-sm"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: index * 0.2 }}
+            >
               {sentence.trim()}
-            </p>
+            </motion.p>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       <div className="absolute top-0 right-0 w-64 h-64 bg-accent opacity-10 rounded-full animate-pulse"></div>
