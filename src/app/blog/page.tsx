@@ -18,7 +18,7 @@ export default async function Blog() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-base to-mantle p-4 sm:p-6 md:pl-72 text-text overflow-hidden">
-      <div className="max-w-4xl mx-auto mt-10 relative z-10">
+      <div className="max-w-4xl mx-auto mt-12 pt-4 relative z-10">
         <WavyTitle>Blog Posts</WavyTitle>
         {postsWithViews.length > 0 ? (
           <div className="space-y-12">

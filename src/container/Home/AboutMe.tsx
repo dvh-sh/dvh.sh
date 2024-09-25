@@ -14,7 +14,7 @@ export default function AboutMe() {
   );
 
   return (
-    <section id="about" className="mb-16 mt-8 relative overflow-hidden">
+    <section id="about" className="mb-16 mt-10 relative overflow-hidden">
       <motion.h2
         className="text-6xl font-black mb-8 text-accent uppercase tracking-tighter transform -skew-x-6"
         initial={{ x: -100, opacity: 0 }}
