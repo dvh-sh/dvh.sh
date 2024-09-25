@@ -45,7 +45,7 @@ export const ThemeSwitcher = () => {
             key={t.name}
             onClick={() => setTheme(t.name)}
             className={`p-2 rounded-full bg-surface0 text-text hover:bg-overlay0 hover:text-overlay2 transition-all duration-300 hover:rotate-45 ${
-              theme === t.name ? "ring-2 ring-accent animate-bounce" : ""
+              theme === t.name ? "ring-2 ring-accent" : ""
             }`}
             aria-label={`Switch to ${t.name} theme`}
           >

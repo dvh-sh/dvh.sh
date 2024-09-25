@@ -1,7 +1,11 @@
 import React from "react";
+
 import { FaExternalLinkAlt } from "react-icons/fa";
-import { Position } from "@types";
 import { motion } from "framer-motion";
+
+import TechChip from "@component/chip/TechChip";
+
+import { Position } from "@types";
 
 const PositionCard: React.FC<Position> = ({
   title,
@@ -29,14 +33,8 @@ const PositionCard: React.FC<Position> = ({
         {shortDescription}
       </p>
       <div className="flex flex-wrap gap-2 mb-4">
-        {technologies.map((tech, index) => (
-          <motion.span
-            key={index}
-            className="inline-block bg-surface1 text-subtext1 px-2 py-1 text-sm font-bold uppercase tracking-wide"
-            whileHover={{ scale: 1.05, rotate: Math.random() * 5 - 2.5 }}
-          >
-            {tech}
-          </motion.span>
+        {technologies.map((tech) => (
+          <TechChip key={tech} slug={tech} />
         ))}
       </div>
       <motion.a

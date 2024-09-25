@@ -1,6 +1,6 @@
 {
   "name": "dvh.sh",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "author": "David @dvhsh (https://dvh.sh)",
   "license": "GNU GPL 3.0",
   "scripts": {
@@ -11,12 +11,6 @@
   },
   "dependencies": {
     "@catppuccin/palette": "^1.4.0",
-    "@nextui-org/card": "^2.0.33",
-    "@nextui-org/divider": "^2.0.31",
-    "@nextui-org/image": "^2.0.31",
-    "@nextui-org/link": "^2.0.34",
-    "@nextui-org/system": "^2.2.5",
-    "@nextui-org/theme": "^2.2.9",
     "@tailwindcss/typography": "^0.5.15",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",

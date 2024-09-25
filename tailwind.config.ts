@@ -1,13 +1,10 @@
 import type { Config } from "tailwindcss";
 
-const { nextui } = require("@nextui-org/theme");
-
 const config: Config = {
   content: [
     "./src/container/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/component/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -23,7 +20,6 @@ const config: Config = {
   },
   darkMode: "class",
   plugins: [
-    nextui(),
     require("@catppuccin/tailwindcss")({
       defaultFlavor: "Mocha",
     }),

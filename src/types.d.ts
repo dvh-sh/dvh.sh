@@ -1,3 +1,10 @@
+interface Tech {
+  slug: string;
+  title: string;
+  color: string;
+  icon: string;
+}
+
 interface Position {
   title: string;
   shortDescription: string;
@@ -35,15 +42,9 @@ interface Post {
   readingTime?: string;
 }
 
-interface Skill {
-  icon: string;
-  label: string;
-  color: string;
-}
-
 type Catppuccin = {
   flavor: string;
   setFlavor: (flavor: string) => void;
 };
 
-export type { Position, Project, Software, Post, Skill, Catppuccin };
+export type { Tech, Position, Project, Software, Post, Catppuccin };

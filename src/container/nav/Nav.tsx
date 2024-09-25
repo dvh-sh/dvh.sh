@@ -44,12 +44,12 @@ export default function Nav() {
   return (
     <nav className="my-8">
       <ul className="space-y-4">
-        {navItems.map((item, index) => (
+        {navItems.map((item) => (
           <li key={item.name} className="group">
             <Link
               href={item.href}
               className={`
-                flex items-center py-2 px-4 rounded-lg transition-all duration-300
+                no-underline flex items-center py-2 px-4 rounded-lg transition-all duration-300
                 ${
                   isActive(item.href)
                     ? "bg-accent text-base font-bold transform -skew-x-6"
@@ -70,7 +70,7 @@ export default function Nav() {
                     <Link
                       href={subItem.href}
                       className={`
-                        flex items-center py-1 px-4 rounded-lg transition-all duration-300
+                        no-underline flex items-center py-1 px-4 rounded-lg transition-all duration-300
                         ${
                           pathname === subItem.href
                             ? "text-accent font-bold transform translate-x-2"

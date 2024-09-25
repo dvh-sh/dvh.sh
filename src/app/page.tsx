@@ -1,9 +1,9 @@
 "use client";
 
-import AboutMe from "@component/content/AboutMe";
-import Positions from "@component/content/Positions";
-import Projects from "@component/content/Projects";
-import Skills from "@component/content/Skills";
+import AboutMe from "@container/Home/AboutMe";
+import Positions from "@container/Home/Positions";
+import Projects from "@container/Home/Projects";
+import Skills from "@container/Home/Skills";
 
 export default function HomePage() {
   return (

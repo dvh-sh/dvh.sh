@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { SiGithub, SiGmail, SiLinkedin } from "react-icons/si";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 import ConnectSection from "@container/ConnectSection";
 import Nav from "@container/nav/Nav";
@@ -56,45 +57,58 @@ const SidebarContent = () => {
   return (
     <>
       {isMobile && (
-        <button
+        <motion.button
           onClick={toggleSidebar}
-          className="fixed top-4 left-4 z-50 p-2 bg-surface0 rounded-full shadow-lg transition-transform duration-300 hover:rotate-180"
+          className="fixed top-4 left-4 z-50 p-2 bg-surface0 shadow-brutal rounded-none"
+          whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+          whileTap={{ scale: 0.9 }}
           aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
         >
           {isOpen ? (
-            <FaTimes className="text-accent" />
+            <FaTimes className="text-accent text-2xl" />
           ) : (
-            <FaBars className="text-accent" />
+            <FaBars className="text-accent text-2xl" />
           )}
-        </button>
+        </motion.button>
       )}
-      <aside
+      <motion.aside
         className={`
-          w-64 h-screen bg-gradient-to-br from-mantle to-crust fixed left-0 top-0 bottom-0 flex flex-col
-          transition-all duration-500 ease-in-out z-40 shadow-lg
-          ${isMobile ? (isOpen ? "translate-x-0 skew-y-3" : "-translate-x-full") : "translate-x-0"}
+          w-64 h-screen fixed left-0 top-0 bottom-0 flex flex-col
+          border-r-4 border-accent
+          transition-all duration-300 ease-in-out z-40 shadow-brutal
+          bg-gradient-to-br from-mantle to-crust
+          ${isMobile ? (isOpen ? "translate-x-0" : "-translate-x-full") : "translate-x-0"}
         `}
+        initial={false}
+        animate={isOpen ? "open" : "closed"}
+        variants={{
+          open: { x: 0 },
+          closed: { x: "-100%" },
+        }}
       >
         <div className="flex-grow overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-accent scrollbar-track-surface0">
           <UserCard />
           <Nav />
         </div>
-        <div className="p-4 flex flex-col items-center bg-surface0 transform -skew-x-3">
+        <div className="p-4 flex flex-col items-center bg-surface0 border-t-4 border-accent">
           <ThemeSwitcher />
-          <div className="mt-4 w-full">
+          <div className="mt-2 w-full">
             <ConnectSection
               connections={connections}
               iconSize="w-6 sm:w-8 h-6 sm:h-8"
             />
           </div>
         </div>
-      </aside>
+      </motion.aside>
       {isMobile && isOpen && (
-        <div
+        <motion.div
           className="fixed inset-0 bg-black bg-opacity-50 z-30 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           onClick={toggleSidebar}
           aria-hidden="true"
-        ></div>
+        />
       )}
     </>
   );

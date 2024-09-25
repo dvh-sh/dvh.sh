@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import SkillsSection from "@container/SkillsSection";
 
-import { Skill } from "@types";
-
 interface SkillsData {
-  programmingLanguages: Skill[];
-  frameworks: Skill[];
-  tools: Skill[];
-  cloud: Skill[];
+  programmingLanguages: string[];
+  frameworks: string[];
+  tools: string[];
+  cloud: string[];
 }
 
 export default function Skills() {

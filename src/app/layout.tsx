@@ -1,7 +1,5 @@
 import React from "react";
 
-import { NextUIProvider } from "@nextui-org/system";
-
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
@@ -64,15 +62,13 @@ export default function RootLayout({
       </head>
       <body className="flex flex-col min-h-screen">
         <ThemeProvider>
-          <NextUIProvider>
-            <div className="flex flex-grow">
-              <Sidebar />
-              <div className="flex-1 flex flex-col">
-                <main className="flex-grow">{children}</main>
-              </div>
+          <div className="flex flex-grow">
+            <Sidebar />
+            <div className="flex-1 flex flex-col">
+              <main className="flex-grow">{children}</main>
             </div>
-            <Footer />
-          </NextUIProvider>
+          </div>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
