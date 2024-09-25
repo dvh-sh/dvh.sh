@@ -1,8 +1,9 @@
 import React from "react";
 
-const text = "I'm a self-taught full-stack software engineer with 7+ years of experience, juggling coding with full-time studies. When not immersed in tech, I'm hiking, snapping photos, or tending to plants. I unwind with Tetris, dabble in OSINT and reverse engineering, and have a knack for DevOps and low-level optimization.";
+const text =
+  "I'm a self-taught full-stack software engineer with 7+ years of experience, juggling coding with full-time studies. When not immersed in tech, I'm hiking, snapping photos, or tending to plants. I unwind with Tetris, dabble in OSINT and reverse engineering, and have a knack for DevOps and low-level optimization.";
 
-const sentences = text.split(".").filter(sentence => sentence.trim());
+const sentences = text.split(".").filter((sentence) => sentence.trim());
 
 export default function AboutMe() {
   return (
@@ -14,10 +15,7 @@ export default function AboutMe() {
       <div className="relative z-10 p-2">
         <div className="bg-surface0 p-6 border-4 border-accent shadow-lg transform rotate-1 transition-transform hover:rotate-0 duration-300">
           {sentences.map((sentence, index) => (
-            <p
-              key={index}
-              className="mb-2 last:mb-0 font-mono text-sm"
-            >
+            <p key={index} className="mb-2 last:mb-0 font-mono text-sm">
               {sentence.trim()}
             </p>
           ))}
