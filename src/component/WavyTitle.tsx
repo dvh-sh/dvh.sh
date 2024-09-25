@@ -1,5 +1,5 @@
 export const WavyTitle = ({ children }: { children: React.ReactNode }) => (
-  <h1 className="text-6xl font-black mb-16 text-accent uppercase tracking-widest relative wavy-title">
+  <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-8 md:mb-16 text-accent uppercase tracking-widest relative wavy-title">
     {(children ?? "")
       .toString()
       .split("")
