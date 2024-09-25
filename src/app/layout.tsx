@@ -59,6 +59,13 @@ export default function RootLayout({
       <head>
         <link rel="canonical" href="https://dvh.sh" />
         <meta name="theme-color" content="#1e1e2e" />
+        <link
+          rel="preload"
+          href="/fonts/open-sans-latin-400-normal.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="flex flex-col min-h-screen">
         <ThemeProvider>
