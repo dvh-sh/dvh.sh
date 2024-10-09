@@ -37,7 +37,7 @@ export default function Positions() {
   return (
     <section id="positions" className="mb-16">
       <h2 className="text-6xl font-bold mb-4 text-accent">Positions</h2>
-      <div className="space-y-24">
+      <div className="space-y-8">
         {positions.map((position, index) => (
           <motion.div
             key={position.title}

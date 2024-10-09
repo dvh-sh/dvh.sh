@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { flavors } from "@catppuccin/palette";
 
 import { ThemeContext } from "@container/ThemeContext";
@@ -7,6 +7,7 @@ import { Catppuccin } from "@types";
 export const ThemeSwitcher = () => {
   const { theme, setTheme, accent, setAccent } = React.useContext(ThemeContext);
   const [showPalette, setShowPalette] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const themes: { name: Catppuccin["flavor"]; emoji: string }[] = [
     { name: "latte", emoji: "🌻" },
@@ -20,11 +21,24 @@ export const ThemeSwitcher = () => {
       flavors.mocha.colors[color as keyof typeof flavors.mocha.colors].accent,
   );
 
+  const handleMouseEnter = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setShowPalette(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    timeoutRef.current = setTimeout(() => {
+      setShowPalette(false);
+    }, 300); 
+  }, []);
+
   return (
     <div
       className="relative inline-block"
-      onMouseEnter={() => setShowPalette(true)}
-      onMouseLeave={() => setShowPalette(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {showPalette && (
         <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 p-2 bg-surface0 rounded-lg shadow-lg flex flex-wrap gap-2 z-10 w-48">
