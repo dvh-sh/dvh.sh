@@ -5,13 +5,16 @@ interface Tech {
   icon: string;
 }
 
-interface Position {
+interface Work {
   title: string;
   shortDescription: string;
   technologies: string[];
   link: string;
-  positionTitle: string;
   date: string;
+}
+
+interface Position extends Work {
+  positionTitle: string;
 }
 
 interface Project {
@@ -47,4 +50,4 @@ type Catppuccin = {
   setFlavor: (flavor: string) => void;
 };
 
-export type { Tech, Position, Project, Software, Post, Catppuccin };
+export type { Tech, Work, Position, Project, Software, Post, Catppuccin };

@@ -34,7 +34,7 @@ const SoftwareCard: React.FC<Software> = React.memo(
         whileHover="hover"
         variants={cardVariants}
       >
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-pink via-mauve to-sapphire"></div>
+        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-pink via-mauve to-sapphire" />
         <div className="flex items-center space-x-3 mb-4">
           <h3 className="text-xl font-black text-accent uppercase tracking-wider">
             {title}

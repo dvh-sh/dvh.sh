@@ -31,7 +31,7 @@ export const ThemeSwitcher = () => {
   const handleMouseLeave = useCallback(() => {
     timeoutRef.current = setTimeout(() => {
       setShowPalette(false);
-    }, 300); 
+    }, 300);
   }, []);
 
   return (

@@ -10,6 +10,7 @@ import {
   FaCogs,
   FaUser,
   FaBook,
+  FaAddressBook,
 } from "react-icons/fa";
 
 const navItems: {
@@ -23,8 +24,8 @@ const navItems: {
     href: "/",
     Icon: FaHome,
     subItems: [
-      { name: "About", href: "/#about", Icon: FaUser },
-      { name: "Positions", href: "/#positions", Icon: FaFileAlt },
+      { name: "Positions", href: "/#positions", Icon: FaUser },
+      { name: "Works", href: "/#works", Icon: FaFileAlt },
       { name: "Projects", href: "/#projects", Icon: FaProjectDiagram },
       { name: "Skills", href: "/#skills", Icon: FaCogs },
     ],
@@ -42,7 +43,7 @@ export default function Nav() {
   };
 
   return (
-    <nav className="my-8">
+    <nav className="my-6">
       <ul className="space-y-4">
         {navItems.map((item) => (
           <li key={item.name} className="group">
