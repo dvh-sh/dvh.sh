@@ -97,6 +97,18 @@ const SoftwareCard: React.FC<Software> = React.memo(
   },
 );
 
+export const SoftwareCardSkeleton = () => (
+  <div className="bg-surface0 p-6 rounded-lg shadow-lg animate-pulse h-[200px] flex flex-col">
+    <div className="h-6 bg-overlay0 rounded w-3/4 mb-4"></div>
+    <div className="h-4 bg-overlay0 rounded w-full mb-2"></div>
+    <div className="h-4 bg-overlay0 rounded w-5/6 mb-4"></div>
+    <div className="mt-auto flex space-x-2">
+      <div className="h-8 w-8 bg-overlay0 rounded"></div>
+      <div className="h-8 w-8 bg-overlay0 rounded"></div>
+    </div>
+  </div>
+);
+
 export default SoftwareCard;
 
 // path: src/component/SoftwareCard.tsx

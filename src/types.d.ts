@@ -45,6 +45,13 @@ interface Post {
   readingTime?: string;
 }
 
+export interface SkillsData {
+  programmingLanguages: string[];
+  frameworks: string[];
+  tools: string[];
+  cloud: string[];
+}
+
 type Catppuccin = {
   flavor: string;
   setFlavor: (flavor: string) => void;

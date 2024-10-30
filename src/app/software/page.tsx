@@ -4,14 +4,39 @@ import React, { useEffect, useState, useMemo } from "react";
 import { flavors } from "@catppuccin/palette";
 import { motion } from "framer-motion";
 
-import SoftwareCard from "@component/card/SoftwareCard";
+import SoftwareCard, {
+  SoftwareCardSkeleton,
+} from "@component/card/SoftwareCard";
 import { Software } from "@types";
+
+const CategorySkeleton = () => (
+  <motion.div
+    className="mb-12 md:mb-16"
+    initial={{ opacity: 0, x: -50 }}
+    animate={{ opacity: 1, x: 0 }}
+  >
+    <div className="h-8 bg-overlay0 w-48 mb-6 md:mb-8 rounded"></div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {[...Array(6)].map((_, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: index * 0.1 }}
+        >
+          <SoftwareCardSkeleton />
+        </motion.div>
+      ))}
+    </div>
+  </motion.div>
+);
 
 export default function SoftwarePage() {
   const [softwareList, setSoftwareList] = useState<{
     [key: string]: Software[];
   } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchSoftware = async () => {
@@ -28,7 +53,11 @@ export default function SoftwarePage() {
         } else {
           throw new Error("Data structure is not as expected");
         }
-      } catch (error) {}
+      } catch (error) {
+        setError(error as string);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchSoftware();
@@ -91,19 +120,6 @@ export default function SoftwarePage() {
     };
   }, [accentColors]);
 
-  if (error)
-    return (
-      <div className="text-accent text-2xl font-bold">
-        Error loading software: {error}
-      </div>
-    );
-  if (!softwareList)
-    return (
-      <div className="text-accent text-2xl font-bold animate-pulse">
-        Loading software...
-      </div>
-    );
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-base to-mantle p-4 sm:p-6 md:p-8 md:ml-64 overflow-x-hidden relative">
       <motion.div
@@ -119,10 +135,20 @@ export default function SoftwarePage() {
         >
           Software
         </motion.h2>
-        {renderedSoftwareList}
+
+        {isLoading ? (
+          <>
+            <CategorySkeleton />
+            <CategorySkeleton />
+          </>
+        ) : error ? (
+          <div className="text-accent text-2xl font-bold">
+            Error loading software: {error}
+          </div>
+        ) : (
+          renderedSoftwareList
+        )}
       </motion.div>
     </div>
   );
 }
-
-// path: src/app/software/page.tsx

@@ -56,4 +56,4 @@ export default function AboutMe() {
   );
 }
 
-// path: src/component/content/AboutMe.tsx
+// path: src/container/Home/AboutMe.tsx

@@ -1,5 +1,5 @@
 import { WavyTitle } from "@component/WavyTitle";
-import BlogCard from "@component/card/BlogCard";
+import BlogCard, { BlogCardSkeleton } from "@component/card/BlogCard";
 import { getSortedPostsData } from "@lib/posts";
 import { getAllBlogViews } from "@lib/views";
 import { Post } from "@types";
@@ -33,9 +33,10 @@ export default async function Blog() {
             ))}
           </div>
         ) : (
-          <div className="text-center p-8 bg-surface0 rounded-lg shadow-lg">
-            <p className="text-lg text-text mb-2">No posts found.</p>
-            <p className="text-subtext0">You might be rate-limited.</p>
+          <div className="space-y-12">
+            {[...Array(3)].map((_, index) => (
+              <BlogCardSkeleton key={index} />
+            ))}
           </div>
         )}
       </div>
