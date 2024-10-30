@@ -67,12 +67,12 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="flex flex-col min-h-screen">
+      <body className="flex flex-col min-h-screen overflow-x-hidden">
         <ThemeProvider>
-          <div className="flex flex-grow">
+          <div className="flex flex-grow relative w-full">
             <Sidebar />
-            <div className="flex-1 flex flex-col">
-              <main className="flex-grow">{children}</main>
+            <div className="flex-1 flex flex-col w-full">
+              <main className="flex-grow w-full">{children}</main>
             </div>
           </div>
           <Footer />
