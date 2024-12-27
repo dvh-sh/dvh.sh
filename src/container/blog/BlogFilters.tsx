@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState, useMemo } from "react";
 import { FaSearch, FaSort, FaGlobe, FaUtensils } from "react-icons/fa";
@@ -20,16 +20,16 @@ interface BlogFiltersProps {
 }
 
 export default function BlogFilters({ posts, isCooking }: BlogFiltersProps) {
-  const SelectButton = ({ 
-    label, 
-    value, 
-    options, 
-    onChange, 
-    icon: Icon 
-  }: { 
-    label: string; 
-    value: string; 
-    options: string[]; 
+  const SelectButton = ({
+    label,
+    value,
+    options,
+    onChange,
+    icon: Icon,
+  }: {
+    label: string;
+    value: string;
+    options: string[];
     onChange: (value: string) => void;
     icon: React.ComponentType<{ className?: string }>;
   }) => (
@@ -48,17 +48,21 @@ export default function BlogFilters({ posts, isCooking }: BlogFiltersProps) {
         <Icon className="w-4 h-4" />
         <span>{value}</span>
       </button>
-      <div className="absolute z-50 w-full md:w-48 mt-2 opacity-0 group-hover:opacity-100 
-                      transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto">
-        <div className="bg-surface0 border-2 border-accent shadow-lg 
-                      transform -rotate-1 hover:rotate-0 transition-transform duration-200">
+      <div
+        className="absolute z-50 w-full md:w-48 mt-2 opacity-0 group-hover:opacity-100 
+                      transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto"
+      >
+        <div
+          className="bg-surface0 border-2 border-accent shadow-lg 
+                      transform -rotate-1 hover:rotate-0 transition-transform duration-200"
+        >
           {options.map((option) => (
             <button
               key={option}
               onClick={() => onChange(option)}
               className={`w-full px-4 py-2 text-left hover:bg-blue hover:text-base 
                          transition-colors duration-200 font-mono uppercase tracking-tight
-                         ${value === option ? 'bg-accent text-base' : ''}`}
+                         ${value === option ? "bg-accent text-base" : ""}`}
             >
               {option}
             </button>
@@ -70,13 +74,15 @@ export default function BlogFilters({ posts, isCooking }: BlogFiltersProps) {
 
   const origins = useMemo(() => {
     if (!isCooking) return [];
-    const uniqueOrigins = new Set(posts.map(post => post.origin).filter(Boolean));
+    const uniqueOrigins = new Set(
+      posts.map((post) => post.origin).filter(Boolean),
+    );
     return ["All", ...Array.from(uniqueOrigins)];
   }, [posts, isCooking]);
 
   const types = useMemo(() => {
     if (!isCooking) return [];
-    const uniqueTypes = new Set(posts.map(post => post.type).filter(Boolean));
+    const uniqueTypes = new Set(posts.map((post) => post.type).filter(Boolean));
     return ["All", ...Array.from(uniqueTypes)];
   }, [posts, isCooking]);
 
@@ -89,12 +95,15 @@ export default function BlogFilters({ posts, isCooking }: BlogFiltersProps) {
 
   const filteredPosts = useMemo(() => {
     return posts
-      .filter(post => {
-        const matchesSearch = post.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-                            post.excerpt.toLowerCase().includes(filters.search.toLowerCase());
-        const matchesOrigin = filters.origin === "All" || post.origin === filters.origin;
-        const matchesType = filters.type === "All" || post.type === filters.type;
-        
+      .filter((post) => {
+        const matchesSearch =
+          post.title.toLowerCase().includes(filters.search.toLowerCase()) ||
+          post.excerpt.toLowerCase().includes(filters.search.toLowerCase());
+        const matchesOrigin =
+          filters.origin === "All" || post.origin === filters.origin;
+        const matchesType =
+          filters.type === "All" || post.type === filters.type;
+
         return matchesSearch && matchesOrigin && matchesType;
       })
       .sort((a, b) => {
@@ -118,7 +127,9 @@ export default function BlogFilters({ posts, isCooking }: BlogFiltersProps) {
             type="text"
             placeholder="SEARCH POSTS..."
             value={filters.search}
-            onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
+            onChange={(e) =>
+              setFilters((prev) => ({ ...prev, search: e.target.value }))
+            }
             className="w-full p-3 pl-12 bg-surface0 
                      border-2 border-accent hover:border-blue
                      focus:border-blue focus:outline-none
@@ -133,14 +144,25 @@ export default function BlogFilters({ posts, isCooking }: BlogFiltersProps) {
         <div className="flex flex-wrap gap-4">
           <SelectButton
             label="Sort"
-            value={filters.sortBy === "newest" ? "NEWEST FIRST" : 
-                   filters.sortBy === "oldest" ? "OLDEST FIRST" : "MOST VIEWS"}
+            value={
+              filters.sortBy === "newest"
+                ? "NEWEST FIRST"
+                : filters.sortBy === "oldest"
+                  ? "OLDEST FIRST"
+                  : "MOST VIEWS"
+            }
             options={["NEWEST FIRST", "OLDEST FIRST", "MOST VIEWS"]}
-            onChange={(value) => setFilters(prev => ({ 
-              ...prev, 
-              sortBy: value === "NEWEST FIRST" ? "newest" : 
-                      value === "OLDEST FIRST" ? "oldest" : "most-views"
-            }))}
+            onChange={(value) =>
+              setFilters((prev) => ({
+                ...prev,
+                sortBy:
+                  value === "NEWEST FIRST"
+                    ? "newest"
+                    : value === "OLDEST FIRST"
+                      ? "oldest"
+                      : "most-views",
+              }))
+            }
             icon={FaSort}
           />
 
@@ -148,11 +170,13 @@ export default function BlogFilters({ posts, isCooking }: BlogFiltersProps) {
             <SelectButton
               label="Origin"
               value={filters.origin.toUpperCase()}
-              options={origins.map(o => o!.toUpperCase())}
-              onChange={(value) => setFilters(prev => ({ 
-                ...prev, 
-                origin: value 
-              }))}
+              options={origins.map((o) => o!.toUpperCase())}
+              onChange={(value) =>
+                setFilters((prev) => ({
+                  ...prev,
+                  origin: value,
+                }))
+              }
               icon={FaGlobe}
             />
           )}
@@ -161,22 +185,25 @@ export default function BlogFilters({ posts, isCooking }: BlogFiltersProps) {
             <SelectButton
               label="Type"
               value={filters.type.toUpperCase()}
-              options={types.map(t => t!.toUpperCase())}
-              onChange={(value) => setFilters(prev => ({ 
-                ...prev, 
-                type: value 
-              }))}
+              options={types.map((t) => t!.toUpperCase())}
+              onChange={(value) =>
+                setFilters((prev) => ({
+                  ...prev,
+                  type: value,
+                }))
+              }
               icon={FaUtensils}
             />
           )}
         </div>
       </div>
 
-      { isCooking && (
+      {isCooking && (
         <div className="mb-6 font-mono text-subtext0 uppercase tracking-tight transform -rotate-1">
-        <span className="bg-surface0 px-4 py-2 border-2 border-accent inline-block">
-          SHOWING {filteredPosts.length} {filteredPosts.length === 1 ? 'POST' : 'POSTS'}
-        </span>
+          <span className="bg-surface0 px-4 py-2 border-2 border-accent inline-block">
+            SHOWING {filteredPosts.length}{" "}
+            {filteredPosts.length === 1 ? "POST" : "POSTS"}
+          </span>
         </div>
       )}
       {filteredPosts.length > 0 ? (

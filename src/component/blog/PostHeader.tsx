@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { FaArrowLeft, FaCalendarAlt, FaEye, FaGlobe, FaUtensils } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaCalendarAlt,
+  FaEye,
+  FaGlobe,
+  FaUtensils,
+} from "react-icons/fa";
 
 interface PostHeaderProps {
   title: string;

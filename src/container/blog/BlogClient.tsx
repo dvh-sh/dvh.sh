@@ -21,7 +21,7 @@ export default async function BlogClient({ isCooking = false }) {
     <div className="relative min-h-screen bg-gradient-to-br from-base to-mantle p-4 sm:p-6 md:pl-72 text-text overflow-hidden">
       <div className="max-w-4xl mx-auto mt-12 pt-4 relative z-10">
         <WavyTitle>{isCooking ? "Cookbook" : "Blog Posts"}</WavyTitle>
-        
+
         <BlogFilters posts={postsWithViews} isCooking={isCooking} />
       </div>
 
