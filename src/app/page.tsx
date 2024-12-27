@@ -50,14 +50,14 @@ export default function HomePage() {
         <AboutMe />
         {isLoading ? (
           <>
-            <WorksSkeleton />
+            {/* <WorksSkeleton /> */}x
             <WorksSkeleton />
             <ProjectsSkeleton />
             <SkillsSkeleton />
           </>
         ) : data ? (
           <>
-            <Positions data={data.positions} />
+            {/* <Positions data={data.positions} /> */}
             <Works data={data.works} />
             <Projects data={data.projects} />
             <Skills data={data.skills} />
