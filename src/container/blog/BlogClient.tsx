@@ -1,17 +1,14 @@
+// path: src/container/blog/BlogClient.tsx
 import { WavyTitle } from "@component/WavyTitle";
-import BlogCard, { BlogCardSkeleton } from "@component/card/BlogCard";
 import { getSortedPostsData } from "@lib/posts";
 import { getAllBlogViews } from "@lib/views";
+import BlogFilters from "./BlogFilters";
 import { Post } from "@types";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 60;
 
-interface BlogClientProps {
-  isCooking?: boolean;
-}
-
-export default async function BlogClient({ isCooking }: BlogClientProps) {
+export default async function BlogClient({ isCooking = false }) {
   const posts = await getSortedPostsData(isCooking);
   const viewCounts = await getAllBlogViews(isCooking);
 
@@ -24,26 +21,10 @@ export default async function BlogClient({ isCooking }: BlogClientProps) {
     <div className="relative min-h-screen bg-gradient-to-br from-base to-mantle p-4 sm:p-6 md:pl-72 text-text overflow-hidden">
       <div className="max-w-4xl mx-auto mt-12 pt-4 relative z-10">
         <WavyTitle>{isCooking ? "Cookbook" : "Blog Posts"}</WavyTitle>
-        {postsWithViews.length > 0 ? (
-          <div className="space-y-12">
-            {postsWithViews.map((post, index) => (
-              <div
-                key={post.slug}
-                className="blog-card-container"
-                style={{ animationDelay: `${0.1 * index}s` }}
-              >
-                <BlogCard {...post} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="space-y-12">
-            {[...Array(3)].map((_, index) => (
-              <BlogCardSkeleton key={index} />
-            ))}
-          </div>
-        )}
+        
+        <BlogFilters posts={postsWithViews} isCooking={isCooking} />
       </div>
+
       <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-0">
         <svg
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full"

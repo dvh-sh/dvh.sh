@@ -40,7 +40,13 @@ export default async function PostClient({ params }: PostProps) {
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-base to-mantle p-4 sm:p-6 md:pl-72 py-8">
       <div className="max-w-4xl mx-auto mt-8 relative">
-        <PostHeader title={post.title} date={post.date} views={views} />
+        {
+            bIsCooking ? (
+                <PostHeader title={post.title} date={post.date} views={views} isCooking />
+            ) : (
+                <PostHeader title={post.title} date={post.date} views={views} />
+            )
+        }
         <PostContent content={post.content} />
         <LicenseInfo />
         <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[-1]">
