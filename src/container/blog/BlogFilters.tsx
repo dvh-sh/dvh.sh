@@ -97,13 +97,20 @@ export default function BlogFilters({ posts, isCooking }: BlogFiltersProps) {
     return posts
       .filter((post) => {
         const matchesSearch =
-          post.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-          post.excerpt.toLowerCase().includes(filters.search.toLowerCase());
+          post.title?.toLowerCase().includes(filters.search.toLowerCase()) ||
+          post.excerpt?.toLowerCase().includes(filters.search.toLowerCase()) ||
+          filters.search === "";
+  
         const matchesOrigin =
-          filters.origin === "All" || post.origin === filters.origin;
+          filters.origin === "ALL" || 
+          post.origin?.toUpperCase() === filters.origin ||
+          filters.origin === "All";
+  
         const matchesType =
-          filters.type === "All" || post.type === filters.type;
-
+          filters.type === "ALL" ||
+          post.type?.toUpperCase() === filters.type ||
+          filters.type === "All";
+  
         return matchesSearch && matchesOrigin && matchesType;
       })
       .sort((a, b) => {
