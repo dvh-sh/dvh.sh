@@ -10,7 +10,7 @@ import {
   FaCogs,
   FaUser,
   FaBook,
-  FaAddressBook,
+  FaBreadSlice,
 } from "react-icons/fa";
 
 const navItems: {
@@ -24,7 +24,6 @@ const navItems: {
     href: "/",
     Icon: FaHome,
     subItems: [
-      { name: "Positions", href: "/#positions", Icon: FaUser },
       { name: "Works", href: "/#works", Icon: FaFileAlt },
       { name: "Projects", href: "/#projects", Icon: FaProjectDiagram },
       { name: "Skills", href: "/#skills", Icon: FaCogs },
@@ -32,6 +31,7 @@ const navItems: {
   },
   { name: "Software", href: "/software", Icon: FaLaptopCode },
   { name: "Blog", href: "/blog", Icon: FaBook },
+  { name: "Cooking", href: "/cooking", Icon: FaBreadSlice },
 ];
 
 export default function Nav() {

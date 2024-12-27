@@ -4,8 +4,10 @@ import matter from "gray-matter";
 import { Post } from "@types";
 
 const GITHUB_API_URL = "https://api.github.com/repos/dvh-sh/blog/contents";
+const GITHUB_COOKING_URL =
+  "https://api.github.com/repos/dvh-sh/blog/contents/cooking";
 const EXCERPT_SEPARATOR = "<!-- end -->";
-const WORDS_PER_MINUTE = 250; // Average reading speed
+const WORDS_PER_MINUTE = 250;
 
 const fetchAndParseMd = async (
   url: string,
@@ -37,14 +39,23 @@ const createPost = (
     excerpt: matterResult.excerpt?.trim() || "",
     content,
     readingTime,
+    origin: matterResult.data.origin,
+    type: matterResult.data.type,
   };
 };
 
-export const getSortedPostsData = async (): Promise<Post[]> => {
+export const getSortedPostsData = async (
+  isCooking = false,
+): Promise<Post[]> => {
   try {
-    const { data } = await axios.get(GITHUB_API_URL);
-    const mdFiles = data.filter((file: { name: string }) =>
-      file.name.endsWith(".md"),
+    const url = isCooking ? GITHUB_COOKING_URL : GITHUB_API_URL;
+    const { data } = await axios.get(url);
+
+    const mdFiles = data.filter(
+      (file: { name: string; type: string }) =>
+        file.name.endsWith(".md") &&
+        // Exclude cooking directory from main blog posts
+        (!isCooking ? file.type === "file" && file.name !== "cooking" : true),
     );
 
     const posts = await Promise.all(
@@ -63,9 +74,13 @@ export const getSortedPostsData = async (): Promise<Post[]> => {
   }
 };
 
-export const getPostData = async (slug: string): Promise<Post | null> => {
+export const getPostData = async (
+  slug: string,
+  isCooking = false,
+): Promise<Post | null> => {
   try {
-    const { data } = await axios.get(`${GITHUB_API_URL}/${slug}.md`);
+    const baseUrl = isCooking ? GITHUB_COOKING_URL : GITHUB_API_URL;
+    const { data } = await axios.get(`${baseUrl}/${slug}.md`);
     const matterResult = await fetchAndParseMd(data.download_url);
     return createPost(slug, matterResult, true);
   } catch (error) {

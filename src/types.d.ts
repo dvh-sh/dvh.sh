@@ -35,14 +35,16 @@ interface Software {
   subSoftware?: Software[];
 }
 
-interface Post {
+export interface Post {
   slug: string;
   title: string;
   date: string;
   excerpt: string;
   content: string;
+  readingTime: string;
   views?: number;
-  readingTime?: string;
+  origin?: string;
+  type?: string;
 }
 
 export interface SkillsData {

@@ -10,6 +10,7 @@ const blogSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  type: { type: String, enum: ["blog", "cooking"], default: "blog" },
 });
 
 const Blog = mongoose.models.Blog || mongoose.model("Blog", blogSchema);
