@@ -46,6 +46,8 @@ export default async function PostClient({ params }: PostProps) {
             date={post.date}
             views={views}
             isCooking
+            origin={post.origin}
+            type={post.type}
           />
         ) : (
           <PostHeader title={post.title} date={post.date} views={views} />

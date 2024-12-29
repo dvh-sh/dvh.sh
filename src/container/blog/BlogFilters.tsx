@@ -50,7 +50,7 @@ export default function BlogFilters({ posts, isCooking }: BlogFiltersProps) {
       </button>
       <div className="absolute -bottom-4 left-0 w-full h-8 bg-transparent" />
       <div
-        className="absolute z-50 w-full md:w-48 mt-2 opacity-0 group-hover:opacity-100 
+        className="absolute z-50 w-full md:w-auto mt-2 opacity-0 group-hover:opacity-100 
                        transition-opacity duration-200 pointer-events-none group-hover:pointer-events-auto"
       >
         <div className="absolute -top-4 left-0 w-full h-4 bg-transparent" />
@@ -150,7 +150,14 @@ export default function BlogFilters({ posts, isCooking }: BlogFiltersProps) {
           <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-subtext0 w-5 h-5" />
         </div>
 
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap items-center gap-4">
+          {isCooking && (
+            <span className="bg-surface0 px-4 py-2 border-2 border-accent inline-block font-mono text-subtext0 uppercase tracking-tight transform -rotate-1">
+              SHOWING {filteredPosts.length}{" "}
+              {filteredPosts.length === 1 ? "POST" : "POSTS"}
+            </span>
+          )}
+
           <SelectButton
             label="Sort"
             value={
@@ -207,14 +214,6 @@ export default function BlogFilters({ posts, isCooking }: BlogFiltersProps) {
         </div>
       </div>
 
-      {isCooking && (
-        <div className="mb-6 font-mono text-subtext0 uppercase tracking-tight transform -rotate-1">
-          <span className="bg-surface0 px-4 py-2 border-2 border-accent inline-block">
-            SHOWING {filteredPosts.length}{" "}
-            {filteredPosts.length === 1 ? "POST" : "POSTS"}
-          </span>
-        </div>
-      )}
       {filteredPosts.length > 0 ? (
         <div className="space-y-12">
           {filteredPosts.map((post, index) => (
