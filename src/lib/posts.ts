@@ -39,6 +39,7 @@ const createPost = (
     excerpt: matterResult.excerpt?.trim() || "",
     content,
     readingTime,
+    cookingTime: matterResult.data.cookingTime,
     origin: matterResult.data.origin,
     type: matterResult.data.type,
   };

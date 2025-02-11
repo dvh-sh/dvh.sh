@@ -42,6 +42,7 @@ export interface Post {
   excerpt: string;
   content: string;
   readingTime: string;
+  cookingTime?: string;
   views?: number;
   origin?: string;
   type?: string;

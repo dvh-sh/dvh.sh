@@ -14,6 +14,7 @@ interface PostHeaderProps {
   isCooking?: boolean;
   origin?: string;
   type?: string;
+  cookingTime?: string;
 }
 
 export const PostHeader: React.FC<PostHeaderProps> = ({
@@ -23,6 +24,7 @@ export const PostHeader: React.FC<PostHeaderProps> = ({
   isCooking = false,
   origin,
   type,
+  cookingTime,
 }) => (
   <div className="mb-12 bg-surface0 p-6 shadow-lg transform -skew-x-2">
     <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
@@ -46,6 +48,12 @@ export const PostHeader: React.FC<PostHeaderProps> = ({
           <FaEye className="mr-2" />
           <span className="font-mono">{views} views</span>
         </div>
+        {isCooking && (
+          <div className="flex items-center">
+            <FaUtensils className="mr-2" />
+            <span className="font-mono">{cookingTime}</span>
+          </div>
+        )}
         {origin && (
           <div className="flex items-center">
             <FaGlobe className="mr-2" />
