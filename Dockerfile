@@ -1,12 +1,3 @@
-/*
- * @file        Dockerfile
- * @description Production Dockerfile for dvh.sh personal website using Node 20
- *
- * @project     dvh.sh
- * @author      David
- * @created     Feb 23, 2025
- */
-
 # Base stage for dependencies
 FROM node:20-alpine AS deps
 WORKDIR /app
