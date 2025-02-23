@@ -1,20 +1,9 @@
 import * as SiIcons from "react-icons/si";
-
 import { Tech } from "@types";
 
 const tech: Tech[] = [
-  {
-    slug: "javascript",
-    title: "JavaScript",
-    color: "text-yellow",
-    icon: "SiJavascript",
-  },
-  {
-    slug: "typescript",
-    title: "TypeScript",
-    color: "text-blue",
-    icon: "SiTypescript",
-  },
+  { slug: "javascript", title: "JavaScript", color: "text-yellow", icon: "SiJavascript" },
+  { slug: "typescript", title: "TypeScript", color: "text-blue", icon: "SiTypescript" },
   { slug: "python", title: "Python", color: "text-yellow", icon: "SiPython" },
   { slug: "kotlin", title: "Kotlin", color: "text-mauve", icon: "SiKotlin" },
   { slug: "cplusplus", title: "C++", color: "text-blue", icon: "SiCplusplus" },
@@ -30,34 +19,16 @@ const tech: Tech[] = [
   { slug: "nginx", title: "Nginx", color: "text-green", icon: "SiNginx" },
   { slug: "mongodb", title: "MongoDB", color: "text-green", icon: "SiMongodb" },
   { slug: "mysql", title: "MySQL", color: "text-blue", icon: "SiMysql" },
-  {
-    slug: "postgresql",
-    title: "PostgreSQL",
-    color: "text-blue",
-    icon: "SiPostgresql",
-  },
-  {
-    slug: "digitalocean",
-    title: "DigitalOcean",
-    color: "text-blue",
-    icon: "SiDigitalocean",
-  },
-  {
-    slug: "oracle",
-    title: "Oracle Cloud",
-    color: "text-red",
-    icon: "SiOracle",
-  },
+  { slug: "digitalocean", title: "DigitalOcean", color: "text-blue", icon: "SiDigitalocean" },
+  { slug: "oracle", title: "Oracle Cloud", color: "text-red", icon: "SiOracle" },
+  { slug: "coolify", title: "Coolify", color: "text-purple", icon: "SiCoolify" },
+  { slug: "letsencrypt", title: "Let's Encrypt", color: "text-blue", icon: "SiLetsencrypt" },
+  { slug: "c", title: "C", color: "text-blue", icon: "SiC" }
 ];
 
-const getTechBySlug = (slug: string): Tech | undefined => {
-  return tech.find((t) => t.slug === slug);
-};
-
-const getIcon = (iconName: string) => {
-  return SiIcons[iconName as keyof typeof SiIcons];
-};
+const getTechBySlug = (slug: string): Tech | undefined => tech.find(t => t.slug === slug);
+const getIcon = (iconName: string) => SiIcons[iconName as keyof typeof SiIcons];
 
 export { tech, getTechBySlug, getIcon };
 
-// path: src/util/tech.util.ts
+// Path: src/util/tech.util.ts
