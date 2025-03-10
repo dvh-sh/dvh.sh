@@ -50,7 +50,7 @@ export default function HomePage() {
         <AboutMe />
         {isLoading ? (
           <>
-            {/* <WorksSkeleton /> */}x
+            {/* <WorksSkeleton /> */}
             <WorksSkeleton />
             <ProjectsSkeleton />
             <SkillsSkeleton />
