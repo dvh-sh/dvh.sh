@@ -23,7 +23,8 @@ const tech: Tech[] = [
   { slug: "oracle", title: "Oracle Cloud", color: "text-red", icon: "SiOracle" },
   { slug: "coolify", title: "Coolify", color: "text-purple", icon: "SiCoolify" },
   { slug: "letsencrypt", title: "Let's Encrypt", color: "text-blue", icon: "SiLetsencrypt" },
-  { slug: "c", title: "C", color: "text-blue", icon: "SiC" }
+  { slug: "c", title: "C", color: "text-blue", icon: "SiC" },
+ { slug: "csharp", title: "C#", color: "text-blue", icon: "SiCsharp" }
 ];
 
 const getTechBySlug = (slug: string): Tech | undefined => tech.find(t => t.slug === slug);
