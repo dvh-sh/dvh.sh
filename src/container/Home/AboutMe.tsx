@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 export default function AboutMe() {
   const text = useMemo(
     () =>
-      "I'm a self-taught full-stack software engineer with 7+ years of experience, currently balancing coding with full-time studies. Outside of tech, you'll find me hiking trails, capturing moments through photography, or caring for my cacti garden. My downtime is spent playing Chess, Tetris, and various rhythm games, while exploring interests in OSINT, reverse engineering, and the intricacies of DevOps and low-level optimization. As of late, I've also taken up various creatives, such as writing, drawing, piano, and cooking/baking; Although all to a more novice extent.",
+      "I'm a self-taught full-stack software engineer with 7+ years of experience, currently balancing coding with full-time studies. Outside of tech, you'll find me hiking trails, capturing moments through photography, or caring for my cacti garden. My downtime is spent playing Chess, Tetris, and various rhythm games, while exploring interests in OSINT, reverse engineering, and the intricacies of DevOps and low-level optimization. As of late, I've also taken up various creatives, such as writing, drawing, and cooking/baking; Although all to a more novice extent.",
     [],
   );
 
