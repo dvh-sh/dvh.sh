@@ -39,7 +39,7 @@ const BlogCard: React.FC<Post> = ({
             <FaBook size={12} className="mr-1" />
             <span>~{readingTime} min</span>
           </div>
-          
+
           <div className="flex items-center">
             <FaEye size={12} className="mr-1" />
             <span>{views} views</span>

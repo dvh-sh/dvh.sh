@@ -2,8 +2,18 @@ import * as SiIcons from "react-icons/si";
 import { Tech } from "@types";
 
 const tech: Tech[] = [
-  { slug: "javascript", title: "JavaScript", color: "text-yellow", icon: "SiJavascript" },
-  { slug: "typescript", title: "TypeScript", color: "text-blue", icon: "SiTypescript" },
+  {
+    slug: "javascript",
+    title: "JavaScript",
+    color: "text-yellow",
+    icon: "SiJavascript",
+  },
+  {
+    slug: "typescript",
+    title: "TypeScript",
+    color: "text-blue",
+    icon: "SiTypescript",
+  },
   { slug: "python", title: "Python", color: "text-yellow", icon: "SiPython" },
   { slug: "kotlin", title: "Kotlin", color: "text-mauve", icon: "SiKotlin" },
   { slug: "cplusplus", title: "C++", color: "text-blue", icon: "SiCplusplus" },
@@ -19,15 +29,36 @@ const tech: Tech[] = [
   { slug: "nginx", title: "Nginx", color: "text-green", icon: "SiNginx" },
   { slug: "mongodb", title: "MongoDB", color: "text-green", icon: "SiMongodb" },
   { slug: "mysql", title: "MySQL", color: "text-blue", icon: "SiMysql" },
-  { slug: "digitalocean", title: "DigitalOcean", color: "text-blue", icon: "SiDigitalocean" },
-  { slug: "oracle", title: "Oracle Cloud", color: "text-red", icon: "SiOracle" },
-  { slug: "coolify", title: "Coolify", color: "text-purple", icon: "SiCoolify" },
-  { slug: "letsencrypt", title: "Let's Encrypt", color: "text-blue", icon: "SiLetsencrypt" },
+  {
+    slug: "digitalocean",
+    title: "DigitalOcean",
+    color: "text-blue",
+    icon: "SiDigitalocean",
+  },
+  {
+    slug: "oracle",
+    title: "Oracle Cloud",
+    color: "text-red",
+    icon: "SiOracle",
+  },
+  {
+    slug: "coolify",
+    title: "Coolify",
+    color: "text-purple",
+    icon: "SiServerfault",
+  },
+  {
+    slug: "letsencrypt",
+    title: "Let's Encrypt",
+    color: "text-blue",
+    icon: "SiLetsencrypt",
+  },
   { slug: "c", title: "C", color: "text-blue", icon: "SiC" },
- { slug: "csharp", title: "C#", color: "text-blue", icon: "SiCsharp" }
+  { slug: "csharp", title: "C#", color: "text-blue", icon: "SiCsharp" },
 ];
 
-const getTechBySlug = (slug: string): Tech | undefined => tech.find(t => t.slug === slug);
+const getTechBySlug = (slug: string): Tech | undefined =>
+  tech.find((t) => t.slug === slug);
 const getIcon = (iconName: string) => SiIcons[iconName as keyof typeof SiIcons];
 
 export { tech, getTechBySlug, getIcon };
