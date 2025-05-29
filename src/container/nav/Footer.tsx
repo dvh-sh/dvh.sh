@@ -39,7 +39,7 @@ function FooterContent() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-wrap justify-between items-center gap-2">
           <p className="text-xs font-mono transform hover:-skew-x-6 transition-transform duration-300">
-            &copy; {currentYear} dvh.sh
+            &copy; 2024 - {currentYear} dvh.sh | All Rights Reserved 
           </p>
           <p className="text-xs font-bold uppercase tracking-wider">
             Hello from ☀️ SoCal
