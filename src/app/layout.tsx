@@ -1,17 +1,32 @@
-import React from "react";
+/**
+ * @file src/app/layout.tsx
+ * @author David @dvhsh (https://dvh.sh)
+ *
+ * @created Wed, Aug 20 2025
+ * @updated Wed, Aug 20 2025
+ *
+ * @description
+ * Root layout for the entire application.
+ * Sets up HTML structure, metadata, theme provider, and navigation components.
+ */
 
+import React, { JSX } from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import "./globals.css";
 
-import { ThemeProvider } from "@provider/ThemeProvider";
-
-import { Sidebar } from "@container/nav/Sidebar";
-import { Footer } from "@container/nav/Footer";
+import { ThemeProvider } from "@/providers/ThemeProvider";
+import { Footer } from "@/containers/nav/Footer";
+import { Sidebar } from "@/containers/nav/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
+/**
+ * @var metadata
+ * @description The base metadata for the application, including title, description,
+ * keywords, and OpenGraph/Twitter card information.
+ */
 export const metadata: Metadata = {
   title: "David | Full-Stack Developer Portfolio",
   description:
@@ -49,11 +64,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+/**
+ * @component RootLayout
+ * @description The root layout component that wraps all pages.
+ * @param {{ children: React.ReactNode }} { children } - The child components to be rendered within the layout.
+ * @returns {JSX.Element} The root HTML structure of the application.
+ */
+const RootLayout = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}): JSX.Element => {
   return (
     <html lang="en" className={inter.className}>
       <head>
@@ -80,6 +101,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
 
-// path: src/app/layout.tsx
+export default RootLayout;

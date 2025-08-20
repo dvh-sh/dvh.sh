@@ -5,6 +5,7 @@ WORKDIR /app
 # Install dependencies needed for build
 RUN apk add --no-cache libc6-compat
 
+# Copy package manager files and install dependencies
 COPY package.json package-lock.json ./
 RUN npm ci --fetch-timeout=600000
 
@@ -12,10 +13,12 @@ RUN npm ci --fetch-timeout=600000
 FROM node:20-alpine AS builder
 WORKDIR /app
 
+# Copy dependencies from the 'deps' stage
 COPY --from=deps /app/node_modules ./node_modules
+# Copy all other project files
 COPY . .
 
-# Build-time variables
+# Set build-time environment variables
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
@@ -33,11 +36,10 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-# Set proper permissions
-RUN mkdir .next && \
-    chown nextjs:nodejs .next
+# Set correct ownership for the entire app directory
+RUN chown -R nextjs:nodejs /app
 
-# Copy necessary files
+# Copy necessary files from the builder stage with correct ownership
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
@@ -52,6 +54,5 @@ USER nextjs
 
 EXPOSE 3000
 
+# Start the application
 CMD ["node", "server.js"]
-
-# Path: Dockerfile

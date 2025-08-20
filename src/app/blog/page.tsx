@@ -1,7 +1,24 @@
-import BlogClient from "@container/blog/BlogClient";
+/**
+ * @file src/app/blog/page.tsx
+ * @author David @dvhsh (https://dvh.sh)
+ *
+ * @created Wed, Aug 20 2025
+ * @updated Wed, Aug 20 2025
+ *
+ * @description
+ * Blog index page. Renders BlogClient (isCooking: false).
+ */
 
-export default function Blog() {
+import BlogClient from "@/containers/blog/BlogClient";
+
+/**
+ * @component BlogPage
+ * @description Main page component for the blog section.
+ * Renders the BlogClient component, configured for general blog content
+ * by setting the `isCooking` prop to `false`.
+ */
+const BlogPage = () => {
   return <BlogClient isCooking={false} />;
-}
+};
 
-// path: src/app/blog/page.tsx
+export default BlogPage;

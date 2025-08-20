@@ -1,0 +1,40 @@
+{
+  "photos": [
+    {
+      "slug": "seal-cove-la-jolla-san-diego-sea-lions-2024",
+      "title": "Sea Lions at Seal Cove",
+      "location": "La Jolla, San Diego",
+      "sublocation": "Seal Cove",
+      "date": "2024-06-07",
+      "camera": "iPhone 15",
+      "settings": {
+        "aperture": "f/1.6",
+        "shutterSpeed": "1/2024",
+        "focalLength": "6mm"
+      },
+      "tags": ["wildlife", "ocean", "sea-lions", "california", "la-jolla"],
+      "description": "Sea lions and cormorants gather on the rocks at Seal Cove, La Jolla.",
+      "sizes": {
+        "thumbnail": "seal-cove-la-jolla-san-diego-sea-lions-2024-320.webp",
+        "small": "seal-cove-la-jolla-san-diego-sea-lions-2024-640.webp",
+        "medium": "seal-cove-la-jolla-san-diego-sea-lions-2024-1280.webp",
+        "large": "seal-cove-la-jolla-san-diego-sea-lions-2024-1920.webp",
+        "full": "seal-cove-la-jolla-san-diego-sea-lions-2025-4032.webp"
+      },
+      "aspectRatio": 1.33,
+      "width": 4032,
+      "height": 3024,
+      "views": 0
+    }
+  ],
+  "collections": [
+    {
+      "slug": "la-jolla-2024",
+      "title": "La Jolla Wildlife",
+      "description": "Coastal wildlife from La Jolla",
+      "coverPhoto": "seal-cove-la-jolla-san-diego-sea-lions-2024",
+      "photos": ["seal-cove-la-jolla-san-diego-sea-lions-2024"],
+      "date": "2024-06-07"
+    }
+  ]
+}

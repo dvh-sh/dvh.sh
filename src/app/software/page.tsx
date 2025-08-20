@@ -1,21 +1,38 @@
+/**
+ * @file app/software/page.tsx
+ * @author David @dvhsh (https://dvh.sh)
+ *
+ * @created Wed, Aug 20 2025
+ * @updated Wed, Aug 20 2025
+ *
+ * @description
+ * Main page for displaying software projects. Fetches software data from a GitHub repository,
+ * displays it categorized, and includes skeleton loaders and animated elements.
+ */
+
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
 import { flavors } from "@catppuccin/palette";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
+import React, { useEffect, useState, useMemo, useContext } from "react";
 
 import SoftwareCard, {
   SoftwareCardSkeleton,
-} from "@component/card/SoftwareCard";
-import { Software } from "@types";
+} from "@/components/card/SoftwareCard";
+import { ThemeContext } from "@/providers/ThemeProvider";
+import { Software } from "@/types/software";
 
+/**
+ * @component CategorySkeleton
+ * @description Renders a skeleton loader for a software category, used while data is being fetched.
+ */
 const CategorySkeleton = () => (
   <motion.div
     className="mb-12 md:mb-16"
     initial={{ opacity: 0, x: -50 }}
     animate={{ opacity: 1, x: 0 }}
   >
-    <div className="h-8 bg-overlay0 w-48 mb-6 md:mb-8 rounded"></div>
+    <div className="h-8 bg-ctp-overlay0 w-48 mb-6 md:mb-8 rounded"></div>
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
       {[...Array(6)].map((_, index) => (
         <motion.div
@@ -31,13 +48,24 @@ const CategorySkeleton = () => (
   </motion.div>
 );
 
-export default function SoftwarePage() {
+/**
+ * @component SoftwarePage
+ * @description Main component for the software page. Fetches and displays categorized software
+ * information, including loading states and error handling.
+ */
+const SoftwarePage = () => {
   const [softwareList, setSoftwareList] = useState<{
     [key: string]: Software[];
   } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { theme } = useContext(ThemeContext);
 
+  /**
+   * @function fetchSoftware
+   * @description Asynchronously fetches software data from a GitHub raw content URL.
+   * Handles success, error, and loading states.
+   */
   useEffect(() => {
     const fetchSoftware = async () => {
       try {
@@ -63,6 +91,11 @@ export default function SoftwarePage() {
     fetchSoftware();
   }, []);
 
+  /**
+   * @var renderedSoftwareList
+   * @description Memoized React element that renders the categorized software list.
+   * Iterates through software categories and displays them using SoftwareCard components.
+   */
   const renderedSoftwareList = useMemo(() => {
     if (!softwareList) return null;
 
@@ -74,7 +107,7 @@ export default function SoftwarePage() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: index * 0.2 }}
       >
-        <h3 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-subtext0 uppercase tracking-wider transform skew-x-12">
+        <h3 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-ctp-subtext0 uppercase tracking-wider transform skew-x-12">
           {category}
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -93,17 +126,29 @@ export default function SoftwarePage() {
     ));
   }, [softwareList]);
 
+  /**
+   * @var accentColors
+   * @description Memoized array of accent color names from the Catppuccin palette.
+   * Used for dynamic color animations.
+   */
   const accentColors = useMemo(() => {
-    return Object.keys(flavors.mocha.colors).filter(
+    const currentFlavor = flavors[theme as keyof typeof flavors];
+    return Object.keys(currentFlavor.colors).filter(
       (color) =>
-        flavors.mocha.colors[color as keyof typeof flavors.mocha.colors].accent,
+        currentFlavor.colors[color as keyof typeof currentFlavor.colors].accent,
     );
-  }, []);
+  }, [theme]);
 
+  /**
+   * @var titleVariants
+   * @description Memoized animation variants for the "Software" title.
+   * Creates a cyclical color and text shadow animation based on accent colors.
+   */
   const titleVariants = useMemo(() => {
+    const currentFlavor = flavors[theme as keyof typeof flavors];
     const colorValues = accentColors.map(
       (color) =>
-        flavors.mocha.colors[color as keyof typeof flavors.mocha.colors].hex,
+        currentFlavor.colors[color as keyof typeof currentFlavor.colors].hex,
     );
     return {
       animate: {
@@ -118,10 +163,10 @@ export default function SoftwarePage() {
         },
       },
     };
-  }, [accentColors]);
+  }, [accentColors, theme]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-base to-mantle p-4 sm:p-6 md:p-8 md:ml-64 overflow-x-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-ctp-base to-ctp-mantle p-4 sm:p-6 md:p-8 md:ml-64 overflow-x-hidden relative">
       <motion.div
         className="max-w-6xl mx-auto"
         initial={{ opacity: 0, y: 50 }}
@@ -131,7 +176,6 @@ export default function SoftwarePage() {
         <motion.h2
           className="text-4xl sm:text-5xl md:text-6xl font-black my-8 py-8 text-accent text-center uppercase tracking-widest transform -skew-x-12"
           animate="animate"
-          variants={titleVariants}
         >
           Software
         </motion.h2>
@@ -151,4 +195,6 @@ export default function SoftwarePage() {
       </motion.div>
     </div>
   );
-}
+};
+
+export default SoftwarePage;

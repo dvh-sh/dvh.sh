@@ -1,6 +1,6 @@
 {
   "name": "dvh.sh",
-  "version": "1.6.4",
+  "version": "1.7.0",
   "author": "David @dvhsh (https://dvh.sh)",
   "license": "GNU GPL 3.0",
   "scripts": {
@@ -10,31 +10,32 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@catppuccin/palette": "^1.4.0",
-    "@tailwindcss/typography": "^0.5.15",
-    "autoprefixer": "^10.4.20",
-    "axios": "^1.7.7",
-    "framer-motion": "^11.5.6",
+    "@catppuccin/palette": "^1.7.1",
+    "@tailwindcss/typography": "^0.5.16",
+    "autoprefixer": "^10.4.21",
+    "axios": "^1.11.0",
     "gray-matter": "^4.0.3",
-    "mongoose": "^8.6.3",
-    "next": "^14.2.13",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-icons": "^5.3.0",
-    "react-markdown": "^9.0.1",
+    "mongoose": "^8.17.2",
+    "motion": "^12.23.12",
+    "next": "^15.5.0",
+    "react": "^19",
+    "react-dom": "^19",
+    "react-icons": "^5.5.0",
+    "react-markdown": "^10.1.0",
     "react-type-animation": "^3.2.0",
-    "sharp": "^0.33.5",
-    "tailwindcss": "^3.4.10"
+    "sharp": "^0.34.3",
+    "tailwindcss": "^4.1.12"
   },
   "devDependencies": {
-    "@catppuccin/tailwindcss": "^0.1.6",
-    "@types/node": "20.16.5",
-    "@types/react": "18.3.8",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
-    "prettier": "3.3.3",
-    "typescript": "5.6.2"
+    "@catppuccin/tailwindcss": "^1.0.0",
+    "@tailwindcss/postcss": "^4.1.12",
+    "@types/node": "24.3.0",
+    "@types/react": "19.1.10",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.0",
+    "prettier": "3.6.2",
+    "typescript": "5.9.2"
   },
   "repository": {
     "type": "git",

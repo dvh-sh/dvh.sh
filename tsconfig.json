@@ -5,6 +5,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -19,15 +20,16 @@
       }
     ],
     "paths": {
-      "@provider/*": ["./src/provider/*"],
-      "@component/*": ["./src/component/*"],
-      "@container/*": ["./src/container/*"],
-      "@model/*": ["./src/model/*"],
-      "@types": ["./src/types.d.ts"],
-      "@util/*": ["./src/util/*"],
-      "@lib/*": ["./src/lib/*"]
+      "@/*": ["./src/*"],
+      "@/public/*": ["./public/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "postcss.config.js"
+  ],
   "exclude": ["node_modules"]
 }

@@ -1,14 +1,30 @@
+/**
+ * @file src/lib/posts.ts
+ * @author David @dvhsh (https://dvh.sh)
+ *
+ * @created Wed, Aug 20 2025
+ * @updated Wed, Aug 20 2025
+ *
+ * @description
+ * Functions for fetching and parsing blog and cooking posts from a GitHub repository.
+ */
+
 import axios from "axios";
 import matter from "gray-matter";
 
-import { Post } from "@types";
+import type { Post } from "@/types/blog";
 
 const GITHUB_API_URL = "https://api.github.com/repos/dvh-sh/blog/contents";
-const GITHUB_COOKING_URL =
-  "https://api.github.com/repos/dvh-sh/blog/contents/cooking";
+const GITHUB_COOKING_URL = `${GITHUB_API_URL}/cooking`;
 const EXCERPT_SEPARATOR = "<!-- end -->";
 const WORDS_PER_MINUTE = 250;
 
+/**
+ * @function fetchAndParseMd
+ * @description Fetches raw Markdown content from a URL and parses its front matter.
+ * @param {string} url - The URL of the raw Markdown file.
+ * @returns {Promise<matter.GrayMatterFile<string>>} A promise that resolves to the parsed matter object.
+ */
 const fetchAndParseMd = async (
   url: string,
 ): Promise<matter.GrayMatterFile<string>> => {
@@ -16,6 +32,14 @@ const fetchAndParseMd = async (
   return matter(data, { excerpt_separator: EXCERPT_SEPARATOR });
 };
 
+/**
+ * @function createPost
+ * @description Constructs a Post object from a parsed Markdown file.
+ * @param {string} slug - The slug of the post.
+ * @param {matter.GrayMatterFile<string>} matterResult - The parsed matter object.
+ * @param {boolean} [removeExcerpt=false] - Whether to remove the excerpt from the main content.
+ * @returns {Post} The constructed Post object.
+ */
 const createPost = (
   slug: string,
   matterResult: matter.GrayMatterFile<string>,
@@ -45,6 +69,12 @@ const createPost = (
   };
 };
 
+/**
+ * @function getSortedPostsData
+ * @description Fetches all posts, parses them, and sorts them by date in descending order.
+ * @param {boolean} [isCooking=false] - Flag to fetch from the cooking directory.
+ * @returns {Promise<Post[]>} A promise that resolves to an array of sorted posts.
+ */
 export const getSortedPostsData = async (
   isCooking = false,
 ): Promise<Post[]> => {
@@ -55,7 +85,6 @@ export const getSortedPostsData = async (
     const mdFiles = data.filter(
       (file: { name: string; type: string }) =>
         file.name.endsWith(".md") &&
-        // Exclude cooking directory from main blog posts
         (!isCooking ? file.type === "file" && file.name !== "cooking" : true),
     );
 
@@ -75,6 +104,13 @@ export const getSortedPostsData = async (
   }
 };
 
+/**
+ * @function getPostData
+ * @description Fetches and parses a single post by its slug.
+ * @param {string} slug - The slug of the post to fetch.
+ * @param {boolean} [isCooking=false] - Flag to fetch from the cooking directory.
+ * @returns {Promise<Post | null>} A promise resolving to the Post object or null if not found.
+ */
 export const getPostData = async (
   slug: string,
   isCooking = false,
@@ -89,5 +125,3 @@ export const getPostData = async (
     return null;
   }
 };
-
-// path: src/lib/posts.ts

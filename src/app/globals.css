@@ -1,3 +1,15 @@
+/**
+ * @file app/globals.css
+ * @author David @dvhsh (https://dvh.sh)
+ *
+ * @created Wed, Aug 20 2025
+ * @updated Wed, Aug 20 2025
+ *
+ * @description
+ * Global styles with Tailwind directives and custom CSS.
+ */
+
+/* Fonts */
 @font-face {
   font-family: "Open Sans";
   src: url("/fonts/open-sans-latin-400-normal.woff2") format("woff2");
@@ -5,7 +17,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Open Sans";
   src: url("/fonts/open-sans-latin-600-normal.woff2") format("woff2");
@@ -13,7 +24,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Open Sans";
   src: url("/fonts/open-sans-latin-700-normal.woff2") format("woff2");
@@ -21,7 +31,6 @@
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: "Open Sans";
   src: url("/fonts/open-sans-latin-800-normal.woff2") format("woff2");
@@ -30,44 +39,44 @@
   font-display: swap;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "@catppuccin/tailwindcss/mocha.css";
 
+/* Accent hook for dynamic accent color */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-  --accent-color: var(--pink);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --accent-color: var(--ctp-pink);
 }
 
 @layer base {
-  a {
-    @apply underline hover:text-[var(--catppuccin-text)];
-  }
-
   html {
     scroll-behavior: smooth;
   }
-
   body {
-    @apply bg-[var(--color-base)] text-[var(--color-text)] m-0 p-0;
+    font-family:
+      "Open Sans",
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      Segoe UI,
+      Roboto,
+      Arial;
+    @apply bg-ctp-base text-ctp-text;
   }
+}
 
-  main {
-    @apply p-0;
+@layer utilities {
+  /* Dynamic accent color classes */
+  .bg-accent {
+    background-color: var(--accent-color);
   }
-
-  #__next {
-    @apply flex flex-col min-h-screen;
+  .text-accent {
+    color: var(--accent-color);
+  }
+  .border-accent {
+    border-color: var(--accent-color);
+  }
+  .ring-accent {
+    --tw-ring-color: var(--accent-color);
   }
 }
 
@@ -98,10 +107,11 @@
   }
 
   .shadow-brutal {
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.8);
   }
 }
 
+/* Keyframes */
 @keyframes wave {
   0%,
   100% {
@@ -120,7 +130,6 @@
     transform: rotate(-4deg);
   }
 }
-
 @keyframes gradient {
   0%,
   100% {
@@ -130,19 +139,26 @@
     background-position: 100% 50%;
   }
 }
-
 @keyframes float {
   0%,
   100% {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
   50% {
     transform: translateY(-10px);
   }
 }
-
 @keyframes fadeIn {
   to {
-    @apply opacity-100 translate-x-0;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
