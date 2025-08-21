@@ -25,6 +25,74 @@
       "width": 4032,
       "height": 3024,
       "views": 0
+    },
+    {
+      "slug": "a-valley-of-snails-pauma-valley-2024",
+      "title": "A Valley of Snails",
+      "location": "Pauma Valley, San Diego County, California",
+      "sublocation": "Pauma Valley",
+      "date": "2024-06-03",
+      "camera": "iPhone 15",
+      "lens": "Wide 5.96mm",
+      "settings": {
+        "aperture": "f/1.6",
+        "shutterSpeed": "1/24",
+        "iso": "400",
+        "focalLength": "6mm"
+      },
+      "tags": ["snails", "macro", "hand", "night", "california", "pauma-valley"],
+      "description": "A trio of snails, held within a human's hand.",
+      "sizes": {
+        "thumbnail": "a-valley-of-snails-pauma-valley-2024-320.webp",
+        "small": "a-valley-of-snails-pauma-valley-2024-640.webp",
+        "medium": "a-valley-of-snails-pauma-valley-2024-1280.webp",
+        "large": "a-valley-of-snails-pauma-valley-2024-1920.webp",
+        "full": "a-valley-of-snails-pauma-valley-2024-4032.webp"
+      },
+      "aspectRatio": 1.33,
+      "width": 4032,
+      "height": 3024,
+      "views": 0
+    },
+    {
+      "slug": "pauma-valley-sunset-2024",
+      "title": "Pauma Valley Sunset",
+      "location": "Pauma Valley, San Diego County, California",
+      "date": "2024-06-03",
+      "camera": "iPhone 15",
+      "tags": ["sunset", "landscape", "california", "pauma-valley"],
+      "description": "Warm sunset light over Pauma Valley.",
+      "sizes": {
+        "thumbnail": "pauma-valley-sunset-2024-320.webp",
+        "small": "pauma-valley-sunset-2024-640.webp",
+        "medium": "pauma-valley-sunset-2024-1280.webp",
+        "large": "pauma-valley-sunset-2024-1920.webp",
+        "full": "pauma-valley-sunset-2024-4032.webp"
+      },
+      "aspectRatio": 1.33,
+      "width": 4032,
+      "height": 3024,
+      "views": 0
+    },
+    {
+      "slug": "pauma-valley-mountain-2024",
+      "title": "Pauma Valley Mountain",
+      "location": "Pauma Valley, San Diego County, California",
+      "date": "2024-06-03",
+      "camera": "iPhone 15",
+      "tags": ["mountain", "landscape", "california", "pauma-valley"],
+      "description": "Evening view of a mountain ridge near Pauma Valley.",
+      "sizes": {
+        "thumbnail": "pauma-valley-mountain-2024-320.webp",
+        "small": "pauma-valley-mountain-2024-640.webp",
+        "medium": "pauma-valley-mountain-2024-1280.webp",
+        "large": "pauma-valley-mountain-2024-1920.webp",
+        "full": "pauma-valley-mountain-2024-4032.webp"
+      },
+      "aspectRatio": 1.33,
+      "width": 4032,
+      "height": 3024,
+      "views": 0
     }
   ],
   "collections": [
@@ -35,6 +103,18 @@
       "coverPhoto": "seal-cove-la-jolla-san-diego-sea-lions-2024",
       "photos": ["seal-cove-la-jolla-san-diego-sea-lions-2024"],
       "date": "2024-06-07"
+    },
+    {
+      "slug": "pauma-valley-2024",
+      "title": "Pauma Valley",
+      "description": "Snails, sunsets, and mountain evenings in Pauma Valley.",
+      "coverPhoto": "pauma-valley-sunset-2024",
+      "photos": [
+        "a-valley-of-snails-pauma-valley-2024",
+        "pauma-valley-sunset-2024",
+        "pauma-valley-mountain-2024"
+      ],
+      "date": "2024-06-03"
     }
   ]
 }
