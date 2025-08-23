@@ -7,11 +7,13 @@
       "sublocation": "Seal Cove",
       "date": "2024-06-07",
       "camera": "iPhone 15",
+      "lens": "iPhone 15 back dual wide camera 5.96mm f/1.6",
       "photographer": "David Heffler",
       "producer": "David Heffler",
       "settings": {
         "aperture": "f/1.6",
         "shutterSpeed": "1/2024",
+        "iso": "32",
         "focalLength": "6mm"
       },
       "tags": ["california", "wildlife", "ocean"],
@@ -21,7 +23,7 @@
         "small": "seal-cove-la-jolla-san-diego-sea-lions-2024-640.webp",
         "medium": "seal-cove-la-jolla-san-diego-sea-lions-2024-1280.webp",
         "large": "seal-cove-la-jolla-san-diego-sea-lions-2024-1920.webp",
-        "full": "seal-cove-la-jolla-san-diego-sea-lions-2025-4032.webp"
+        "full": "seal-cove-la-jolla-san-diego-sea-lions-2024-4032.webp"
       },
       "aspectRatio": 1.33,
       "width": 4032,
@@ -35,7 +37,7 @@
       "sublocation": "Pauma Valley",
       "date": "2024-06-03",
       "camera": "iPhone 15",
-      "lens": "Wide 5.96mm",
+      "lens": "iPhone 15 back dual wide camera 5.96mm f/1.6",
       "photographer": "David Heffler",
       "producer": "David Heffler",
       "settings": {
@@ -65,7 +67,7 @@
       "sublocation": "Streeterville",
       "date": "2022-10-13",
       "camera": "iPhone 13",
-      "lens": "iPhone 13 back dual wide 1.54mm (14mm equiv.)",
+      "lens": "iPhone 13 back dual wide camera 1.54mm f/2.4",
       "photographer": "David Heffler",
       "producer": "David Heffler",
       "settings": {
