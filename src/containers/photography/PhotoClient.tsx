@@ -3,10 +3,11 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Fri, Aug 23 2025
  *
  * @description
  * The main client component for displaying a single photo and its details.
+ * Enhanced with camera settings display and photographer/producer credits.
  */
 
 "use client";
@@ -25,6 +26,9 @@ import {
   FaInfoCircle,
   FaMapMarkerAlt,
   FaTimes,
+  FaUser,
+  FaUserEdit,
+  FaCog,
 } from "react-icons/fa";
 
 import type { Photo } from "@/types/photography";
@@ -123,7 +127,7 @@ const PhotoDisplay = ({
               : "bg-ctp-surface0 text-ctp-text border-accent hover:bg-accent hover:text-ctp-base"
           } transition-all duration-200`}
         >
-          Full (4032px)
+          Full ({photo.width}px)
         </button>
       </div>
     </div>
@@ -164,28 +168,95 @@ const PhotoDetails = ({ photo, views }: PhotoClientProps) => (
         </div>
       </div>
     </motion.div>
-    {photo.camera && (
+
+    {/* Credits Section */}
+    {(photo.photographer || photo.producer) && (
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.1 }}
         className="bg-ctp-surface0 p-6 border-4 border-accent shadow-brutal transform rotate-1"
       >
-        <h3 className="text-xl font-bold text-accent uppercase mb-3 flex items-center gap-2">
-          <FaCamera size={16} />
-          Camera Info
+        <h3 className="text-xl font-bold text-accent uppercase mb-3">
+          Credits
         </h3>
-        <div className="space-y-1 text-ctp-text font-mono text-sm">
-          <div>{photo.camera}</div>
+        <div className="space-y-2 text-ctp-text font-mono text-sm">
+          {photo.photographer && (
+            <div className="flex items-center gap-2">
+              <FaUser size={14} />
+              <span>Photographer: {photo.photographer}</span>
+            </div>
+          )}
+          {photo.producer && (
+            <div className="flex items-center gap-2">
+              <FaUserEdit size={14} />
+              <span>Producer: {photo.producer}</span>
+            </div>
+          )}
         </div>
       </motion.div>
     )}
-    {photo.price && (
+
+    {/* Camera Info Section */}
+    {(photo.camera || photo.lens || photo.settings) && (
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2 }}
-        className="bg-accent text-ctp-base p-6 border-4 border-ctp-base shadow-brutal transform -rotate-1"
+        className="bg-ctp-surface0 p-6 border-4 border-accent shadow-brutal transform -rotate-1"
+      >
+        <h3 className="text-xl font-bold text-accent uppercase mb-3 flex items-center gap-2">
+          <FaCamera size={16} />
+          Camera Info
+        </h3>
+        <div className="space-y-2 text-ctp-text font-mono text-sm">
+          {photo.camera && <div>Camera: {photo.camera}</div>}
+          {photo.lens && <div>Lens: {photo.lens}</div>}
+        </div>
+        {photo.settings && (
+          <div className="mt-4 pt-4 border-t border-ctp-surface1">
+            <h4 className="text-sm font-bold text-accent uppercase mb-2 flex items-center gap-2">
+              <FaCog size={12} />
+              Settings
+            </h4>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              {photo.settings.aperture && (
+                <div>
+                  <span className="text-ctp-subtext0">Aperture:</span>{" "}
+                  {photo.settings.aperture}
+                </div>
+              )}
+              {photo.settings.shutterSpeed && (
+                <div>
+                  <span className="text-ctp-subtext0">Shutter:</span>{" "}
+                  {photo.settings.shutterSpeed}
+                </div>
+              )}
+              {photo.settings.iso && (
+                <div>
+                  <span className="text-ctp-subtext0">ISO:</span>{" "}
+                  {photo.settings.iso}
+                </div>
+              )}
+              {photo.settings.focalLength && (
+                <div>
+                  <span className="text-ctp-subtext0">Focal:</span>{" "}
+                  {photo.settings.focalLength}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </motion.div>
+    )}
+
+    {/* Licensing Section */}
+    {photo.price && (
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.3 }}
+        className="bg-accent text-ctp-base p-6 border-4 border-ctp-base shadow-brutal transform rotate-1"
       >
         <h3 className="text-xl font-black uppercase mb-4 flex items-center gap-2">
           <FaDollarSign size={16} />
@@ -199,10 +270,12 @@ const PhotoDetails = ({ photo, views }: PhotoClientProps) => (
         </a>
       </motion.div>
     )}
+
+    {/* Tags */}
     <motion.div
       initial={{ opacity: 0, x: 20 }}
       animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.3 }}
+      transition={{ delay: 0.4 }}
       className="flex flex-wrap gap-2"
     >
       {photo.tags.map((tag: any) => (
@@ -245,8 +318,9 @@ const PhotoClient = ({ photo, views }: PhotoClientProps) => {
           </div>
           <div className="mt-12 p-4 bg-ctp-surface0 border-t-4 border-accent">
             <p className="text-sm text-ctp-subtext0 font-mono flex items-center gap-2">
-              <FaInfoCircle />© 2017 - {new Date().getFullYear()} David
-              Heffler. All rights reserved. No unauthorized use.
+              <FaInfoCircle />© 2017 - {new Date().getFullYear()}{" "}
+              {photo.photographer || "David Heffler"}. All rights reserved. No
+              unauthorized use.
             </p>
           </div>
         </div>

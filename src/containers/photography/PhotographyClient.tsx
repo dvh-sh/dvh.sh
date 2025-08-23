@@ -3,11 +3,12 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Fri, Aug 23 2025
  *
  * @description
  * Main photography gallery client component.
  * Coordinates filtering, display, and interactions between sub-components.
+ * Fixed AnimatePresence mode to prevent disappearing entries.
  */
 
 "use client";
@@ -94,9 +95,9 @@ const PhotographyClient = ({ photos }: PhotographyClientProps) => {
           onFilterChange={setFilter}
         />
 
-        {/* Photo Grid */}
+        {/* Photo Grid - Fixed AnimatePresence mode */}
         <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
-          <AnimatePresence mode="popLayout">
+          <AnimatePresence mode="wait" initial={false}>
             {filteredPhotos.map((photo, index) => (
               <PhotoGridItem
                 key={photo.slug}

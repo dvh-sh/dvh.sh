@@ -21,6 +21,8 @@ export interface Photo {
   date: string;
   camera?: string;
   lens?: string;
+  photographer?: string;
+  producer?: string;
   settings?: {
     aperture?: string;
     shutterSpeed?: string;

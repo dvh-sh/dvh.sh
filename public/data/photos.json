@@ -7,6 +7,8 @@
       "sublocation": "Seal Cove",
       "date": "2024-06-07",
       "camera": "iPhone 15",
+      "photographer": "David Heffler",
+      "producer": "David Heffler",
       "settings": {
         "aperture": "f/1.6",
         "shutterSpeed": "1/2024",
@@ -34,6 +36,8 @@
       "date": "2024-06-03",
       "camera": "iPhone 15",
       "lens": "Wide 5.96mm",
+      "photographer": "David Heffler",
+      "producer": "David Heffler",
       "settings": {
         "aperture": "f/1.6",
         "shutterSpeed": "1/24",
@@ -62,6 +66,8 @@
       "date": "2022-10-13",
       "camera": "iPhone 13",
       "lens": "iPhone 13 back dual wide 1.54mm (14mm equiv.)",
+      "photographer": "David Heffler",
+      "producer": "David Heffler",
       "settings": {
         "aperture": "f/2.4",
         "shutterSpeed": "1/120",
@@ -77,7 +83,7 @@
         "large": "concrete-river-chicago-2022-1920.webp",
         "full": "concrete-river-chicago-2022-4032.webp"
       },
-      "aspectRatio": 1.33,
+      "aspectRatio": 0.75,
       "width": 3024,
       "height": 4032,
       "views": 0

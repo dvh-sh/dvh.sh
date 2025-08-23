@@ -3,11 +3,11 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Fri, Aug 23 2025
  *
  * @description
  * Individual photo grid item component for the photography gallery.
- * Handles image display, hover effects, and animations.
+ * Handles image display, hover effects, animations, and photographer credits.
  */
 
 "use client";
@@ -16,7 +16,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { memo } from "react";
-import { FaEye, FaMapMarkerAlt } from "react-icons/fa";
+import { FaEye, FaMapMarkerAlt, FaUser } from "react-icons/fa";
 
 import type { Photo } from "@/types/photography";
 
@@ -90,6 +90,13 @@ const PhotoGridItem = memo(
                   <FaEye size={12} />
                   {photo.views || 0}
                 </span>
+                {photo.photographer &&
+                  photo.photographer !== "David Heffler" && (
+                    <span className="flex items-center gap-1">
+                      <FaUser size={12} />
+                      {photo.photographer}
+                    </span>
+                  )}
               </div>
             </motion.div>
 
