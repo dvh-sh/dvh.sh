@@ -40,7 +40,7 @@
         "iso": "400",
         "focalLength": "6mm"
       },
-      "tags": ["california"],
+      "tags": ["california", "wildlife"],
       "description": "A trio of snails, held within a human's hand.",
       "sizes": {
         "thumbnail": "a-valley-of-snails-pauma-valley-2024-320.webp",
@@ -53,6 +53,34 @@
       "width": 4032,
       "height": 3024,
       "views": 0
+    },
+    {
+      "slug": "concrete-river-chicago-2022",
+      "title": "Concrete River",
+      "location": "Chicago, Illinois",
+      "sublocation": "Streeterville",
+      "date": "2022-10-13",
+      "camera": "iPhone 13",
+      "lens": "iPhone 13 back dual wide 1.54mm (14mm equiv.)",
+      "settings": {
+        "aperture": "f/2.4",
+        "shutterSpeed": "1/120",
+        "iso": "200",
+        "focalLength": "1.54mm"
+      },
+      "tags": ["illinois", "cityscape", "river", "architecture"],
+      "description": "A cold river slicing through the steel, glass, and concrete of Chicago's Streeterville.",
+      "sizes": {
+        "thumbnail": "concrete-river-chicago-2022-320.webp",
+        "small": "concrete-river-chicago-2022-640.webp",
+        "medium": "concrete-river-chicago-2022-1280.webp",
+        "large": "concrete-river-chicago-2022-1920.webp",
+        "full": "concrete-river-chicago-2022-4032.webp"
+      },
+      "aspectRatio": 1.33,
+      "width": 3024,
+      "height": 4032,
+      "views": 0
     }
   ],
   "collections": [
@@ -63,15 +91,32 @@
       "coverPhoto": "seal-cove-la-jolla-san-diego-sea-lions-2024",
       "photos": ["seal-cove-la-jolla-san-diego-sea-lions-2024"],
       "date": "2024-06-07"
+    },
+    {
+      "slug": "pauma-valley-2024",
+      "title": "Pauma Valley",
+      "description": "Scenes from Pauma Valley in northern San Diego County.",
+      "coverPhoto": "a-valley-of-snails-pauma-valley-2024",
+      "photos": ["a-valley-of-snails-pauma-valley-2024"],
+      "date": "2024-06-03"
+    },
+    {
+      "slug": "chicago-collection",
+      "title": "Chicago",
+      "description": "Architecture and river views from downtown Chicago.",
+      "coverPhoto": "concrete-river-chicago-2022",
+      "photos": ["concrete-river-chicago-2022"],
+      "date": "2022-10-13"
     }
   ],
   "tagDictionary": [
     "california",
+    "illinois",
     "wildlife",
     "ocean",
-    "landscape",
-    "mountain",
-    "sunset",
-    "sunrise"
+    "cityscape",
+    "architecture",
+    "river",
+    "landscape"
   ]
 }
