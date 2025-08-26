@@ -32,7 +32,7 @@ const robots = (): MetadataRoute.Robots => {
           "*.json",
           "/*?*", // URLs with query parameters
           "/404",
-          "/resume"
+          "/resume",
         ],
         crawlDelay: 0,
       },

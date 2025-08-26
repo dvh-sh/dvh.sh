@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@import "@catppuccin/tailwindcss/mocha.css";
+
+@layer base {
+  :root {
+    /* Catppuccin Mocha colors with high contrast */
+    --ctp-base: #1e1e2e;
+    --ctp-text: #cdd6f4;
+    --ctp-subtext0: #a6adc8; /* Better contrast than subtext1 */
+    --ctp-pink: #f5c2e7;
+    --ctp-blue: #89b4fa;
+    --ctp-surface1: #45475a;
+    --ctp-surface2: #585b70;
+  }
+
+  /* Ensure minimum font sizes for accessibility */
+  html {
+    font-size: 16px;
+  }
+
+  @media print {
+    body {
+      background: white !important;
+      color: black !important;
+    }
+
+    .no-print {
+      display: none !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* High contrast text colors */
+  .text-ctp-text {
+    color: var(--ctp-text);
+  }
+  .text-ctp-subtext0 {
+    color: var(--ctp-subtext0);
+  }
+  .text-ctp-pink {
+    color: var(--ctp-pink);
+  }
+  .text-ctp-blue {
+    color: var(--ctp-blue);
+  }
+
+  .border-ctp-surface1 {
+    border-color: var(--ctp-surface1);
+  }
+  .border-ctp-surface2 {
+    border-color: var(--ctp-surface2);
+  }
+
+  .bg-ctp-base {
+    background-color: var(--ctp-base);
+  }
+}

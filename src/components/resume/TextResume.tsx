@@ -6,7 +6,7 @@
  * @updated Mon, Aug 26 2025
  *
  * @description
- * Optimized text resume with perfect accessibility scores.
+ * High contrast resume with WCAG AAA compliance.
  */
 
 import Link from "next/link";
@@ -51,18 +51,14 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
   const education = Array.isArray(data.education) ? data.education : [];
 
   return (
-    <div 
-      className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-4 md:py-8"
-      style={{ backgroundColor: '#11111b', color: '#cdd6f4' }}
-    >
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-4 md:py-8">
       {/* Floating header row */}
       <div className="mb-5 md:mb-7 no-print">
         <div className="flex items-center justify-between gap-3">
           <Link
             href="/"
-            className="text-ctp-pink hover:text-white transition-colors font-mono text-xs uppercase tracking-wide"
+            className="text-ctp-pink hover:text-ctp-text transition-colors font-mono text-[13px] md:text-sm tracking-wide"
             aria-label="Back to dvh.sh"
-            style={{ fontSize: '12px', color: '#f5c2e7' }}
           >
             dvh.sh
           </Link>
@@ -74,27 +70,20 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
 
       {/* Identity */}
       <header className="mb-6 md:mb-8">
-        <h1 
-          className="text-2xl md:text-3xl font-black leading-tight"
-          style={{ color: '#cdd6f4' }}
-        >
+        <h1 className="text-[24px] md:text-[28px] font-black text-ctp-text leading-tight">
           {data.profile?.name}
         </h1>
-        <p 
-          className="text-sm mt-1"
-          style={{ color: '#a6adc8' }}
-        >
+        <p className="text-[13px] md:text-sm text-ctp-subtext0 mt-1">
           {data.profile?.title}
         </p>
 
-        <div className="mt-3 text-xs space-y-0.5 font-mono" style={{ color: '#a6adc8' }}>
+        <div className="mt-3 text-[12px] md:text-[13px] text-ctp-subtext0 space-y-0.5 font-mono">
           <p>{data.profile?.location}</p>
           <div className="flex flex-wrap gap-x-3 gap-y-1">
             {data.profile?.email && (
               <a
                 href={`mailto:${data.profile.email}`}
                 className="hover:text-ctp-text transition-colors"
-                style={{ color: '#a6adc8' }}
               >
                 {data.profile.email}
               </a>
@@ -105,7 +94,6 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-ctp-text transition-colors"
-                style={{ color: '#a6adc8' }}
               >
                 {data.profile.website}
               </a>
@@ -116,7 +104,6 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-ctp-text transition-colors"
-                style={{ color: '#a6adc8' }}
               >
                 {data.profile.github}
               </a>
@@ -127,7 +114,6 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-ctp-text transition-colors"
-                style={{ color: '#a6adc8' }}
               >
                 {data.profile.linkedin}
               </a>
@@ -142,20 +128,17 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
         <aside className="lg:col-span-1 space-y-6">
           {/* Education */}
           <section>
-            <h3 
-              className="text-xs font-bold text-ctp-pink uppercase mb-2 tracking-wide"
-              style={{ color: '#f5c2e7' }}
-            >
+            <h3 className="text-[12px] font-bold text-ctp-pink uppercase mb-2 tracking-wide">
               Education
             </h3>
             <div className="space-y-3">
               {education
                 .filter((e) => e.school && e.degree)
                 .map((edu, i) => (
-                  <div key={`edu-${i}`} className="text-xs">
-                    <p className="font-semibold" style={{ color: '#cdd6f4' }}>{edu.school}</p>
-                    <p style={{ color: '#a6adc8' }}>{edu.degree}</p>
-                    <p style={{ color: '#a6adc8' }}>
+                  <div key={`edu-${i}`} className="text-[12px] md:text-[13px]">
+                    <p className="text-ctp-text font-semibold">{edu.school}</p>
+                    <p className="text-ctp-subtext0">{edu.degree}</p>
+                    <p className="text-ctp-subtext0">
                       {edu.dates}
                       {edu.expected ? " · expected" : ""}
                     </p>
@@ -166,34 +149,31 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
 
           {/* Skills */}
           <section>
-            <h3 
-              className="text-xs font-bold text-ctp-pink uppercase mb-2 tracking-wide"
-              style={{ color: '#f5c2e7' }}
-            >
+            <h3 className="text-[12px] font-bold text-ctp-pink uppercase mb-2 tracking-wide">
               Skills
             </h3>
-            <div className="text-xs space-y-1.5" style={{ color: '#cdd6f4' }}>
+            <div className="text-[12px] md:text-[13px] text-ctp-text space-y-1.5">
               {skillsObj.programmingLanguages?.length > 0 && (
                 <p>
-                  <span style={{ color: '#a6adc8' }}>Languages:</span>{" "}
+                  <span className="text-ctp-subtext0">Languages:</span>{" "}
                   {skillsObj.programmingLanguages.join(", ")}
                 </p>
               )}
               {skillsObj.frameworks?.length > 0 && (
                 <p>
-                  <span style={{ color: '#a6adc8' }}>Frameworks:</span>{" "}
+                  <span className="text-ctp-subtext0">Frameworks:</span>{" "}
                   {skillsObj.frameworks.join(", ")}
                 </p>
               )}
               {skillsObj.tools?.length > 0 && (
                 <p>
-                  <span style={{ color: '#a6adc8' }}>DevOps/Tools:</span>{" "}
+                  <span className="text-ctp-subtext0">DevOps/Tools:</span>{" "}
                   {skillsObj.tools.join(", ")}
                 </p>
               )}
               {skillsObj.cloud?.length > 0 && (
                 <p>
-                  <span style={{ color: '#a6adc8' }}>Cloud/DB:</span>{" "}
+                  <span className="text-ctp-subtext0">Cloud/DB:</span>{" "}
                   {skillsObj.cloud.join(", ")}
                 </p>
               )}
@@ -205,10 +185,7 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
         <main className="lg:col-span-2 space-y-7">
           {/* Experience */}
           <section>
-            <h2 
-              className="text-sm font-bold text-ctp-pink uppercase tracking-wide mb-3"
-              style={{ color: '#f5c2e7' }}
-            >
+            <h2 className="text-[13px] md:text-[14px] font-bold text-ctp-pink uppercase tracking-wide mb-3">
               Experience
             </h2>
             <div className="space-y-5">
@@ -217,26 +194,22 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                 return (
                   <div
                     key={`exp-${i}`}
-                    className="border-l-2 pl-3"
-                    style={{ borderColor: '#45475a' }}
+                    className="border-l-2 border-ctp-surface1 pl-3"
                   >
                     <div className="flex flex-wrap items-baseline justify-between gap-3">
-                      <h3 
-                        className="font-bold text-sm"
-                        style={{ color: '#cdd6f4' }}
-                      >
+                      <h3 className="font-bold text-ctp-text text-[12px] md:text-[13px]">
                         {exp.title}
                       </h3>
-                      <span className="text-xs" style={{ color: '#a6adc8' }}>
+                      <span className="text-[11px] text-ctp-subtext0">
                         {exp.startDate} - {exp.endDate} · {duration}
                       </span>
                     </div>
-                    <p className="text-xs" style={{ color: '#a6adc8' }}>
+                    <p className="text-[12px] md:text-[13px] text-ctp-subtext0">
                       {exp.company} • {exp.type} • {exp.location}
                     </p>
 
-                    {exp.description && (
-                      <p className="text-xs mt-1" style={{ color: '#cdd6f4' }}>
+                    {exp.description ? (
+                      <p className="text-[12px] md:text-[13px] text-ctp-text mt-1">
                         {emphasizeHtml(exp.description, kwRegex).map(
                           (seg, k) =>
                             seg.bold ? (
@@ -248,7 +221,7 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                             ),
                         )}
                       </p>
-                    )}
+                    ) : null}
 
                     <ul className="mt-1 space-y-0.5">
                       {(exp.bullets || []).map((bullet, j) => {
@@ -256,10 +229,9 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                         return (
                           <li
                             key={`expb-${i}-${j}`}
-                            className="text-xs flex"
-                            style={{ color: '#cdd6f4' }}
+                            className="text-[12px] md:text-[13px] text-ctp-text flex"
                           >
-                            <span className="mr-2" style={{ color: '#f5c2e7' }}>•</span>
+                            <span className="text-ctp-pink mr-2">•</span>
                             <span>
                               {segs.map((s, k) =>
                                 s.bold ? (
@@ -284,31 +256,24 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
           {/* Works */}
           {works.length > 0 && (
             <section>
-              <h2 
-                className="text-sm font-bold text-ctp-pink uppercase tracking-wide mb-3"
-                style={{ color: '#f5c2e7' }}
-              >
-                Works
+              <h2 className="text-[13px] md:text-[14px] font-bold text-ctp-pink uppercase tracking-wide mb-3">
+                Client Engagements
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {works.map((w, idx) => (
                   <div
                     key={`work-${idx}`}
-                    className="border p-3"
-                    style={{ borderColor: '#45475a' }}
+                    className="border border-ctp-surface1 p-3"
                   >
                     <div className="flex items-baseline justify-between gap-3">
-                      <h3 
-                        className="font-bold text-sm"
-                        style={{ color: '#cdd6f4' }}
-                      >
+                      <h3 className="font-bold text-ctp-text text-[12px] md:text-[13px]">
                         {w.title}
                       </h3>
-                      <span className="text-xs" style={{ color: '#a6adc8' }}>
+                      <span className="text-[11px] text-ctp-subtext0">
                         {w.date}
                       </span>
                     </div>
-                    <p className="text-xs mt-1" style={{ color: '#cdd6f4' }}>
+                    <p className="text-[12px] md:text-[13px] text-ctp-text mt-1">
                       {emphasizeHtml(w.shortDescription, kwRegex).map(
                         (seg, k) =>
                           seg.bold ? (
@@ -321,7 +286,7 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                       )}
                     </p>
                     {w.technologies?.length ? (
-                      <p className="text-xs mt-1" style={{ color: '#a6adc8' }}>
+                      <p className="text-[11px] text-ctp-subtext0 mt-1">
                         <span>Tech:</span> {w.technologies.join(", ")}
                       </p>
                     ) : null}
@@ -334,8 +299,7 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                         }
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs inline-block mt-1 hover:underline"
-                        style={{ color: '#89b4fa' }}
+                        className="text-[11px] text-ctp-blue hover:text-ctp-text transition-colors mt-1 inline-block"
                       >
                         {w.link}
                       </a>
