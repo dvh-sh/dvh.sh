@@ -2,8 +2,9 @@
 
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' *.dvh.sh;
-  child-src *.google.com;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.dvh.sh;
+  worker-src 'self' blob:;
+  child-src *.google.com blob:;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
   media-src 'none';
@@ -77,7 +78,7 @@ const nextConfig = {
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           {
             key: "Content-Security-Policy",
-            value: ContentSecurityPolicy.replace(/\n/g, ""),
+            value: ContentSecurityPolicy.replace(/\s{2,}/g, " ").trim(),
           },
           {
             key: "Permissions-Policy",
