@@ -71,7 +71,7 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
           {/* Left: site link */}
           <Link
             href="/"
-            className="text-ctp-pink hover:text-white transition-colors font-mono text-[11px] md:text-[12px] uppercase tracking-wide"
+            className="text-ctp-pink hover:text-white transition-colors font-mono text-[11px] md:text-[12px] tracking-wide"
             aria-label="Back to dvh.sh"
           >
             dvh.sh
