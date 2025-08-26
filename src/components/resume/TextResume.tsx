@@ -3,7 +3,7 @@
  * @author David (https://dvh.sh)
  *
  * @created Sun, Aug 25 2025
- * @updated Mon, Aug 25 2025
+ * @updated Tue, Aug 26 2025
  *
  * @description
  * Brutalist, text-first resume (server component) with floating header controls.
@@ -35,12 +35,10 @@ interface TextResumeProps {
  * @description Clean, text-based resume layout with floating header controls and no sticky bar.
  */
 export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
-  // Build keyword regex once (supports either "keywords" or "highlightKeywords" in JSON)
   const kwRegex = buildKeywordRegex(
     data.keywords || (data as any).highlightKeywords || [],
   );
 
-  // Skills object
   const skillsObj = data.skills || {
     programmingLanguages: [],
     frameworks: [],
@@ -48,7 +46,6 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
     cloud: [],
   };
 
-  // Works (with normalized tech names)
   const works =
     Array.isArray(data.works) && data.works.length
       ? data.works.map((w) => ({
@@ -57,7 +54,6 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
         }))
       : [];
 
-  // Experience with safe guards
   const experience: Experience[] = Array.isArray(data.experience)
     ? data.experience
     : [];
@@ -65,35 +61,31 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-4 md:py-8">
-      {/* Floating header row (no bar) */}
       <div className="mb-5 md:mb-7">
         <div className="flex items-center justify-between gap-3">
-          {/* Left: site link */}
           <Link
             href="/"
-            className="text-ctp-pink hover:text-white transition-colors font-mono text-[11px] md:text-[12px] uppercase tracking-wide"
+            className="text-ctp-pink hover:text-white transition-colors font-mono text-[12px] md:text-[13px] uppercase tracking-wide"
             aria-label="Back to dvh.sh"
           >
             dvh.sh
           </Link>
 
-          {/* Right: export button (client) */}
           <div className="shrink-0">
             <ExportButtons />
           </div>
         </div>
       </div>
 
-      {/* Identity */}
       <header className="mb-6 md:mb-8">
-        <h1 className="text-[22px] md:text-[26px] font-black text-white leading-tight">
+        <h1 className="text-[24px] md:text-[28px] font-black text-white leading-tight">
           {data.profile?.name}
         </h1>
-        <p className="text-[11px] md:text-[12px] text-ctp-subtext0 mt-1">
+        <p className="text-[12px] md:text-[13px] text-ctp-subtext1 mt-1">
           {data.profile?.title}
         </p>
 
-        <div className="mt-3 text-[10px] md:text-[11px] text-ctp-subtext0 space-y-0.5 font-mono">
+        <div className="mt-3 text-[12px] md:text-[12px] text-ctp-subtext1 space-y-0.5 font-mono">
           <p>{data.profile?.location}</p>
           <div className="flex flex-wrap gap-x-3 gap-y-1">
             {data.profile?.email && (
@@ -138,24 +130,20 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
         </div>
       </header>
 
-      {/* Two-column layout */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
-        {/* Left column */}
         <aside className="lg:col-span-1 space-y-6">
-          {/* Education */}
           <section>
-            <h3 className="text-[11px] font-bold text-ctp-pink uppercase mb-2 tracking-wide">
+            <h2 className="text-[12px] md:text-[13px] font-bold text-ctp-pink uppercase mb-2 tracking-wide">
               Education
-            </h3>
+            </h2>
             <div className="space-y-3">
               {education
-                // Only keep explicit entries (bachelor omitted in JSON)
                 .filter((e) => e.school && e.degree)
                 .map((edu, i) => (
-                  <div key={`edu-${i}`} className="text-[10px] md:text-[11px]">
+                  <div key={`edu-${i}`} className="text-[12px] md:text-[12px]">
                     <p className="text-ctp-text font-semibold">{edu.school}</p>
-                    <p className="text-ctp-subtext0">{edu.degree}</p>
-                    <p className="text-ctp-subtext0">
+                    <p className="text-ctp-subtext1">{edu.degree}</p>
+                    <p className="text-ctp-subtext1">
                       {edu.dates}
                       {edu.expected ? " · expected" : ""}
                     </p>
@@ -164,33 +152,32 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
             </div>
           </section>
 
-          {/* Skills */}
           <section>
-            <h3 className="text-[11px] font-bold text-ctp-pink uppercase mb-2 tracking-wide">
+            <h2 className="text-[12px] md:text-[13px] font-bold text-ctp-pink uppercase mb-2 tracking-wide">
               Skills
-            </h3>
-            <div className="text-[10px] md:text-[11px] text-ctp-text space-y-1.5">
+            </h2>
+            <div className="text-[12px] md:text-[12px] text-ctp-text space-y-1.5">
               {skillsObj.programmingLanguages?.length > 0 && (
                 <p>
-                  <span className="text-ctp-subtext0">Languages:</span>{" "}
+                  <span className="text-ctp-subtext1">Languages:</span>{" "}
                   {skillsObj.programmingLanguages.join(", ")}
                 </p>
               )}
               {skillsObj.frameworks?.length > 0 && (
                 <p>
-                  <span className="text-ctp-subtext0">Frameworks:</span>{" "}
+                  <span className="text-ctp-subtext1">Frameworks:</span>{" "}
                   {skillsObj.frameworks.join(", ")}
                 </p>
               )}
               {skillsObj.tools?.length > 0 && (
                 <p>
-                  <span className="text-ctp-subtext0">DevOps/Tools:</span>{" "}
+                  <span className="text-ctp-subtext1">DevOps/Tools:</span>{" "}
                   {skillsObj.tools.join(", ")}
                 </p>
               )}
               {skillsObj.cloud?.length > 0 && (
                 <p>
-                  <span className="text-ctp-subtext0">Cloud/DB:</span>{" "}
+                  <span className="text-ctp-subtext1">Cloud/DB:</span>{" "}
                   {skillsObj.cloud.join(", ")}
                 </p>
               )}
@@ -198,11 +185,9 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
           </section>
         </aside>
 
-        {/* Right column */}
         <main className="lg:col-span-2 space-y-7">
-          {/* Experience */}
           <section>
-            <h2 className="text-[12px] md:text-[13px] font-bold text-ctp-pink uppercase tracking-wide mb-3">
+            <h2 className="text-[13px] md:text-[14px] font-bold text-ctp-pink uppercase tracking-wide mb-3">
               Experience
             </h2>
             <div className="space-y-5">
@@ -214,19 +199,19 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                     className="border-l-2 border-ctp-surface1 pl-3"
                   >
                     <div className="flex flex-wrap items-baseline justify-between gap-3">
-                      <h3 className="font-bold text-ctp-text text-[11px] md:text-[12px]">
+                      <h3 className="font-bold text-ctp-text text-[12px] md:text-[13px]">
                         {exp.title}
                       </h3>
-                      <span className="text-[9px] text-ctp-subtext0">
+                      <span className="text-[12px] text-ctp-subtext1">
                         {exp.startDate} - {exp.endDate} · {duration}
                       </span>
                     </div>
-                    <p className="text-[10px] md:text-[11px] text-ctp-subtext0">
+                    <p className="text-[12px] md:text-[12px] text-ctp-subtext1">
                       {exp.company} • {exp.type} • {exp.location}
                     </p>
 
                     {exp.description ? (
-                      <p className="text-[10px] md:text-[11px] text-ctp-text mt-1">
+                      <p className="text-[12px] md:text-[12px] text-ctp-text mt-1">
                         {emphasizeHtml(exp.description, kwRegex).map(
                           (seg, k) =>
                             seg.bold ? (
@@ -246,7 +231,7 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                         return (
                           <li
                             key={`expb-${i}-${j}`}
-                            className="text-[10px] md:text-[11px] text-ctp-text flex"
+                            className="text-[12px] md:text-[12px] text-ctp-text flex"
                           >
                             <span className="text-ctp-pink mr-2">•</span>
                             <span>
@@ -270,11 +255,10 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
             </div>
           </section>
 
-          {/* Works (client engagements) */}
           {works.length > 0 && (
             <section>
-              <h2 className="text-[12px] md:text-[13px] font-bold text-ctp-pink uppercase tracking-wide mb-3">
-                Works
+              <h2 className="text-[13px] md:text-[14px] font-bold text-ctp-pink uppercase tracking-wide mb-3">
+                Client Engagements
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {works.map((w, idx) => (
@@ -283,14 +267,14 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                     className="border border-ctp-surface1 p-3"
                   >
                     <div className="flex items-baseline justify-between gap-3">
-                      <h3 className="font-bold text-ctp-text text-[11px] md:text-[12px]">
+                      <h3 className="font-bold text-ctp-text text-[12px] md:text-[13px]">
                         {w.title}
                       </h3>
-                      <span className="text-[9px] text-ctp-subtext0">
+                      <span className="text-[12px] text-ctp-subtext1">
                         {w.date}
                       </span>
                     </div>
-                    <p className="text-[10px] md:text-[11px] text-ctp-text mt-1">
+                    <p className="text-[12px] md:text-[12px] text-ctp-text mt-1">
                       {emphasizeHtml(w.shortDescription, kwRegex).map(
                         (seg, k) =>
                           seg.bold ? (
@@ -303,8 +287,8 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                       )}
                     </p>
                     {w.technologies?.length ? (
-                      <p className="text-[10px] text-ctp-subtext0 mt-1">
-                        <span className="text-ctp-subtext0">Tech:</span>{" "}
+                      <p className="text-[12px] text-ctp-subtext1 mt-1">
+                        <span className="text-ctp-subtext1">Tech:</span>{" "}
                         {w.technologies.join(", ")}
                       </p>
                     ) : null}
@@ -317,7 +301,7 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                         }
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[10px] text-ctp-blue hover:text-ctp-text transition-colors mt-1 inline-block"
+                        className="text-[12px] text-ctp-blue hover:text-ctp-text transition-colors mt-1 inline-block"
                       >
                         {w.link}
                       </a>

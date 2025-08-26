@@ -2,7 +2,7 @@
 
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' *.dvh.sh;
+  script-src 'self' 'unsafe-inline' *.dvh.sh;
   child-src *.google.com;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
@@ -39,8 +39,30 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === "production",
   },
 
+  experimental: {
+    optimizePackageImports: ["react", "react-dom"],
+  },
+
   async headers() {
     return [
+      {
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/resume",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, s-maxage=3600, stale-while-revalidate=86400",
+          },
+        ],
+      },
       {
         source: "/:path*",
         headers: [
@@ -57,10 +79,14 @@ const nextConfig = {
             key: "Content-Security-Policy",
             value: ContentSecurityPolicy.replace(/\n/g, ""),
           },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
         ],
       },
     ];
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
