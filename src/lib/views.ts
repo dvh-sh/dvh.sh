@@ -12,7 +12,7 @@
 import { cache } from "react";
 
 import Blog from "@/models/blog.model";
-import connectDB from "@/utils/db.util";
+import connectDB from "@/utils/db.utils";
 
 /**
  * @function updateViewCount

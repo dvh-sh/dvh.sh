@@ -3,111 +3,138 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, Aug 26 2025
  *
  * @description
- * A card component for displaying a single project.
+ * Brutalist project card: flat frame, keyword emphasis, clean tech row.
  */
 
 "use client";
 
 import { motion } from "motion/react";
-import React, { useMemo } from "react";
-import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import React, { Fragment, useMemo } from "react";
+import { FaExternalLinkAlt, FaGithub, FaCode } from "react-icons/fa";
 
 import TechChip from "@/components/chip/TechChip";
-import type { Project } from "@/types/dev";
+import type { Project } from "@/types";
+import { buildKeywordRegex, safeSegments } from "@/utils/text.utils";
+
+interface ProjectCardProps extends Project {
+  keywords?: string[];
+  index?: number;
+}
 
 /**
  * @component ProjectLink
- * @description A reusable link component for project cards, with an icon and text.
+ * @description Minimal brutal link button.
  */
 const ProjectLink: React.FC<{
   href?: string;
   icon: React.ReactNode;
   text: string;
-}> = ({ href, icon, text }) => {
+  primary?: boolean;
+}> = ({ href, icon, text, primary = false }) => {
   if (!href) return null;
 
   return (
     <motion.a
       href={href}
-      className="group flex items-center space-x-2 text-ctp-subtext0 hover:text-accent transition-colors duration-200"
+      className={`inline-flex items-center gap-2 font-black uppercase tracking-wider
+        px-3 py-2 border-2 transition-all duration-200 shadow-brutal
+        ${
+          primary
+            ? "border-accent bg-accent text-ctp-base hover:bg-transparent hover:text-accent"
+            : "border-accent text-accent hover:bg-accent hover:text-ctp-base"
+        }`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`View project ${text.toLowerCase()}`}
-      whileHover={{ scale: 1.1, rotate: [-1, 1, -1, 1, 0] }}
-      transition={{ duration: 0.3 }}
+      whileHover={{ scale: 1.03, rotate: -1 }}
+      whileTap={{ scale: 0.96 }}
     >
       {icon}
-      <span className="font-bold uppercase tracking-wider group-hover:underline">
-        {text}
-      </span>
+      <span className="text-xs">{text}</span>
     </motion.a>
   );
 };
 
 /**
  * @component ProjectCard
- * @description Renders a card for a single project, including description, technologies, and links.
- * @param {Project} props - The project data to display.
- * @returns {JSX.Element} The rendered project card.
+ * @description Brutalist project card with emphasis and clean tech row (safe rendering).
  */
-const ProjectCard: React.FC<Project> = ({
+const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   description,
   technologies,
   demoLink,
   sourceLink,
+  keywords,
+  index = 0,
 }) => {
-  const initialRotation = useMemo(() => Math.random() * 2 - 1, []);
-
-  const techChips = useMemo(
-    () => technologies.map((tech) => <TechChip key={tech} slug={tech} />),
-    [technologies],
-  );
+  const rotation = useMemo(() => (index % 3) - 1, [index]);
+  const kwRegex = buildKeywordRegex(keywords ?? []);
+  const techs = Array.isArray(technologies) ? technologies : [];
 
   return (
     <motion.div
       className="relative bg-ctp-surface0 border-4 border-accent p-6 shadow-brutal overflow-hidden flex flex-col h-full"
-      initial={{ rotate: initialRotation }}
-      whileHover={{
-        rotate: 0,
-        scale: 1.02,
-        transition: { duration: 0.3 },
-      }}
+      initial={{ rotate: rotation * 1.5, opacity: 0, scale: 0.98 }}
+      animate={{ rotate: rotation * 0.5, opacity: 1, scale: 1 }}
+      whileHover={{ rotate: 0, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
     >
-      <h3 className="relative text-3xl font-black text-accent mb-4 uppercase tracking-wider transform -skew-x-6">
-        {title}
+      <h3 className="text-2xl font-black text-accent mb-3 uppercase tracking-wider transform -skew-x-6">
+        {String(title ?? "")}
       </h3>
 
-      <p className="relative text-ctp-text mb-6 font-mono text-sm leading-relaxed flex-grow">
-        {description}
+      <p className="text-ctp-text mb-4 font-mono text-sm leading-relaxed flex-grow">
+        {safeSegments(description, kwRegex).map((seg, k) =>
+          seg.bold ? (
+            <strong key={k} className="font-black text-ctp-pink inline-block">
+              {seg.text}
+            </strong>
+          ) : (
+            <Fragment key={k}>{seg.text}</Fragment>
+          ),
+        )}
       </p>
 
-      <div className="flex flex-wrap gap-2 mb-6">{techChips}</div>
+      {techs.length > 0 && (
+        <div className="mb-5">
+          <div className="flex items-center gap-2 mb-2">
+            <FaCode className="text-ctp-subtext0" size={12} />
+            <span className="text-[11px] font-bold text-ctp-subtext0 uppercase tracking-wider">
+              Built with
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {techs.map((tech, idx) => (
+              <motion.div
+                key={`${title}-${tech}-${idx}`}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.04 }}
+              >
+                <TechChip slug={tech} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      )}
 
-      <div className="flex justify-between items-center mt-auto">
+      <div className="flex gap-3 mt-auto">
         <ProjectLink
-          href={demoLink}
-          icon={<FaExternalLinkAlt size={20} />}
+          href={typeof demoLink === "string" ? demoLink : undefined}
+          icon={<FaExternalLinkAlt size={14} />}
           text="Demo"
+          primary
         />
         <ProjectLink
-          href={sourceLink}
-          icon={<FaGithub size={20} />}
-          text="Source"
+          href={typeof sourceLink === "string" ? sourceLink : undefined}
+          icon={<FaGithub size={14} />}
+          text="Code"
         />
       </div>
-
-      <motion.div
-        className="absolute inset-0 border-4 border-accent opacity-50 pointer-events-none"
-        animate={{
-          rotate: [0, 2, 0, -2, 0],
-        }}
-        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-        style={{ willChange: "transform" }}
-      />
     </motion.div>
   );
 };

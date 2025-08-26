@@ -16,7 +16,7 @@ import { memo, useDeferredValue, useMemo, useState } from "react";
 import { FaGlobe, FaSearch, FaSort, FaUtensils } from "react-icons/fa";
 
 import BlogCard from "@/components/card/BlogCard";
-import type { Post } from "@/types/blog";
+import type { Post } from "@/types";
 
 type SortOption = "newest" | "oldest" | "most-views";
 

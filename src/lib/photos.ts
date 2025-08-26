@@ -14,7 +14,7 @@ import { cache } from "react";
 import PhotoView from "@/models/photo.model";
 import photosData from "@/public/data/photos.json";
 import type { Photo } from "@/types/photography";
-import connectDB from "@/utils/db.util";
+import connectDB from "@/utils/db.utils";
 
 /**
  * @function getPhotos

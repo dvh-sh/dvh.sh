@@ -1,9 +1,9 @@
 /**
  * @file app/software/page.tsx
- * @author David @dvhsh (https://dvh.sh)
+ * @author David (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, Aug 26 2025
  *
  * @description
  * Main page for displaying software projects. Fetches software data from a GitHub repository,
@@ -20,7 +20,7 @@ import SoftwareCard, {
   SoftwareCardSkeleton,
 } from "@/components/card/SoftwareCard";
 import { ThemeContext } from "@/providers/ThemeProvider";
-import { Software } from "@/types/software";
+import type { Software } from "@/types";
 
 /**
  * @component CategorySkeleton
@@ -54,9 +54,10 @@ const CategorySkeleton = () => (
  * information, including loading states and error handling.
  */
 const SoftwarePage = () => {
-  const [softwareList, setSoftwareList] = useState<{
-    [key: string]: Software[];
-  } | null>(null);
+  const [softwareList, setSoftwareList] = useState<Record<
+    string,
+    Software[]
+  > | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { theme } = useContext(ThemeContext);
@@ -70,19 +71,33 @@ const SoftwarePage = () => {
     const fetchSoftware = async () => {
       try {
         const response = await fetch(
-          "https://raw.githubusercontent.com/dvh-sh/.github/main/assets/software.json",
+          "https://raw.githubusercontent.com/dvh-sh/.github/main/portfolio.json",
+          { cache: "no-store" },
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await response.json();
-        if (data && data.software) {
+        const data = (await response.json()) as {
+          software?: Record<string, Software[]>;
+        };
+
+        if (
+          data &&
+          data.software &&
+          typeof data.software === "object" &&
+          !Array.isArray(data.software)
+        ) {
           setSoftwareList(data.software);
         } else {
-          throw new Error("Data structure is not as expected");
+          throw new Error(
+            "Data structure is not as expected (missing software object).",
+          );
         }
-      } catch (error) {
-        setError(error as string);
+      } catch (e) {
+        console.error("Failed to load software:", e);
+        const message =
+          e instanceof Error ? e.message : String(e ?? "Unknown error");
+        setError(message);
       } finally {
         setIsLoading(false);
       }
@@ -99,31 +114,35 @@ const SoftwarePage = () => {
   const renderedSoftwareList = useMemo(() => {
     if (!softwareList) return null;
 
-    return Object.entries(softwareList).map(([category, softwares], index) => (
-      <motion.div
-        key={category}
-        className="mb-12 md:mb-16"
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: index * 0.2 }}
-      >
-        <h3 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-ctp-subtext0 uppercase tracking-wider transform skew-x-12">
-          {category}
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {softwares.map((software, index) => (
-            <motion.div
-              key={software.title}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <SoftwareCard {...software} />
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-    ));
+    const entries = Object.entries(softwareList) as Array<[string, Software[]]>;
+    return entries.map(([category, softwares], index) => {
+      const list = Array.isArray(softwares) ? softwares : [];
+      return (
+        <motion.div
+          key={category}
+          className="mb-12 md:mb-16"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: index * 0.2 }}
+        >
+          <h3 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-ctp-subtext0 uppercase tracking-wider transform skew-x-12">
+            {category}
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {list.map((software, i) => (
+              <motion.div
+                key={`${category}-${software.title}-${i}`}
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.08 }}
+              >
+                <SoftwareCard {...software} />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      );
+    });
   }, [softwareList]);
 
   /**
@@ -133,36 +152,37 @@ const SoftwarePage = () => {
    */
   const accentColors = useMemo(() => {
     const currentFlavor = flavors[theme as keyof typeof flavors];
+    if (!currentFlavor) return [];
     return Object.keys(currentFlavor.colors).filter(
-      (color) =>
-        currentFlavor.colors[color as keyof typeof currentFlavor.colors].accent,
+      (color) => (currentFlavor.colors as any)[color]?.accent === true,
     );
   }, [theme]);
 
   /**
    * @var titleVariants
    * @description Memoized animation variants for the "Software" title.
-   * Creates a cyclical color and text shadow animation based on accent colors.
    */
   const titleVariants = useMemo(() => {
     const currentFlavor = flavors[theme as keyof typeof flavors];
-    const colorValues = accentColors.map(
-      (color) =>
-        currentFlavor.colors[color as keyof typeof currentFlavor.colors].hex,
-    );
+    if (!currentFlavor || accentColors.length === 0) return undefined;
+
+    const colorValues = accentColors
+      .map((color) => (currentFlavor.colors as any)[color]?.hex as string)
+      .filter(Boolean);
+
+    if (colorValues.length === 0) return undefined;
+
     return {
       animate: {
         color: colorValues,
-        textShadow: colorValues.map(
-          (color) => `0 0 5px ${color}, 0 0 10px ${color}`,
-        ),
+        textShadow: colorValues.map((c) => `0 0 5px ${c}, 0 0 10px ${c}`),
         transition: {
-          duration: accentColors.length * 2,
+          duration: colorValues.length * 2,
           repeat: Infinity,
           ease: "linear",
         },
       },
-    };
+    } as const;
   }, [accentColors, theme]);
 
   return (
@@ -175,7 +195,8 @@ const SoftwarePage = () => {
       >
         <motion.h2
           className="text-4xl sm:text-5xl md:text-6xl font-black my-8 py-8 text-accent text-center uppercase tracking-widest transform -skew-x-12"
-          animate="animate"
+          animate={titleVariants ? "animate" : undefined}
+          variants={titleVariants}
         >
           Software
         </motion.h2>

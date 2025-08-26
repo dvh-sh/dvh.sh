@@ -16,8 +16,8 @@ import React, { useMemo } from "react";
 import { FaCode } from "react-icons/fa";
 import type { IconType } from "react-icons";
 
-import { getIcon, getTechBySlug } from "@/utils/tech.util";
-import type { Tech } from "@/types/dev";
+import { getIcon, getTechBySlug } from "@/utils/tech.utils";
+import type { Tech } from "@/types/\\";
 
 interface SkillsSectionProps {
   title: string;

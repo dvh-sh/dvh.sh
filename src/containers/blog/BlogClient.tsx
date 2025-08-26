@@ -13,7 +13,7 @@ import { WavyTitle } from "@/components/title/WavyTitle";
 import { getSortedPostsData } from "@/lib/posts";
 import { getAllBlogViews } from "@/lib/views";
 import BlogFilters from "./BlogFilters";
-import type { Post } from "@/types/blog";
+import type { Post } from "@/types";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 60; // Revalidate data every 60 seconds

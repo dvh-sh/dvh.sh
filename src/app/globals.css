@@ -162,3 +162,28 @@
     transform: rotate(360deg);
   }
 }
+
+@media print {
+  body {
+    background: white !important;
+  }
+
+  .print-hidden {
+    display: none !important;
+  }
+
+  * {
+    color: black !important;
+    border-color: #ccc !important;
+    background-color: transparent !important;
+  }
+
+  .print-accent {
+    color: #333 !important;
+    font-weight: bold !important;
+  }
+
+  .print-subtle {
+    color: #666 !important;
+  }
+}

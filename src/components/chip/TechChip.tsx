@@ -12,7 +12,7 @@
 import { motion } from "motion/react";
 import React from "react";
 
-import { getIcon, getTechBySlug } from "@/utils/tech.util";
+import { getIcon, getTechBySlug } from "@/utils/tech.utils";
 
 /**
  * @interface TechChipProps

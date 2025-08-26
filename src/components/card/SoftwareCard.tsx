@@ -3,112 +3,165 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, Aug 26 2025
  *
  * @description
- * A card component for displaying a piece of software.
+ * Brutalist software card with safe rendering and subtle interactions.
  */
+
+"use client";
 
 import { AnimatePresence, motion } from "motion/react";
 import { FaCopy, FaExternalLinkAlt } from "react-icons/fa";
 import React, { useState, useCallback, useMemo } from "react";
 
-import type { Software } from "@/types/software";
+import type { Software } from "@/types";
 
 /**
  * @component SoftwareCard
- * @description Renders a card for a single piece of software, including price, OS, and install commands.
+ * @description Renders a brutalist card for software, with price, OS, link and optional brew install copy.
  * @param {Software} props - The software data to display.
  * @returns {JSX.Element} The rendered software card.
  */
 const SoftwareCard: React.FC<Software> = React.memo(
   ({ title, description, link, price, brewInstall, operatingSystem }) => {
-    const [showToast, setShowToast] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     const copyToClipboard = useCallback((text: string) => {
-      navigator.clipboard.writeText(text);
-      setShowToast(true);
-      setTimeout(() => setShowToast(false), 2000);
+      try {
+        navigator.clipboard.writeText(text);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1400);
+      } catch (e) {
+        console.error("Clipboard write failed:", e);
+      }
     }, []);
 
-    const cardVariants = useMemo(
+    const containerVariants = useMemo(
       () => ({
-        hover: {
-          rotate: [-1, 1, -1],
-          scale: 1.02,
-          transition: {
-            rotate: { repeat: Infinity, duration: 1 },
-            scale: { duration: 0.3 },
-          },
-        },
+        initial: { rotate: -1, scale: 0.99, opacity: 0.95 },
+        animate: { rotate: -0.5, scale: 1, opacity: 1 },
+        hover: { rotate: 0, scale: 1.02, x: 6 },
       }),
       [],
     );
 
+    const safeTitle = String(title ?? "");
+    const safeDesc = String(description ?? "");
+    const safeLink =
+      typeof link === "string" && link
+        ? link.startsWith("http")
+          ? link
+          : `https://${link}`
+        : undefined;
+    const safePrice = String(price ?? "");
+    const osRaw = typeof operatingSystem === "string" ? operatingSystem : "";
+    const osTags = osRaw
+      ? osRaw
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
+      : [];
+
     return (
       <motion.div
-        className="bg-ctp-surface0 p-6 shadow-lg flex flex-col h-full relative overflow-hidden"
+        className="relative bg-ctp-surface0 border-4 border-accent p-6 shadow-brutal overflow-hidden flex flex-col h-full"
+        variants={containerVariants}
+        initial="initial"
+        animate="animate"
         whileHover="hover"
-        variants={cardVariants}
+        transition={{ type: "spring", stiffness: 260, damping: 20 }}
       >
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-ctp-pink via-ctp-mauve to-ctp-sapphire" />
-        <div className="flex items-center space-x-3 mb-4">
-          <h3 className="text-xl font-black text-accent uppercase tracking-wider">
-            {title}
+        {/* Title + Price */}
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <h3 className="text-xl font-black text-accent uppercase tracking-wider transform -skew-x-6">
+            {safeTitle}
           </h3>
-          <span className="inline-block bg-ctp-surface1 text-ctp-subtext0 px-3 py-1 text-sm font-bold transform -skew-x-12">
-            {price}
-          </span>
+          {safePrice && (
+            <span className="inline-block bg-ctp-surface1 text-ctp-subtext0 px-3 py-1 text-xs font-black uppercase tracking-wider border-2 border-accent">
+              {safePrice}
+            </span>
+          )}
         </div>
-        <p className="text-ctp-text mb-4 flex-grow font-mono text-sm">
-          {description}
-        </p>
-        <div className="flex justify-between items-center mt-auto">
-          <div className="text-ctp-subtext0 font-bold uppercase">
-            {operatingSystem}
-          </div>
-          <div className="flex space-x-3 relative">
-            {brewInstall && (
-              <motion.div
-                className="group relative"
-                whileHover={{ scale: 1.2 }}
-              >
-                <button
-                  onClick={() => copyToClipboard(brewInstall)}
-                  className="text-ctp-subtext0 hover:text-accent transition-colors duration-200"
-                  aria-label="Copy Brew Install Command"
+
+        {/* Description */}
+        {safeDesc && (
+          <p className="text-ctp-text mb-4 flex-grow font-mono text-sm leading-relaxed">
+            {safeDesc}
+          </p>
+        )}
+
+        {/* OS + Actions */}
+        <div className="mt-auto flex items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-1 text-[11px] font-black uppercase tracking-wider text-ctp-subtext0">
+            {osTags.length ? (
+              osTags.map((os, idx) => (
+                <span
+                  key={`${safeTitle}-os-${idx}`}
+                  className="px-2 py-0.5 border border-accent bg-ctp-surface1"
                 >
-                  <FaCopy size={20} />
-                </button>
-                <div className="absolute bottom-full mb-2 right-0 bg-ctp-surface0 text-ctp-text p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-xs whitespace-nowrap">
-                  Copy command
-                </div>
-              </motion.div>
+                  {os}
+                </span>
+              ))
+            ) : (
+              <span className="px-2 py-0.5 border border-accent bg-ctp-surface1">
+                N/A
+              </span>
             )}
-            <motion.a
-              href={link}
-              className="text-ctp-subtext0 hover:text-accent transition-colors duration-200"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View software"
-              whileHover={{ scale: 1.2, rotate: 180 }}
-            >
-              <FaExternalLinkAlt size={20} />
-            </motion.a>
+          </div>
+
+          <div className="flex items-center gap-3">
+            {typeof brewInstall === "string" && brewInstall.trim() && (
+              <motion.button
+                onClick={() => copyToClipboard(brewInstall)}
+                className="inline-flex items-center gap-2 text-ctp-subtext0 hover:text-accent transition-colors px-2 py-1 border-2 border-accent bg-ctp-surface1 font-black uppercase tracking-wider text-[11px]"
+                whileHover={{ scale: 1.04, rotate: -1 }}
+                whileTap={{ scale: 0.96 }}
+                aria-label="Copy Brew Install Command"
+                title="Copy Brew Install Command"
+              >
+                <FaCopy size={14} />
+                Copy
+              </motion.button>
+            )}
+
+            {safeLink && (
+              <motion.a
+                href={safeLink}
+                className="inline-flex items-center gap-2 text-accent border-2 border-accent px-2 py-1 bg-transparent hover:bg-accent hover:text-ctp-base transition-colors font-black uppercase tracking-wider text-[11px]"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View software"
+                whileHover={{ scale: 1.04, rotate: -1 }}
+                whileTap={{ scale: 0.96 }}
+              >
+                <FaExternalLinkAlt size={14} />
+                View
+              </motion.a>
+            )}
           </div>
         </div>
+
+        {/* In-card toast (theme-safe) */}
         <AnimatePresence>
-          {showToast && (
+          {copied && (
             <motion.div
-              className="fixed top-4 right-4 bg-ctp-surface0 text-ctp-text p-3 rounded shadow-lg"
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 100, opacity: 0 }}
+              className="absolute bottom-3 right-3 bg-ctp-surface1 border-2 border-accent text-ctp-text px-3 py-1 font-mono text-xs shadow-brutal"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
             >
-              Copied to clipboard!
+              Copied!
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Subtle inner wobble */}
+        <motion.div
+          className="pointer-events-none absolute inset-1 border-2 border-accent opacity-30"
+          animate={{ rotate: [0, 0.6, 0, -0.6, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+        />
       </motion.div>
     );
   },
@@ -116,16 +169,16 @@ const SoftwareCard: React.FC<Software> = React.memo(
 
 /**
  * @component SoftwareCardSkeleton
- * @description Renders a skeleton loader for the SoftwareCard component.
+ * @description Skeleton loader for SoftwareCard.
  */
 export const SoftwareCardSkeleton = () => (
-  <div className="bg-ctp-surface0 p-6 rounded-lg shadow-lg animate-pulse h-[200px] flex flex-col">
-    <div className="h-6 bg-ctp-overlay0 rounded w-3/4 mb-4"></div>
-    <div className="h-4 bg-ctp-overlay0 rounded w-full mb-2"></div>
-    <div className="h-4 bg-ctp-overlay0 rounded w-5/6 mb-4"></div>
-    <div className="mt-auto flex space-x-2">
-      <div className="h-8 w-8 bg-ctp-overlay0 rounded"></div>
-      <div className="h-8 w-8 bg-ctp-overlay0 rounded"></div>
+  <div className="bg-ctp-surface0 border-4 border-accent p-6 shadow-brutal h-[200px] flex flex-col">
+    <div className="h-6 bg-ctp-overlay0 w-3/4 mb-3" />
+    <div className="h-4 bg-ctp-overlay0 w-full mb-2" />
+    <div className="h-4 bg-ctp-overlay0 w-5/6 mb-4" />
+    <div className="mt-auto flex items-center gap-2">
+      <div className="h-7 w-20 bg-ctp-overlay0" />
+      <div className="h-7 w-16 bg-ctp-overlay0" />
     </div>
   </div>
 );

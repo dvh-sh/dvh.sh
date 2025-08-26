@@ -3,38 +3,50 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, Aug 26 2025
  *
  * @description
- * A container component to display a list of work projects.
- * Client component due to animation requirements.
+ * Container component for client engagement works section.
  */
 
 "use client";
 
 import WorkCard from "@/components/card/WorkCard";
-import { MotionDiv } from "@/components/motion/MotionWrapper";
-import type { Work } from "@/types/experience";
+import { motion } from "motion/react";
+import type { Work } from "@/types";
 
 interface WorksProps {
   data: Work[];
+  keywords?: string[];
 }
 
 /**
  * @component Works
- * @description Renders a section that lists work projects using WorkCard components.
- * @param {WorksProps} { data } - The work data to display.
+ * @description Renders client engagement projects with enhanced WorkCards.
+ * @param {WorksProps} { data, keywords } - Work data and keywords.
  * @returns {JSX.Element} The rendered works section.
  */
-const Works = ({ data }: WorksProps) => {
+const Works = ({ data, keywords }: WorksProps) => {
   return (
     <section id="works" className="mb-16">
-      <h2 className="text-6xl font-bold mb-4 text-accent">Past Works</h2>
+      <motion.h2
+        className="text-6xl font-black mb-8 text-accent uppercase tracking-tighter transform -skew-x-6"
+        initial={{ x: -100, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        Client Engagements
+      </motion.h2>
       <div className="space-y-8">
         {data.map((work, index) => (
-          <MotionDiv key={work.title} delay={index * 0.2}>
-            <WorkCard {...work} />
-          </MotionDiv>
+          <motion.div
+            key={work.title}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.15 }}
+          >
+            <WorkCard {...work} keywords={keywords} index={index} />
+          </motion.div>
         ))}
       </div>
     </section>

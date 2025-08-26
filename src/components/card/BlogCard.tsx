@@ -20,7 +20,7 @@ import {
 import Link from "next/link";
 import React from "react";
 
-import type { Post } from "@/types/blog";
+import type { Post } from "@/types";
 
 /**
  * @component BlogCard

@@ -12,7 +12,7 @@
 import axios from "axios";
 import matter from "gray-matter";
 
-import type { Post } from "@/types/blog";
+import type { Post } from "@/types";
 
 const GITHUB_API_URL = "https://api.github.com/repos/dvh-sh/blog/contents";
 const GITHUB_COOKING_URL = `${GITHUB_API_URL}/cooking`;

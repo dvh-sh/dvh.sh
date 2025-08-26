@@ -14,7 +14,7 @@ import { motion } from "motion/react";
 import React from "react";
 
 import TechChip from "@/components/chip/TechChip";
-import type { Position } from "@/types/experience";
+import type { Position } from "@/types";
 
 /**
  * @component PositionCard
