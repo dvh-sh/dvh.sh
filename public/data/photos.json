@@ -76,7 +76,7 @@
         "iso": "200",
         "focalLength": "1.54mm"
       },
-      "tags": ["illinois", "cityscape", "river", "architecture"],
+      "tags": ["illinois", "cityscape", "architecture"],
       "description": "A cold river slicing through the steel, glass, and concrete of Chicago's Streeterville.",
       "sizes": {
         "thumbnail": "concrete-river-chicago-2022-320.webp",
@@ -89,16 +89,46 @@
       "width": 3024,
       "height": 4032,
       "views": 0
+    },
+    {
+      "slug": "tidal-pools-la-jolla-sandstone-formations-2024",
+      "title": "Tidal Pools and Sandstone Formations",
+      "location": "La Jolla, San Diego, California",
+      "sublocation": "La Jolla Beach",
+      "date": "2024-07-10",
+      "camera": "iPhone 11",
+      "lens": "iPhone 11 back dual wide camera 26mm f/1.8",
+      "photographer": "Dan K.",
+      "producer": "David Heffler",
+      "settings": {
+        "aperture": "f/1.8",
+        "shutterSpeed": "1/1808",
+        "iso": "32",
+        "focalLength": "26mm"
+      },
+      "tags": ["california", "ocean", "landscape"],
+      "description": "Dramatic sandstone rock formations create natural tidal pools along La Jolla's pristine coastline, where crystal-clear Pacific waters flow between ancient geological structures under California's endless blue sky.",
+      "sizes": {
+        "thumbnail": "tidal-pools-la-jolla-sandstone-formations-2024-320.webp",
+        "small": "tidal-pools-la-jolla-sandstone-formations-2024-640.webp",
+        "medium": "tidal-pools-la-jolla-sandstone-formations-2024-1280.webp",
+        "large": "tidal-pools-la-jolla-sandstone-formations-2024-1920.webp",
+        "full": "tidal-pools-la-jolla-sandstone-formations-2024-4032.webp"
+      },
+      "aspectRatio": 1.33,
+      "width": 4032,
+      "height": 3024,
+      "views": 0
     }
   ],
   "collections": [
     {
-      "slug": "la-jolla-2024",
-      "title": "La Jolla Wildlife",
-      "description": "Coastal wildlife from La Jolla",
-      "coverPhoto": "seal-cove-la-jolla-san-diego-sea-lions-2024",
-      "photos": ["seal-cove-la-jolla-san-diego-sea-lions-2024"],
-      "date": "2024-06-07"
+      "slug": "la-jolla",
+      "title": "La Jolla",
+      "description": "Coastal scenes and landscapes from La Jolla, California",
+      "coverPhoto": "tidal-pools-la-jolla-sandstone-formations-2024",
+      "photos": ["seal-cove-la-jolla-san-diego-sea-lions-2024", "tidal-pools-la-jolla-sandstone-formations-2024"],
+      "date": "2024-07-10"
     },
     {
       "slug": "pauma-valley-2024",
@@ -124,7 +154,6 @@
     "ocean",
     "cityscape",
     "architecture",
-    "river",
     "landscape"
   ]
 }
