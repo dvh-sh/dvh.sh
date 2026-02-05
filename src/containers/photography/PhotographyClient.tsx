@@ -80,7 +80,7 @@ const PhotographyClient = ({ photos }: PhotographyClientProps) => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12 text-center"
         >
-          <h1 className="text-6xl md:text-8xl font-black text-accent uppercase tracking-tighter transform -skew-x-6 mb-4">
+          <h1 className="text-4xl md:text-8xl font-black text-accent uppercase tracking-tighter transform md:-skew-x-6 mb-4">
             Photography
           </h1>
           <p className="text-ctp-subtext0 font-mono uppercase tracking-wide">
