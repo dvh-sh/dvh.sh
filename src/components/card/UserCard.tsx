@@ -12,32 +12,14 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion, AnimatePresence } from "motion/react";
-
-const titles = [
-  "Software Engineer",
-  "Cactus Enthusiast",
-  "OSINT Explorer",
-  "DevOps Tinkerer",
-  "Reverse Engineer",
-  "Photography Hobbyist",
-  "Baker in Training",
-];
 
 /**
  * @component UserCard
  * @description Renders a card with avatar, name, and rotating titles.
  */
 export const UserCard = () => {
-  const [titleIndex, setTitleIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTitleIndex((prev) => (prev + 1) % titles.length);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <div className="text-center mb-8">
@@ -61,20 +43,20 @@ export const UserCard = () => {
         className="text-xl font-black mb-2 text-ctp-text uppercase tracking-widest"
         whileHover={{ skewX: -6 }}
       >
-        David
+        David Heffler
       </motion.h1>
 
       <div className="h-6 relative">
         <AnimatePresence mode="wait">
           <motion.p
-            key={titleIndex}
+            key={"title-0"}
             className="text-sm text-ctp-subtext0 font-mono absolute inset-x-0"
             initial={{ y: 20, opacity: 0, rotateX: -90 }}
             animate={{ y: 0, opacity: 1, rotateX: 0 }}
             exit={{ y: -20, opacity: 0, rotateX: 90 }}
             transition={{ duration: 0.3 }}
           >
-            {titles[titleIndex]}
+            Software Engineer
           </motion.p>
         </AnimatePresence>
       </div>

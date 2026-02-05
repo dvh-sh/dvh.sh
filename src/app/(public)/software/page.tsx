@@ -77,7 +77,11 @@ const SoftwarePage = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = (await response.json()) as {
+
+        const text = await response.text();
+        // Clean trailing commas
+        const cleanedText = text.replace(/,\s*([\]}])/g, "$1");
+        const data = JSON.parse(cleanedText) as {
           software?: Record<string, Software[]>;
         };
 

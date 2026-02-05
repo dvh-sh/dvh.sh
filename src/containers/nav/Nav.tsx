@@ -57,8 +57,8 @@ const baseNavItems: NavItem[] = [
       { name: "Skills", href: "/#skills", Icon: FaCogs },
     ],
   },
-  { name: "Software", href: "/software", Icon: FaLaptopCode },
-  { name: "Blog", href: "/blog", Icon: FaBook },
+  { name: "Software I use", href: "/software", Icon: FaLaptopCode },
+ // { name: "Blog", href: "/blog", Icon: FaBook },
   { name: "Cooking", href: "/cooking", Icon: FaBreadSlice },
   { name: "Photography", href: "/photography", Icon: FaCamera },
   // Resume is intentionally not kept here; it will be affixed to the bottom.

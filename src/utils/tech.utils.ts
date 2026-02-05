@@ -110,6 +110,42 @@ const tech: Tech[] = [
     color: "text-ctp-green",
     icon: "SiLetsencrypt",
   },
+  {
+    slug: "postgresql",
+    title: "PostgreSQL",
+    color: "text-ctp-blue",
+    icon: "SiPostgresql",
+  },
+  {
+    slug: "axios",
+    title: "Axios",
+    color: "text-ctp-mauve",
+    icon: "SiAxios",
+  },
+  {
+    slug: "airtable",
+    title: "Airtable",
+    color: "text-ctp-yellow",
+    icon: "SiAirtable",
+  },
+  {
+    slug: "square",
+    title: "Square",
+    color: "text-ctp-text",
+    icon: "SiSquare",
+  },
+  {
+    slug: "squareapi",
+    title: "Square API",
+    color: "text-ctp-text",
+    icon: "SiSquare",
+  },
+  {
+    slug: "s3r2",
+    title: "S3/R2",
+    color: "text-ctp-yellow",
+    icon: "SiCloudflare",
+  },
 ];
 
 /**
@@ -118,8 +154,23 @@ const tech: Tech[] = [
  * @param {string} slug - The slug of the technology to find.
  * @returns {Tech | undefined} The technology object if found, otherwise undefined.
  */
-const getTechBySlug = (slug: string): Tech | undefined =>
-  tech.find((t) => t.slug === slug);
+const getTechBySlug = (slug: string): Tech | undefined => {
+  // Try exact match
+  const exact = tech.find((t) => t.slug === slug);
+  if (exact) return exact;
+
+  // Try case-insensitive / normalized match (for "Next.js" -> "nextjs", "Square API" -> "square", etc.)
+  const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const target = normalize(slug);
+
+  if (!target) return undefined;
+
+  return tech.find((t) => {
+    const tSlug = normalize(t.slug);
+    const tTitle = normalize(t.title);
+    return tSlug === target || tTitle === target;
+  });
+};
 
 /**
  * @function getIcon
