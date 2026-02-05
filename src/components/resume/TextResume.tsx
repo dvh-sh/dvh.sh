@@ -45,6 +45,14 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
         }))
       : [];
 
+  const projects =
+    Array.isArray(data.projects) && data.projects.length
+      ? data.projects.map((p) => ({
+          ...p,
+          technologies: normalizeTech(p.technologies),
+        }))
+      : [];
+
   const experience: Experience[] = Array.isArray(data.experience)
     ? data.experience
     : [];
@@ -303,6 +311,75 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                       >
                         {w.link}
                       </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Projects */}
+          {projects.length > 0 && (
+            <section>
+              <h2 className="text-[13px] md:text-[14px] font-bold text-ctp-pink uppercase tracking-wide mb-3">
+                Select Projects
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {projects.map((p, idx) => (
+                  <div
+                    key={`proj-${idx}`}
+                    className="border border-ctp-surface1 p-3"
+                  >
+                    <h3 className="font-bold text-ctp-text text-[12px] md:text-[13px]">
+                      {p.title}
+                    </h3>
+                    <p className="text-[12px] md:text-[13px] text-ctp-text mt-1">
+                      {emphasizeHtml(p.description, kwRegex).map((seg, k) =>
+                        seg.bold ? (
+                          <strong key={k} className="font-semibold">
+                            {seg.text}
+                          </strong>
+                        ) : (
+                          <Fragment key={k}>{seg.text}</Fragment>
+                        ),
+                      )}
+                    </p>
+                    {p.technologies?.length ? (
+                      <p className="text-[11px] text-ctp-subtext0 mt-1">
+                        <span>Tech:</span> {p.technologies.join(", ")}
+                      </p>
+                    ) : null}
+                    {(p.demoLink || p.sourceLink) && (
+                      <div className="flex flex-wrap gap-x-3 gap-y-1 mt-1">
+                        {p.demoLink && (
+                          <a
+                            href={
+                              p.demoLink.startsWith("http")
+                                ? p.demoLink
+                                : `https://${p.demoLink}`
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[11px] text-ctp-blue hover:text-ctp-text transition-colors"
+                          >
+                            Demo
+                          </a>
+                        )}
+                        {p.sourceLink && (
+                          <a
+                            href={
+                              p.sourceLink.startsWith("http")
+                                ? p.sourceLink
+                                : `https://${p.sourceLink}`
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[11px] text-ctp-blue hover:text-ctp-text transition-colors"
+                          >
+                            Source
+                          </a>
+                        )}
+                      </div>
                     )}
                   </div>
                 ))}
