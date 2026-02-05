@@ -30,7 +30,7 @@ const Works = ({ data, keywords }: WorksProps) => {
   return (
     <section id="works" className="mb-16">
       <motion.h2
-        className="text-6xl font-black mb-8 text-accent uppercase tracking-tighter transform -skew-x-6"
+        className="text-4xl md:text-6xl font-black mb-8 text-accent uppercase tracking-tighter transform md:-skew-x-6"
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}

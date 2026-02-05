@@ -39,7 +39,7 @@ const AboutMe = (): JSX.Element => {
   return (
     <section id="about" className="mb-16 mt-12 relative">
       <motion.h2
-        className="text-6xl font-black mb-8 text-accent uppercase tracking-tighter transform -skew-x-6"
+        className="text-4xl md:text-6xl font-black mb-8 text-accent uppercase tracking-tighter transform md:-skew-x-6"
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
@@ -49,7 +49,7 @@ const AboutMe = (): JSX.Element => {
 
       <div className="relative z-10">
         <motion.div
-          className="bg-ctp-surface0 p-6 border-4 border-accent shadow-lg transform rotate-1"
+          className="bg-ctp-surface0 p-6 border-4 border-accent shadow-lg transform md:rotate-1"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
