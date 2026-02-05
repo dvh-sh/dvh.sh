@@ -22,7 +22,7 @@ import { motion, AnimatePresence } from "motion/react";
 export const UserCard = () => {
 
   return (
-    <div className="text-center mb-8">
+    <div className="text-center mb-4 md:mb-8">
       <motion.div
         className="relative mx-auto mb-4 w-32 h-32"
         whileHover={{ rotate: [0, -5, 5, -5, 5, 0], scale: 1.05 }}

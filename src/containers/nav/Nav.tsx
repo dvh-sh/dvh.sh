@@ -172,7 +172,7 @@ const Nav = (): JSX.Element => {
       <div className="flex-1" />
 
       {/* Bottom affixed Resume */}
-      <div className="pt-4">
+      <div className="pt-2 md:pt-4">
         <Link
           href={resumeItem.href}
           className={`

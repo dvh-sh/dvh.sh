@@ -116,7 +116,7 @@ const SidebarContent = () => {
           closed: { x: "-100%" },
         }}
       >
-        <div className="flex-grow overflow-y-auto px-4 py-3 scrollbar-thin scrollbar-thumb-accent scrollbar-track-ctp-surface0">
+        <div className="flex-grow overflow-y-auto px-4 py-2 md:py-3 scrollbar-thin scrollbar-thumb-accent scrollbar-track-ctp-surface0">
           <UserCard />
           <Nav />
         </div>
