@@ -102,8 +102,8 @@
   }
 
   .blog-card-container {
-    @apply opacity-0 -translate-x-12;
-    animation: fadeIn 0.5s ease-out forwards;
+    @apply opacity-0 translate-y-8;
+    animation: fadeInUp 0.5s ease-out forwards;
   }
 
   .shadow-brutal {
@@ -112,6 +112,13 @@
 }
 
 /* Keyframes */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes wave {
   0%,
   100% {
@@ -148,10 +155,10 @@
     transform: translateY(-10px);
   }
 }
-@keyframes fadeIn {
+@keyframes fadeInUp {
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 @keyframes spin {
