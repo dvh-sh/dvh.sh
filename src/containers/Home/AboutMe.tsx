@@ -13,6 +13,7 @@
 
 import { motion } from "motion/react";
 import React, { JSX, useMemo } from "react";
+import { calculateAge } from "@/utils/date.utils";
 
 /**
  * @component AboutMe
@@ -20,10 +21,14 @@ import React, { JSX, useMemo } from "react";
  * @returns {JSX.Element} The rendered About Me section.
  */
 const AboutMe = (): JSX.Element => {
+
+  const age = useMemo(() => calculateAge(new Date(2006, 3, 3)), []);
+  const experience = useMemo(() => age - 11, [age]);
+
   const text = useMemo(
     () =>
-      "I'm a self-taught full-stack software engineer with 7+ years of experience, currently balancing coding with full-time studies. Outside of tech, you'll find me hiking trails, capturing moments through photography, or caring for my cacti garden. My downtime is spent playing Chess, Tetris, and various rhythm games, while exploring interests in OSINT, reverse engineering, and the intricacies of DevOps and low-level optimization. As of late, I've also taken up various creatives, such as writing, drawing, and cooking/baking; Although all to a more novice extent.",
-    [],
+      `I'm a ${age} year old self-taught full-stack software engineer with ${experience}+ years of amateur experience based out of the Los Angeles Metropolitian Area. My specialties include backend web development, software architecture, and developer operations.`,
+    [age, experience],
   );
 
   const sentences = useMemo(

@@ -46,3 +46,19 @@ export const calcDuration = (start: string, end: string): string => {
   if (years > 0) return `${years} yr${years > 1 ? "s" : ""}`;
   return `${rem} mo`;
 };
+
+/**
+ * @function calculateAge
+ * @description Calculates age based on a birthdate.
+ * @param {Date} birthDate - The birthdate to calculate age from.
+ * @returns {number} The calculated age.
+ */
+export const calculateAge = (birthDate: Date): number => {
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+};
