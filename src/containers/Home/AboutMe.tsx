@@ -27,8 +27,8 @@ const AboutMe = (): JSX.Element => {
 
   const text = useMemo(
     () =>
-      `I'm a ${age} year old self-taught full-stack software engineer with ${experience}+ years of amateur experience based out of the Los Angeles Metropolitian Area. My specialties include backend web development, software architecture, and developer operations.`,
-    [age, experience],
+      `I'm a full-stack software engineer and full-time college student based in the Los Angeles Metropolitan Area. With a coding background spanning over ${experience} years, my specialties include backend web development, software architecture, and developer operations.`,
+    [experience],
   );
 
   const sentences = useMemo(
