@@ -27,7 +27,7 @@ interface TextResumeProps {
 
 export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
   const kwRegex = buildKeywordRegex(
-    data.keywords || (data as any).highlightKeywords || [],
+    data.keywords ?? data.highlightKeywords ?? [],
   );
 
   const skillsObj = data.skills || {

@@ -3,24 +3,43 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Root layout for the entire application.
  * Sets up HTML structure, metadata, theme provider, and navigation components.
+ * Fetches the latest commit hash server-side (cached 1h) so the footer
+ * doesn't hit the GitHub API per visitor.
  */
 
 import React, { JSX } from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 
 import "../globals.css";
 
 import { ThemeProvider } from "@/providers/ThemeProvider";
+import { MotionProvider } from "@/providers/MotionProvider";
 import { Footer } from "@/containers/nav/Footer";
 import { Sidebar } from "@/containers/nav/Sidebar";
 
-const inter = Inter({ subsets: ["latin"] });
+/**
+ * @function getGitHash
+ * @description Fetches the short SHA of the latest commit on main, cached for 1h.
+ * Returns null on failure so the footer just hides the hash.
+ */
+const getGitHash = async (): Promise<string | null> => {
+  try {
+    const res = await fetch(
+      "https://api.github.com/repos/dvh-sh/dvh.sh/commits/main",
+      { next: { revalidate: 3600 } },
+    );
+    if (!res.ok) return null;
+    const data = (await res.json()) as { sha?: string };
+    return data.sha?.substring(0, 7) ?? null;
+  } catch {
+    return null;
+  }
+};
 
 /**
  * @var metadata
@@ -70,13 +89,15 @@ export const metadata: Metadata = {
  * @param {{ children: React.ReactNode }} { children } - The child components to be rendered within the layout.
  * @returns {JSX.Element} The root HTML structure of the application.
  */
-const RootLayout = ({
+const RootLayout = async ({
   children,
 }: {
   children: React.ReactNode;
-}): JSX.Element => {
+}): Promise<JSX.Element> => {
+  const gitHash = await getGitHash();
+
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en">
       <head>
         <link rel="canonical" href="https://dvh.sh" />
         <meta name="theme-color" content="#1e1e2e" />
@@ -89,14 +110,24 @@ const RootLayout = ({
         />
       </head>
       <body className="flex flex-col min-h-screen overflow-x-hidden">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:bg-accent focus:text-ctp-base focus:px-4 focus:py-2 focus:font-black focus:uppercase focus:tracking-wider focus:shadow-brutal"
+        >
+          Skip to content
+        </a>
         <ThemeProvider>
-          <div className="flex flex-grow relative w-full">
-            <Sidebar />
-            <div className="flex-1 flex flex-col w-full">
-              <main className="flex-grow w-full">{children}</main>
+          <MotionProvider>
+            <div className="flex flex-grow relative w-full">
+              <Sidebar />
+              <div className="flex-1 flex flex-col w-full">
+                <main id="main" className="flex-grow w-full">
+                  {children}
+                </main>
+              </div>
             </div>
-          </div>
-          <Footer />
+            <Footer gitHash={gitHash} />
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -3,7 +3,7 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Tag filter component for the photography gallery.
@@ -44,7 +44,7 @@ const TagFilter = memo(
               ? "bg-accent text-ctp-base border-accent transform -rotate-2"
               : "bg-ctp-surface0 text-ctp-text border-accent hover:bg-accent hover:text-ctp-base hover:transform hover:-rotate-1"
           }
-          shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] 
+          shadow-brutal
           hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)]
         `}
           whileHover={{ scale: 1.05 }}

@@ -3,7 +3,7 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Mon, Aug 25 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * General type definitions / misc random stuff
@@ -129,6 +129,8 @@ export interface SkillsData {
  */
 export interface PortfolioData {
   keywords: string[];
+  /** Legacy alias for `keywords`; some older portfolio.json snapshots used this name. */
+  highlightKeywords?: string[];
   profile: Profile;
   about: string;
   experience: Experience[];

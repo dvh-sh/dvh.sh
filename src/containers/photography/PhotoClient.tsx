@@ -278,7 +278,7 @@ const PhotoDetails = ({ photo, views }: PhotoClientProps) => (
       transition={{ delay: 0.4 }}
       className="flex flex-wrap gap-2"
     >
-      {photo.tags.map((tag: any) => (
+      {photo.tags.map((tag: string) => (
         <Link
           key={tag}
           href={`/photography?tag=${tag}`}

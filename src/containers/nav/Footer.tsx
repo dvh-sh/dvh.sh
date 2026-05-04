@@ -3,10 +3,11 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, May 04 2026
  *
  * @description
- * The main footer component for the application.
+ * The main footer component. Receives the git hash as a prop from the
+ * server-side layout (cached 1h) so we don't hit the GitHub API per visitor.
  */
 
 "use client";
@@ -15,27 +16,21 @@ import { motion } from "motion/react";
 import { SiGithub, SiNextdotjs, SiReact, SiTailwindcss } from "react-icons/si";
 import React, { useEffect, useState, useRef } from "react";
 
+interface FooterProps {
+  gitHash: string | null;
+}
+
 /**
- * @component FooterContent
- * @description The main content of the footer, including copyright, location, and tech stack info.
+ * @component Footer
+ * @description Renders the footer with copyright, location, and a tech-stack popup.
  */
-const FooterContent = () => {
+export const Footer: React.FC<FooterProps> = ({ gitHash }) => {
   const currentYear = new Date().getFullYear();
-  const [gitHash, setGitHash] = useState<string | null>(null);
   const [showPopup, setShowPopup] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch("https://api.github.com/repos/dvh-sh/dvh.sh/commits/main")
-      .then((response) => response.json())
-      .then((data) => {
-        setGitHash(data.sha.substring(0, 7));
-      })
-      .catch((error) => console.error("Error fetching Git hash:", error));
-  }, []);
-
-  useEffect(() => {
-    // Basic click outside handler to close the popup
+    if (!showPopup) return;
     const handleClickOutside = (event: MouseEvent) => {
       if (
         popupRef.current &&
@@ -46,10 +41,10 @@ const FooterContent = () => {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [popupRef]);
+  }, [showPopup]);
 
   return (
-    <footer className="bg-ctp-mantle text-ctp-text py-3 md:ml-64 relative">
+    <footer className="print-hidden bg-ctp-mantle text-ctp-text py-3 md:ml-64 relative">
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-wrap justify-between items-center gap-2">
           <p className="text-xs font-mono transform hover:-skew-x-6 transition-transform duration-300">
@@ -59,9 +54,12 @@ const FooterContent = () => {
             Hello from ☀️ SoCal
           </p>
           <div className="relative" ref={popupRef}>
-            <div
-              className="flex items-center space-x-2 text-ctp-subtext0 cursor-pointer bg-ctp-surface0 p-1 rounded-md hover:bg-ctp-surface1 transition-colors duration-300"
+            <button
+              type="button"
+              className="flex items-center space-x-2 text-ctp-subtext0 cursor-pointer bg-ctp-surface0 px-2 py-2 rounded-md hover:bg-ctp-surface1 transition-colors duration-300"
               onClick={() => setShowPopup(!showPopup)}
+              aria-label="Built with info"
+              aria-expanded={showPopup}
             >
               <SiNextdotjs
                 size={16}
@@ -78,7 +76,7 @@ const FooterContent = () => {
               <span className="text-xs font-mono">
                 {gitHash ? `#${gitHash}` : "..."}
               </span>
-            </div>
+            </button>
             {showPopup && (
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
@@ -103,31 +101,8 @@ const FooterContent = () => {
           </div>
         </div>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-accent to-ctp-blue opacity-5"></div>
       <div className="absolute top-0 left-0 w-full h-px bg-accent"></div>
       <div className="absolute bottom-0 right-0 w-full h-px bg-ctp-blue"></div>
     </footer>
   );
-};
-
-/**
- * @component Footer
- * @description A wrapper component to ensure the footer only renders on the client side,
- * preventing hydration errors with client-specific logic like `useEffect`.
- */
-export const Footer = () => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    // Render a static placeholder on the server
-    return (
-      <footer className="bg-ctp-mantle text-ctp-text py-3 md:ml-64 h-[40px]"></footer>
-    );
-  }
-
-  return <FooterContent />;
 };

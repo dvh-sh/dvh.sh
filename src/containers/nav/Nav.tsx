@@ -3,7 +3,7 @@
  * @author David (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Mon, Aug 26 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Navigation component with Home pinned first, remaining items sorted by label length,
@@ -52,13 +52,13 @@ const baseNavItems: NavItem[] = [
     Icon: FaHome,
     subItems: [
       { name: "Experience", href: "/#experience", Icon: FaBriefcase },
-      { name: "Works", href: "/#works", Icon: FaFileAlt },
+      { name: "Client Work", href: "/#works", Icon: FaFileAlt },
       { name: "Projects", href: "/#projects", Icon: FaProjectDiagram },
       { name: "Skills", href: "/#skills", Icon: FaCogs },
     ],
   },
   { name: "Software I use", href: "/software", Icon: FaLaptopCode },
- // { name: "Blog", href: "/blog", Icon: FaBook },
+  { name: "Blog", href: "/blog", Icon: FaBook },
   { name: "Cooking", href: "/cooking", Icon: FaBreadSlice },
   { name: "Photography", href: "/photography", Icon: FaCamera },
   // Resume is intentionally not kept here; it will be affixed to the bottom.
@@ -144,7 +144,7 @@ const Nav = (): JSX.Element => {
                     <Link
                       href={subItem.href}
                       className={`
-                        no-underline flex items-center py-1 px-4 rounded-lg transition-all duration-300
+                        no-underline flex items-center py-2 px-4 rounded-lg transition-all duration-300
                         ${
                           pathname === subItem.href
                             ? "text-accent font-bold transform translate-x-2"

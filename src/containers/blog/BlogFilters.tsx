@@ -52,7 +52,7 @@ const SelectButton = memo(
   }) => (
     <div className="relative group">
       <button
-        className="w-full md:w-auto bg-ctp-surface0 px-4 py-2 border-2 border-accent hover:border-ctp-blue transition-colors duration-200 transform hover:-rotate-1 hover:scale-105 flex items-center justify-between space-x-2 font-mono uppercase tracking-tight shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)] active:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.2)] active:transform active:translate-x-1 active:translate-y-1"
+        className="w-full md:w-auto bg-ctp-surface0 px-4 py-2 border-2 border-accent hover:border-ctp-blue transition-colors duration-200 transform hover:-rotate-1 hover:scale-105 flex items-center justify-between space-x-2 font-mono uppercase tracking-tight shadow-brutal hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)] active:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.2)] active:transform active:translate-x-1 active:translate-y-1"
         aria-label={label}
       >
         <Icon className="w-4 h-4" />
@@ -162,7 +162,7 @@ const BlogFilters = ({ posts, isCooking }: BlogFiltersProps) => {
             onChange={(e) =>
               setFilters((prev) => ({ ...prev, search: e.target.value }))
             }
-            className="w-full p-3 pl-12 bg-ctp-surface0 border-2 border-accent hover:border-ctp-blue focus:border-ctp-blue focus:outline-none font-mono uppercase tracking-tight shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)] transition-all duration-200"
+            className="w-full p-3 pl-12 bg-ctp-surface0 border-2 border-accent hover:border-ctp-blue focus:border-ctp-blue focus:outline-none font-mono uppercase tracking-tight shadow-brutal hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)] transition-all duration-200"
             aria-label="Search posts"
           />
           <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-ctp-subtext0 w-5 h-5 pointer-events-none" />

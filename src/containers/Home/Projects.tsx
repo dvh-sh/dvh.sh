@@ -3,7 +3,7 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Mon, Aug 26 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Container component to display projects with keyword emphasis.
@@ -39,7 +39,7 @@ const Projects = ({ data, keywords }: ProjectsProps) => {
       >
         Projects
       </motion.h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {items.map((project, index) => (
           <motion.div
             key={project.title}

@@ -3,7 +3,7 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Mon, Aug 26 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Brutalist project card: flat frame, keyword emphasis, clean tech row.
@@ -40,7 +40,7 @@ const ProjectLink: React.FC<{
     <motion.a
       href={href}
       className={`inline-flex items-center gap-2 font-black uppercase tracking-wider
-        px-3 py-2 border-2 transition-all duration-200 shadow-brutal
+        px-4 py-3 min-h-[44px] border-2 transition-all duration-200 shadow-brutal
         ${
           primary
             ? "border-accent bg-accent text-ctp-base hover:bg-transparent hover:text-accent"

@@ -101,6 +101,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       setVar("--accent-color", accentColor.hex);
     }
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mount guard so children only render once CSS vars are written
     setMounted(true);
   }, [theme, accent]);
 

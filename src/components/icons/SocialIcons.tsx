@@ -10,7 +10,8 @@
  * Only imports the specific icons used in the app.
  */
 
-import { SiGithub, SiGmail, SiLinkedin } from "react-icons/si";
+import { SiGithub, SiGmail } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
 
 /**
  * @interface IconMap
@@ -19,13 +20,13 @@ import { SiGithub, SiGmail, SiLinkedin } from "react-icons/si";
 interface IconMap {
   github: typeof SiGithub;
   email: typeof SiGmail;
-  linkedin: typeof SiLinkedin;
+  linkedin: typeof FaLinkedin;
 }
 
 export const icons: IconMap = {
   github: SiGithub,
   email: SiGmail,
-  linkedin: SiLinkedin,
+  linkedin: FaLinkedin,
 };
 
 /**
@@ -36,4 +37,4 @@ export const icons: IconMap = {
  */
 export const getIcon = (type: keyof IconMap) => icons[type];
 
-export { SiGithub, SiGmail, SiLinkedin };
+export { SiGithub, SiGmail, FaLinkedin };

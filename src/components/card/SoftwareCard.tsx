@@ -3,7 +3,7 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Mon, Aug 26 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Brutalist software card with safe rendering and subtle interactions.
@@ -146,6 +146,8 @@ const SoftwareCard: React.FC<Software> = React.memo(
         <AnimatePresence>
           {copied && (
             <motion.div
+              role="status"
+              aria-live="polite"
               className="absolute bottom-3 right-3 bg-ctp-surface1 border-2 border-accent text-ctp-text px-3 py-1 font-mono text-xs shadow-brutal"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -166,6 +168,7 @@ const SoftwareCard: React.FC<Software> = React.memo(
     );
   },
 );
+SoftwareCard.displayName = "SoftwareCard";
 
 /**
  * @component SoftwareCardSkeleton

@@ -3,7 +3,7 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Mon, Aug 26 2025
- * @updated Mon, Aug 26 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Subtle banner to direct recruiters to resume page, dismissible.
@@ -45,7 +45,7 @@ export const RecruiterBanner = () => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed bottom-4 right-4 z-50 max-w-sm"
+          className="print-hidden fixed bottom-4 right-4 z-50 max-w-sm"
           initial={{ x: 400, rotate: 5 }}
           animate={{ x: 0, rotate: 0 }}
           exit={{ x: 400, rotate: -5 }}
@@ -58,10 +58,10 @@ export const RecruiterBanner = () => {
             {/* Close button */}
             <button
               onClick={handleDismiss}
-              className="absolute -top-2 -right-2 bg-ctp-pink text-ctp-base p-1 shadow-brutal hover:scale-110 transition-transform"
+              className="absolute -top-2 -right-2 bg-ctp-pink text-ctp-base p-2 shadow-brutal hover:scale-110 transition-transform"
               aria-label="Dismiss"
             >
-              <FaTimes size={12} />
+              <FaTimes size={14} />
             </button>
 
             <div className="flex items-start gap-3">
@@ -71,8 +71,7 @@ export const RecruiterBanner = () => {
                   Looking for a developer?
                 </h3>
                 <p className="text-xs text-ctp-text mb-3 font-mono">
-                  View my formatted resume with experience, skills, and contact
-                  info.
+                  See my experience, skills, and contact info.
                 </p>
                 <Link
                   href="/resume"

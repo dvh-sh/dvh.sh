@@ -3,7 +3,7 @@
  * @author David (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Mon, Aug 26 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Main page for displaying software projects. Fetches software data from a GitHub repository,
@@ -197,13 +197,13 @@ const SoftwarePage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <motion.h2
+        <motion.h1
           className="text-4xl sm:text-5xl md:text-6xl font-black my-8 py-8 text-accent text-center uppercase tracking-widest transform -skew-x-12"
           animate={titleVariants ? "animate" : undefined}
           variants={titleVariants}
         >
           Software
-        </motion.h2>
+        </motion.h1>
 
         {isLoading ? (
           <>
@@ -212,7 +212,7 @@ const SoftwarePage = () => {
           </>
         ) : error ? (
           <div className="text-accent text-2xl font-bold">
-            Error loading software: {error}
+            Couldn&apos;t load the software list. Try refreshing in a moment.
           </div>
         ) : (
           renderedSoftwareList

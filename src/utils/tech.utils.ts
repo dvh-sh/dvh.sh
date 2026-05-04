@@ -3,14 +3,23 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Mon, Aug 26 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Utility functions and data related to technologies (skills, tools).
+ * Icons resolve from react-icons/si first, then react-icons/fa for
+ * trademark-restricted logos (Java, LinkedIn, etc.) that Simple Icons drops.
  */
 
 import * as SiIcons from "react-icons/si";
+import * as FaIcons from "react-icons/fa";
+import type { IconType } from "react-icons";
 import type { Tech } from "@/types";
+
+const iconRegistry: Record<string, IconType> = {
+  ...(SiIcons as Record<string, IconType>),
+  ...(FaIcons as Record<string, IconType>),
+};
 
 /**
  * @const tech
@@ -40,6 +49,12 @@ const tech: Tech[] = [
     title: "Kotlin",
     color: "text-ctp-mauve",
     icon: "SiKotlin",
+  },
+  {
+    slug: "java",
+    title: "Java",
+    color: "text-ctp-red",
+    icon: "FaJava",
   },
   {
     slug: "cplusplus",
@@ -174,10 +189,10 @@ const getTechBySlug = (slug: string): Tech | undefined => {
 
 /**
  * @function getIcon
- * @description Dynamically retrieves an icon component from 'react-icons/si' by its name.
- * @param {string} iconName - The name of the icon component (e.g., "SiReact").
- * @returns {React.ComponentType} The corresponding icon component.
+ * @description Looks up an icon component by name across react-icons/si and react-icons/fa.
+ * @param {string} iconName - The name of the icon component (e.g., "SiReact", "FaJava").
+ * @returns {IconType | undefined} The corresponding icon component, or undefined if not found.
  */
-const getIcon = (iconName: string) => SiIcons[iconName as keyof typeof SiIcons];
+const getIcon = (iconName: string): IconType | undefined => iconRegistry[iconName];
 
 export { tech, getTechBySlug, getIcon };

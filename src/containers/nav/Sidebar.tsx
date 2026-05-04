@@ -3,11 +3,12 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Main sidebar component with lazy-loaded heavy client components.
  * Reduces initial bundle size by deferring non-critical UI.
+ * One hydration check (isHydrated) handles SSR placeholder; no outer wrapper.
  */
 
 "use client";
@@ -15,8 +16,8 @@
 import dynamic from "next/dynamic";
 import { motion } from "motion/react";
 import React, { useState, useEffect, Suspense } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
-import { SiGithub, SiGmail, SiLinkedin } from "react-icons/si";
+import { FaBars, FaTimes, FaLinkedin } from "react-icons/fa";
+import { SiGithub, SiGmail } from "react-icons/si";
 
 import { UserCard } from "@/components/card/UserCard";
 import Nav from "@/containers/nav/Nav";
@@ -38,10 +39,12 @@ const ConnectSection = dynamic(() => import("@/containers/ConnectSection"), {
 });
 
 /**
- * @component SidebarContent
- * @description Core sidebar logic with mobile responsiveness and animations.
+ * @component Sidebar
+ * @description Core sidebar with mobile responsiveness and animations.
+ * Returns a static gradient placeholder during SSR/first paint to avoid
+ * hydration mismatch on the mobile/desktop branch.
  */
-const SidebarContent = () => {
+export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
@@ -60,7 +63,7 @@ const SidebarContent = () => {
       color: "text-ctp-overlay0",
     },
     {
-      Icon: SiLinkedin,
+      Icon: FaLinkedin,
       label: "LinkedIn",
       link: "https://www.linkedin.com/in/dvhsh/",
       color: "text-ctp-overlay0",
@@ -68,6 +71,7 @@ const SidebarContent = () => {
   ];
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- hydration guard so SSR can render a static placeholder
     setIsHydrated(true);
     const checkIfMobile = () => {
       const mobile = window.innerWidth < 768;
@@ -94,7 +98,7 @@ const SidebarContent = () => {
       {isMobile && (
         <motion.button
           onClick={toggleSidebar}
-          className="fixed top-4 left-4 z-50 p-2 bg-ctp-surface0 shadow-brutal rounded-none"
+          className="print-hidden fixed top-4 left-4 z-50 p-2 bg-ctp-surface0 shadow-brutal rounded-none"
           whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
           whileTap={{ scale: 0.9 }}
           aria-label={isOpen ? "Close sidebar" : "Open sidebar"}
@@ -108,7 +112,7 @@ const SidebarContent = () => {
       )}
 
       <motion.aside
-        className="w-64 h-screen fixed left-0 top-0 bottom-0 flex flex-col border-r-4 border-accent transition-transform duration-300 ease-in-out z-40 shadow-brutal bg-gradient-to-br from-ctp-mantle to-ctp-crust"
+        className="print-hidden w-64 h-screen fixed left-0 top-0 bottom-0 flex flex-col border-r-4 border-accent transition-transform duration-300 ease-in-out z-40 shadow-brutal bg-gradient-to-br from-ctp-mantle to-ctp-crust"
         initial={false}
         animate={isMobile ? (isOpen ? "open" : "closed") : "open"}
         variants={{
@@ -139,7 +143,7 @@ const SidebarContent = () => {
 
       {isMobile && isOpen && (
         <motion.div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 backdrop-blur-sm"
+          className="print-hidden fixed inset-0 bg-black bg-opacity-50 z-30 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -151,21 +155,3 @@ const SidebarContent = () => {
   );
 };
 
-/**
- * @component Sidebar
- * @description Wrapper component ensuring client-only rendering.
- * @returns {JSX.Element | null} The sidebar component or null during SSR.
- */
-export const Sidebar = () => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null;
-  }
-
-  return <SidebarContent />;
-};

@@ -3,10 +3,10 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Mon, Aug 26 2025
+ * @updated Mon, May 04 2026
  *
  * @description
- * Container component for client engagement works section.
+ * Container component for client work section.
  */
 
 "use client";
@@ -35,7 +35,7 @@ const Works = ({ data, keywords }: WorksProps) => {
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        Client Engagements
+        Client Work
       </motion.h2>
       <div className="space-y-8">
         {data.map((work, index) => (

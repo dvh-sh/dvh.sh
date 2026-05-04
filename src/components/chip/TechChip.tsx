@@ -3,14 +3,18 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * A component for displaying a technology chip with an icon and name.
+ * Rotation/skew is derived deterministically from the slug so SSR + client
+ * agree (no hydration mismatch) and the value is stable across re-renders.
  */
 
+"use client";
+
 import { motion } from "motion/react";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { getIcon, getTechBySlug } from "@/utils/tech.utils";
 
@@ -26,20 +30,37 @@ interface TechChipProps {
 }
 
 /**
+ * @function hashSlug
+ * @description Stable, SSR-safe djb2-style hash so chips get the same wobble
+ * on server and client.
+ */
+const hashSlug = (s: string): number => {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) {
+    h = (h << 5) - h + s.charCodeAt(i);
+    h |= 0;
+  }
+  return Math.abs(h);
+};
+
+/**
  * @component TechChip
  * @description Renders a stylized chip for a technology, including its icon and name.
  * @param {TechChipProps} { slug, className } - The props for the component.
  * @returns {JSX.Element | null} The rendered tech chip, or null if the tech is not found.
  */
 const TechChip: React.FC<TechChipProps> = ({ slug, className = "" }) => {
-  const tech = getTechBySlug(slug);
+  const tech = useMemo(() => getTechBySlug(slug), [slug]);
+  const Icon = useMemo(
+    () => (tech ? getIcon(tech.icon) : null),
+    [tech],
+  );
+  const seed = useMemo(() => hashSlug(slug), [slug]);
 
-  if (!tech) return null;
+  if (!tech || !Icon) return null;
 
-  const Icon = getIcon(tech.icon);
-
-  const randomRotation = Math.random() * 2 - 1;
-  const randomSkew = Math.random() * 2 - 1;
+  const randomRotation = (seed % 100) / 100 - 0.5;
+  const randomSkew = ((seed >> 2) % 100) / 100 - 0.5;
 
   return (
     <motion.span
@@ -64,19 +85,10 @@ const TechChip: React.FC<TechChipProps> = ({ slug, className = "" }) => {
         whileHover={{ rotate: 360 }}
         transition={{ duration: 0.5 }}
       >
+        {/* eslint-disable-next-line react-hooks/static-components -- stable lookup from a static icon map in tech.utils */}
         <Icon size={18} />
       </motion.span>
-      <span className="relative">
-        <span className="relative z-10">{tech.title}</span>
-        <motion.span
-          className="absolute inset-0 opacity-20"
-          animate={{
-            scaleX: [1, 1.05, 1],
-            scaleY: [1, 0.95, 1],
-          }}
-          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-        />
-      </span>
+      <span>{tech.title}</span>
     </motion.span>
   );
 };

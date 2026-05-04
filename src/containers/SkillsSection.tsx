@@ -3,7 +3,7 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * A component for displaying a titled section of skills.
@@ -11,13 +11,13 @@
 
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import React, { useMemo } from "react";
 import { FaCode } from "react-icons/fa";
 import type { IconType } from "react-icons";
 
 import { getIcon, getTechBySlug } from "@/utils/tech.utils";
-import type { Tech } from "@/types/\\";
+import type { Tech } from "@/types";
 
 interface SkillsSectionProps {
   title: string;
@@ -29,6 +29,8 @@ interface SkillsSectionProps {
  * @description Renders a single, animated skill icon with its name.
  */
 const SkillIcon: React.FC<{ tech: Tech }> = ({ tech }) => {
+  const shouldReduceMotion = useReducedMotion();
+
   const Icon = useMemo(() => {
     const icon = getIcon(tech.icon);
     // Fallback to FaCode if icon not found
@@ -39,7 +41,14 @@ const SkillIcon: React.FC<{ tech: Tech }> = ({ tech }) => {
     return icon as IconType;
   }, [tech.icon]);
 
-  const randomRotation = useMemo(() => Math.random() * 2 - 1, []);
+  const randomRotation = useMemo(() => {
+    let h = 0;
+    for (let i = 0; i < tech.slug.length; i++) {
+      h = (h << 5) - h + tech.slug.charCodeAt(i);
+      h |= 0;
+    }
+    return (Math.abs(h) % 200) / 100 - 1;
+  }, [tech.slug]);
 
   return (
     <motion.div
@@ -49,9 +58,14 @@ const SkillIcon: React.FC<{ tech: Tech }> = ({ tech }) => {
     >
       <motion.div
         className="absolute inset-0 bg-accent opacity-20"
-        animate={{ rotate: [0, 2, 0, -2, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-        style={{ willChange: "transform" }}
+        aria-hidden="true"
+        animate={shouldReduceMotion ? undefined : { rotate: [0, 2, 0, -2, 0] }}
+        transition={
+          shouldReduceMotion
+            ? undefined
+            : { duration: 5, repeat: Infinity, ease: "linear" }
+        }
+        style={{ willChange: shouldReduceMotion ? "auto" : "transform" }}
       />
       <motion.div
         className={`flex items-center p-2 border ${tech.color} bg-ctp-surface0 shadow-brutal relative z-10 before:absolute before:inset-0 before:border before:border-accent before:-m-0.5 after:absolute after:inset-0 after:border after:border-accent after:-m-1`}
@@ -114,7 +128,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ title, skills }) => {
         {title}
       </motion.h3>
       <motion.div
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
+        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
         variants={{
           hidden: { opacity: 0 },
           show: {

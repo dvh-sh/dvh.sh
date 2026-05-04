@@ -3,7 +3,7 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Mon, Aug 26 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Brutalist client work card: flat frame, keyword emphasis, clean tech row.
@@ -110,7 +110,7 @@ const WorkCard: React.FC<WorkCardProps> = ({
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-accent font-black uppercase tracking-wider
-                     px-3 py-2 border-2 border-accent bg-transparent shadow-brutal
+                     px-4 py-3 min-h-[44px] border-2 border-accent bg-transparent shadow-brutal
                      hover:bg-accent hover:text-ctp-base transition-colors"
           whileHover={{ scale: 1.03, rotate: -1 }}
           whileTap={{ scale: 0.96 }}

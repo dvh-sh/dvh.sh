@@ -18,7 +18,7 @@ The site is live at [dvh.sh](https://dvh.sh), where you can explore David's skil
 
 ## Installation
 
-To run the project locally, you will need Node.js installed on your system.
+To run the project locally, you will need [Bun](https://bun.sh) installed on your system.
 
 ```bash
 # Clone the repository
@@ -28,10 +28,10 @@ git clone https://github.com/dvh-sh/dvh.sh.git
 cd dvh.sh
 
 # Install project dependencies
-npm install
+bun install
 
 # Start the development server
-npm run dev
+bun run dev
 ```
 
 The site will be available at `http://localhost:3000`.
@@ -48,10 +48,10 @@ This project is built with Next.js and uses TypeScript for type safety. The proj
 
 ### Scripts
 
-- **Development**: `npm run dev` - Starts the development server.
-- **Build**: `npm run build` - Builds the project for production.
-- **Start**: `npm run start` - Starts the production server.
-- **Lint**: `npm run lint` - Runs ESLint for code quality checks.
+- **Development**: `bun run dev` - Starts the development server.
+- **Build**: `bun run build` - Builds the project for production.
+- **Start**: `bun run start` - Starts the production server.
+- **Lint**: `bun run lint` - Runs ESLint for code quality checks.
 
 ## Acknowledgements
 

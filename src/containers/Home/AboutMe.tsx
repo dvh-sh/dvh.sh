@@ -3,7 +3,7 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * The "About Me" section for the homepage.
@@ -27,7 +27,7 @@ const AboutMe = (): JSX.Element => {
 
   const text = useMemo(
     () =>
-      `I'm a full-stack software engineer and full-time college student based in the Los Angeles Metropolitan Area. With a coding background spanning over ${experience} years, my specialties include backend web development, software architecture, and developer operations.`,
+      `I'm a full-stack software engineer and full-time college student based in the Los Angeles Metropolitan Area. I've been coding for ${experience} years, focused on backend web development, software architecture, and DevOps.`,
     [experience],
   );
 
@@ -38,14 +38,17 @@ const AboutMe = (): JSX.Element => {
 
   return (
     <section id="about" className="mb-16 mt-12 relative">
-      <motion.h2
+      <motion.h1
         className="text-4xl md:text-6xl font-black mb-8 text-accent uppercase tracking-tighter transform md:-skew-x-6"
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        Hi, I'm David <span className="inline-block animate-wave pl-4">👋</span>
-      </motion.h2>
+        Hi, I&apos;m David{" "}
+        <span aria-hidden="true" className="inline-block animate-wave pl-4">
+          👋
+        </span>
+      </motion.h1>
 
       <div className="relative z-10">
         <motion.div
@@ -68,13 +71,14 @@ const AboutMe = (): JSX.Element => {
         </motion.div>
       </div>
 
-      <div className="absolute top-0 right-0 w-64 h-64 bg-accent opacity-10 rounded-full animate-pulse"></div>
-      <div className="absolute bottom-0 left-0 w-48 h-48 bg-ctp-blue opacity-10 rounded-full animate-bounce"></div>
-
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 goo-animation">
-        <div className="goo-circle"></div>
-        <div className="goo-circle"></div>
-      </div>
+      <div
+        aria-hidden="true"
+        className="print-hidden absolute top-0 right-0 w-64 h-64 bg-accent opacity-10 rounded-full animate-pulse"
+      />
+      <div
+        aria-hidden="true"
+        className="print-hidden absolute bottom-0 left-0 w-48 h-48 bg-ctp-blue opacity-10 rounded-full animate-bounce"
+      />
     </section>
   );
 };

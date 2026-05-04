@@ -3,7 +3,7 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Call-to-action component for photography licensing.
@@ -34,7 +34,7 @@ const LicensingCTA = () => (
     </p>
     <a
       href="mailto:david@dvh.sh?subject=Photography%20Inquiry"
-      className="inline-block px-6 py-3 bg-accent text-ctp-base font-black uppercase tracking-wider hover:transform hover:rotate-1 transition-transform duration-200 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)]"
+      className="inline-block px-6 py-3 bg-accent text-ctp-base font-black uppercase tracking-wider hover:transform hover:rotate-1 transition-transform duration-200 shadow-brutal hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,0.2)]"
     >
       Contact for Licensing
     </a>

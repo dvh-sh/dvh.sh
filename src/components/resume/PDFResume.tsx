@@ -179,9 +179,9 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
 
   const projects = Array.isArray(data.projects) ? data.projects : [];
 
-  // Build keywords regex (supports either "keywords" or "highlightKeywords" in JSON)
+  // Build keywords regex (supports either "keywords" or legacy "highlightKeywords" in JSON)
   const kwRegex = buildKeywordRegex(
-    (data as any).keywords || (data as any).highlightKeywords || [],
+    data.keywords ?? data.highlightKeywords ?? [],
   );
 
   // Build contact row

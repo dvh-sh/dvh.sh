@@ -1,16 +1,16 @@
 # Base stage for dependencies
-FROM node:20-alpine AS deps
+FROM oven/bun:1-alpine AS deps
 WORKDIR /app
 
 # Install dependencies needed for build
 RUN apk add --no-cache libc6-compat
 
 # Copy package manager files and install dependencies
-COPY package.json package-lock.json ./
-RUN npm ci --fetch-timeout=600000
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 
 # Builder stage
-FROM node:20-alpine AS builder
+FROM oven/bun:1-alpine AS builder
 WORKDIR /app
 
 # Copy dependencies from the 'deps' stage
@@ -23,7 +23,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
 # Build the application
-RUN npm run build
+RUN bun run build
 
 # Production stage
 FROM node:20-alpine AS runner

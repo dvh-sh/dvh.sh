@@ -3,7 +3,7 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * A component for displaying a set of social media or connection links.
@@ -32,7 +32,7 @@ interface ConnectSectionProps {
  */
 const ConnectSection: React.FC<ConnectSectionProps> = ({
   connections,
-  iconSize = "w-6 sm:w-8 h-6 sm:h-8",
+  iconSize = "w-7 sm:w-8 h-7 sm:h-8",
 }) => {
   return (
     <div className="mt-auto pt-4">
@@ -43,7 +43,7 @@ const ConnectSection: React.FC<ConnectSectionProps> = ({
             href={connection.link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`fill-ctp-overlay0 ${connection.color} hover:text-ctp-text hover:scale-110 transition-all duration-300 hover:rotate-12`}
+            className={`fill-ctp-overlay0 ${connection.color} inline-flex items-center justify-center min-w-[44px] min-h-[44px] hover:text-ctp-text hover:scale-110 transition-all duration-300 hover:rotate-12`}
             aria-label={`${connection.label} Redirect`}
           >
             <connection.Icon
