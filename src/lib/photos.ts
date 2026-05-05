@@ -3,39 +3,41 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Tue, May 05 2026
  *
  * @description
- * Functions for fetching photo data and managing photo view counts.
+ * Photo data accessors + view-count updates. Photo metadata lives in the
+ * dvh-sh/.github repo (photos.json) and is fetched server-side via
+ * fetchPhotosData() with a 5-minute cache, mirroring portfolioCache.
  */
 
 import { cache } from "react";
 
 import PhotoView from "@/models/photo.model";
-import photosData from "@/public/data/photos.json";
+import { fetchPhotosData } from "@/lib/photosCache";
 import type { Photo } from "@/types/photography";
 import connectDB from "@/utils/db.utils";
 
 /**
  * @function getPhotos
- * @description Retrieves all photo data from the local JSON file.
- * The result is cached to avoid re-reading the file on every request.
+ * @description Retrieves all photo data from the cached remote manifest.
  * @returns {Promise<Photo[]>} A promise that resolves to an array of all photos.
  */
 export const getPhotos = cache(async (): Promise<Photo[]> => {
-  return photosData.photos;
+  const data = await fetchPhotosData();
+  return data.photos;
 });
 
 /**
  * @function getPhotoBySlug
- * @description Retrieves a single photo's data by its slug from the local JSON file.
- * The result is cached.
+ * @description Retrieves a single photo's data by its slug from the cached remote manifest.
  * @param {string} slug - The slug of the photo to retrieve.
  * @returns {Promise<Photo | null>} A promise that resolves to the Photo object or null if not found.
  */
 export const getPhotoBySlug = cache(
   async (slug: string): Promise<Photo | null> => {
-    return photosData.photos.find((p) => p.slug === slug) || null;
+    const data = await fetchPhotosData();
+    return data.photos.find((p) => p.slug === slug) || null;
   },
 );
 
