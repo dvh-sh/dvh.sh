@@ -3,32 +3,52 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, May 04 2026
  *
  * @description
- * Cooking post [slug] page. Delegates to PostClient with the slug,
- * indicating it's a cooking post by setting `isCooking` to true.
+ * Cooking post [slug] page. Generates per-post metadata. The matching Recipe
+ * JSON-LD is rendered into <head> by the root layout (driven by x-pathname).
  */
+
+import type { Metadata } from "next";
 
 import PostClient from "@/containers/blog/PostClient";
+import { getPostData } from "@/lib/posts";
+import { SITE_URL } from "@/lib/seo";
 
-/**
- * @interface CookingPostProps
- * @description Props for the CookingPost component, containing the post slug.
- * @property {Promise<{ slug: string }>} params - Contains the slug of the cooking post.
- */
 interface CookingPostProps {
   params: Promise<{ slug: string }>;
 }
 
-/**
- * @component CookingPost
- * @description Page component for displaying a single cooking post.
- * Fetches the slug from parameters and renders the PostClient component,
- * explicitly setting `isCooking` to `true` for cooking-related content.
- * @param {CookingPostProps} { params } - The props object containing the post slug.
- * @returns {JSX.Element} The rendered PostClient component.
- */
+export const generateMetadata = async ({
+  params,
+}: CookingPostProps): Promise<Metadata> => {
+  const { slug } = await params;
+  const post = await getPostData(slug, true);
+  if (!post) return { title: "Recipe Not Found" };
+  const url = `${SITE_URL}/cooking/${slug}`;
+  const published = new Date(post.date);
+  return {
+    title: `${post.title} | Cooking — David Heffler`,
+    description: post.excerpt,
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.excerpt,
+      url,
+      publishedTime: isNaN(published.getTime())
+        ? undefined
+        : published.toISOString(),
+      authors: ["David Heffler"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+    },
+  };
+};
+
 const CookingPost = async ({ params }: CookingPostProps) => {
   const { slug } = await params;
   return <PostClient params={{ slug, isCooking: true }} />;

@@ -3,20 +3,29 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Wed, Aug 20 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Cooking index page. Renders BlogClient with isCooking set to true.
  */
 
+import type { Metadata } from "next";
+
 import BlogClient from "@/containers/blog/BlogClient";
 
-/**
- * @component CookingPage
- * @description Main page component for the cooking section.
- * Renders the BlogClient component, specifically tailored for cooking-related content
- * by setting the `isCooking` prop to `true`.
- */
+export const metadata: Metadata = {
+  title: "Cooking — David Heffler",
+  description:
+    "Recipes and technique notes — desserts, savory plates, and weekend experiments with weights and timings.",
+  openGraph: {
+    title: "Cooking — David Heffler",
+    description:
+      "Recipes and technique notes — desserts, savory plates, and weekend experiments with weights and timings.",
+    url: "https://www.dvh.sh/cooking",
+    type: "website",
+  },
+};
+
 const CookingPage = () => {
   return <BlogClient isCooking={true} />;
 };

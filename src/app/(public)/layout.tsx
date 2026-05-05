@@ -14,6 +14,7 @@
 
 import React, { JSX } from "react";
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 
 import "../globals.css";
 
@@ -21,6 +22,44 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import { MotionProvider } from "@/providers/MotionProvider";
 import { Footer } from "@/containers/nav/Footer";
 import { Sidebar } from "@/containers/nav/Sidebar";
+import { fetchPortfolioData } from "@/lib/portfolioCache";
+import { getPostData } from "@/lib/posts";
+import { getPhotoBySlug } from "@/lib/photos";
+import {
+  personLd,
+  websiteLd,
+  blogPostingLd,
+  recipeLd,
+  imageObjectLd,
+  jsonLdProps,
+  SITE_URL,
+} from "@/lib/seo";
+
+/**
+ * @function getRouteSchema
+ * @description Dispatches a per-route JSON-LD schema based on the current pathname.
+ * Returns null if no schema applies (homepage, list pages, etc. — those use root Person+WebSite).
+ */
+const getRouteSchema = async (
+  pathname: string,
+): Promise<unknown | null> => {
+  const blogMatch = pathname.match(/^\/blog\/([^/]+)\/?$/);
+  if (blogMatch) {
+    const post = await getPostData(blogMatch[1], false);
+    return post ? blogPostingLd(post, blogMatch[1], false) : null;
+  }
+  const cookingMatch = pathname.match(/^\/cooking\/([^/]+)\/?$/);
+  if (cookingMatch) {
+    const post = await getPostData(cookingMatch[1], true);
+    return post ? recipeLd(post, cookingMatch[1]) : null;
+  }
+  const photoMatch = pathname.match(/^\/photography\/([^/]+)\/?$/);
+  if (photoMatch) {
+    const photo = await getPhotoBySlug(photoMatch[1]);
+    return photo ? imageObjectLd(photo) : null;
+  }
+  return null;
+};
 
 /**
  * @function getGitHash
@@ -46,35 +85,35 @@ const getGitHash = async (): Promise<string | null> => {
  * @description The base metadata for the application, including title, description,
  * keywords, and OpenGraph/Twitter card information.
  */
+const ROOT_DESCRIPTION =
+  "Software engineer building full-stack apps and backend systems with TypeScript, Next.js, Java, and Python. Based in the Los Angeles Metropolitan Area.";
+
 export const metadata: Metadata = {
-  title: "David | Full-Stack Developer Portfolio",
-  description:
-    "Explore David’s personal portfolio showcasing skills and experience in full-stack development, with expertise in various modern technologies.",
-  keywords:
-    "David, Full-Stack Developer, Software Engineer, Web Development, Backend, Frontend, CSIS Student",
+  metadataBase: new URL(SITE_URL),
+  title: "David Heffler | Software Engineer",
+  description: ROOT_DESCRIPTION,
   openGraph: {
-    title: "David | Full-Stack Developer Portfolio",
-    description:
-      "Explore David’s portfolio, highlighting his expertise in full-stack development across a range of modern technologies.",
-    url: "https://dvh.sh",
-    siteName: "David Portfolio",
+    title: "David Heffler | Software Engineer",
+    description: ROOT_DESCRIPTION,
+    url: SITE_URL,
+    siteName: "David Heffler",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://dvh.sh/icons/icon.png",
+        url: `${SITE_URL}/icons/icon.png`,
         width: 1200,
         height: 630,
-        alt: "David Portfolio",
+        alt: "David Heffler",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@HaruHoldings",
-    title: "David | Full-Stack Developer Portfolio",
-    description:
-      "Explore David’s portfolio, highlighting his expertise in full-stack development across a range of modern technologies.",
+    site: "@david_dvhsh",
+    creator: "@david_dvhsh",
+    title: "David Heffler | Software Engineer",
+    description: ROOT_DESCRIPTION,
   },
   manifest: "/manifest.json",
   icons: {
@@ -94,12 +133,19 @@ const RootLayout = async ({
 }: {
   children: React.ReactNode;
 }): Promise<JSX.Element> => {
-  const gitHash = await getGitHash();
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") ?? "/";
+
+  const [gitHash, portfolio, routeSchema] = await Promise.all([
+    getGitHash(),
+    fetchPortfolioData(),
+    getRouteSchema(pathname),
+  ]);
 
   return (
     <html lang="en">
       <head>
-        <link rel="canonical" href="https://dvh.sh" />
+        <link rel="canonical" href={SITE_URL} />
         <meta name="theme-color" content="#1e1e2e" />
         <link
           rel="preload"
@@ -108,6 +154,11 @@ const RootLayout = async ({
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        {portfolio?.profile?.name ? (
+          <script {...jsonLdProps(personLd(portfolio.profile))} />
+        ) : null}
+        <script {...jsonLdProps(websiteLd())} />
+        {routeSchema ? <script {...jsonLdProps(routeSchema)} /> : null}
       </head>
       <body className="flex flex-col min-h-screen overflow-x-hidden">
         <a
