@@ -179,8 +179,8 @@ const Nav = (): JSX.Element => {
             no-underline flex items-center py-2 px-4 rounded-lg transition-all duration-300
             ${
               isActive(resumeItem.href)
-                ? "bg-ctp-pink text-ctp-base font-bold transform -skew-x-6 border-2 border-ctp-pink"
-                : "text-ctp-pink border-2 border-ctp-pink hover:bg-ctp-pink hover:text-ctp-base hover:transform hover:-skew-x-6"
+                ? "bg-accent text-ctp-base font-bold transform -skew-x-6 border-2 border-accent"
+                : "text-accent border-2 border-accent hover:bg-accent hover:text-ctp-base hover:transform hover:-skew-x-6"
             }
           `}
           aria-current={isActive(resumeItem.href) ? "page" : undefined}
