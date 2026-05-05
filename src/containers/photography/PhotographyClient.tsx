@@ -70,7 +70,7 @@ const PhotographyClient = ({ photos }: PhotographyClientProps) => {
   }, [photos, deferredFilter]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-ctp-base to-ctp-mantle p-4 sm:p-6 md:pl-72">
+    <div className="min-h-screen bg-gradient-to-br from-ctp-base to-ctp-mantle px-4 sm:px-6 pt-16 md:pt-6 pb-4 sm:pb-6 md:pl-72">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div

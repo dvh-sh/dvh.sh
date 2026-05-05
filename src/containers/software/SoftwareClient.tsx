@@ -170,7 +170,7 @@ const SoftwareClient = () => {
   }, [accentColors, theme]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-ctp-base to-ctp-mantle p-4 sm:p-6 md:p-8 md:ml-64 overflow-x-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-ctp-base to-ctp-mantle px-4 sm:px-6 md:p-8 pt-16 pb-4 sm:pb-6 md:ml-64 overflow-x-hidden relative">
       <motion.div
         className="max-w-6xl mx-auto"
         initial={{ opacity: 0, y: 50 }}

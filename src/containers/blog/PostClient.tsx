@@ -44,7 +44,7 @@ const PostClient = async ({ params }: PostClientProps) => {
 
   if (!post) {
     return (
-      <div className="w-full min-h-screen bg-ctp-base p-4 md:p-8 md:pl-72 text-ctp-text flex items-center justify-center">
+      <div className="w-full min-h-screen bg-ctp-base px-4 md:p-8 pt-16 md:pt-8 pb-4 md:pl-72 text-ctp-text flex items-center justify-center">
         <div className="text-center p-8 bg-ctp-surface0 rounded-lg shadow-lg transform -skew-x-2">
           <p className="text-2xl font-bold text-accent mb-2">Post not found.</p>
           <p className="text-ctp-subtext0">You might be rate-limited.</p>
@@ -54,7 +54,7 @@ const PostClient = async ({ params }: PostClientProps) => {
   }
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-ctp-base to-ctp-mantle p-4 sm:p-6 md:pl-72 py-8">
+    <div className="w-full min-h-screen bg-gradient-to-br from-ctp-base to-ctp-mantle px-4 sm:px-6 md:pl-72 pt-16 md:pt-8 pb-8">
       <div className="max-w-4xl mx-auto mt-8 relative">
         <PostHeader
           title={post.title}

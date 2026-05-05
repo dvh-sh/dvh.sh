@@ -51,7 +51,7 @@ const DataSections = async (): Promise<JSX.Element> => {
 const HomePage = (): JSX.Element => {
   return (
     <div className="w-full min-h-screen bg-ctp-base text-ctp-text transition-all duration-300 ease-in-out md:pl-64">
-      <div className="max-w-4xl mx-auto p-4 sm:p-6 md:p-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 md:p-8 pt-16 md:pt-8 pb-4 sm:pb-6">
         <AboutMe />
         <Suspense
           fallback={
