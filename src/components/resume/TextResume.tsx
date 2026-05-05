@@ -19,6 +19,7 @@ import {
   normalizeTech,
   buildKeywordRegex,
   emphasizeHtml,
+  prettyUrl,
 } from "@/utils/text.utils";
 
 interface TextResumeProps {
@@ -265,7 +266,7 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
           {works.length > 0 && (
             <section>
               <h2 className="text-[13px] md:text-[14px] font-bold text-ctp-pink uppercase tracking-wide mb-3">
-                Client Engagements
+                Client Work
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {works.map((w, idx) => (
@@ -309,7 +310,7 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                         rel="noopener noreferrer"
                         className="text-[11px] text-ctp-blue hover:text-ctp-text transition-colors mt-1 inline-block"
                       >
-                        {w.link}
+                        {prettyUrl(w.link)}
                       </a>
                     )}
                   </div>

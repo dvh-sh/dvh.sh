@@ -3,11 +3,12 @@
  * @author David (https://dvh.sh)
  *
  * @created Sun, Aug 25 2025
- * @updated Mon, Aug 25 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Engineer/Academic-styled PDF resume using @react-pdf/renderer.
  * Small type sizes, dark background, keyword emphasis, duration labels.
+ * Auto-paginates to a second page when content overflows A4.
  */
 
 import React, { JSX } from "react";
@@ -25,9 +26,10 @@ import {
   normalizeTech,
   buildKeywordRegex,
   splitForPdf,
+  prettyUrl,
 } from "@/utils/text.utils";
 
-const PROJECTS_ENABLED = false;
+const PROJECTS_ENABLED = true;
 
 /**
  * @constant styles
@@ -334,11 +336,11 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
                   <Text style={styles.entryTitle}>{p.title}</Text>
                   {p.demoLink ? (
                     <Link src={p.demoLink} style={styles.rightLink}>
-                      {p.demoLink.replace(/^https?:\/\//, "")}
+                      {prettyUrl(p.demoLink)}
                     </Link>
                   ) : p.sourceLink ? (
                     <Link src={p.sourceLink} style={styles.rightLink}>
-                      {p.sourceLink.replace(/^https?:\/\//, "")}
+                      {prettyUrl(p.sourceLink)}
                     </Link>
                   ) : null}
                 </View>
@@ -355,10 +357,10 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
           </>
         ) : null}
 
-        {/* Client Engagements (Works) */}
+        {/* Client Work */}
         {works.length ? (
           <>
-            <Text style={styles.sectionTitle}>Client Engagements</Text>
+            <Text style={styles.sectionTitle}>Client Work</Text>
             {works.map((w, i) => (
               <View key={`w-${i}`} style={styles.entry}>
                 <View style={styles.entryHeader}>
@@ -380,7 +382,7 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
                     }
                     style={styles.rightLink}
                   >
-                    {w.link.replace(/^https?:\/\//, "")}
+                    {prettyUrl(w.link)}
                   </Link>
                 ) : null}
               </View>

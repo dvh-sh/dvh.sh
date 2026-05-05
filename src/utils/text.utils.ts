@@ -3,11 +3,24 @@
  * @author David
  *
  * @created Mon, Aug 25 2025
- * @updated Mon, Aug 25 2025
+ * @updated Mon, May 04 2026
  *
  * @description
  * Text utilities for normalization and emphasis (HTML/PDF).
  */
+
+/**
+ * @function prettyUrl
+ * @description Strips protocol, leading "www.", and trailing slash for display.
+ * Keeps the actual href untouched at the call site.
+ * @param {string} url - Full URL string
+ * @returns {string} Display-friendly URL
+ */
+export const prettyUrl = (url: string): string =>
+  String(url ?? "")
+    .replace(/^https?:\/\//, "")
+    .replace(/^www\./, "")
+    .replace(/\/+$/, "");
 
 /**
  * @function normalizeTech
