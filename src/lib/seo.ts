@@ -48,6 +48,8 @@ const safeIsoDate = (input?: string): string | undefined => {
 /**
  * @function personLd
  * @description Person JSON-LD for the David Heffler entity. Drives the brand-name Knowledge Panel.
+ * disambiguatingDescription leans on positive identity markers (location, stack, role)
+ * rather than naming other entities — keeps the schema durable as external roles change.
  */
 export const personLd = (profile: Profile) => ({
   "@context": "https://schema.org",
@@ -57,16 +59,26 @@ export const personLd = (profile: Profile) => ({
   url: SITE_URL,
   image: `${SITE_URL}/icons/icon.png`,
   jobTitle: "Software Engineer",
+  description:
+    "Full-stack software engineer in the Los Angeles Metropolitan Area. Builds web apps and backend systems with TypeScript, Next.js, Java, and Python. Founder of VANE.",
+  disambiguatingDescription:
+    "Full-stack software engineer based in California (Inland Empire), specializing in TypeScript, Next.js, Java, and Python.",
   email: profile.email ? `mailto:${profile.email}` : undefined,
   address: profile.location
     ? {
         "@type": "PostalAddress",
         addressLocality: profile.location,
+        addressRegion: "California",
+        addressCountry: "US",
       }
     : undefined,
   alumniOf: {
     "@type": "CollegeOrUniversity",
     name: "Mt. San Jacinto College",
+  },
+  worksFor: {
+    "@type": "Organization",
+    name: "VANE",
   },
   sameAs: [
     ensureUrl(profile.github),
@@ -80,6 +92,9 @@ export const personLd = (profile: Profile) => ({
     "Next.js",
     "Backend Systems",
     "DevOps",
+    "E-Commerce Platforms",
+    "Java",
+    "Python",
   ],
 });
 
