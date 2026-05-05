@@ -13,13 +13,12 @@
 
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import dynamic from "next/dynamic";
 import { useDeferredValue, useMemo, useState } from "react";
 
 import type { Photo } from "@/types/photography";
 
-// Import static components
 import TagFilter from "./TagFilter";
 import PhotoGridItem from "@/containers/photography/PhotoGridItem";
 
@@ -45,7 +44,6 @@ interface PhotographyClientProps {
  */
 const PhotographyClient = ({ photos }: PhotographyClientProps) => {
   const [filter, setFilter] = useState<string>("all");
-  const [hoveredPhoto, setHoveredPhoto] = useState<string | null>(null);
 
   // Defer filter for smooth interactions
   const deferredFilter = useDeferredValue(filter);
@@ -95,19 +93,16 @@ const PhotographyClient = ({ photos }: PhotographyClientProps) => {
           onFilterChange={setFilter}
         />
 
-        {/* Photo Grid - Fixed AnimatePresence mode */}
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
-          <AnimatePresence mode="wait" initial={false}>
-            {filteredPhotos.map((photo, index) => (
-              <PhotoGridItem
-                key={photo.slug}
-                photo={photo}
-                index={index}
-                onHover={setHoveredPhoto}
-                isHovered={hoveredPhoto === photo.slug}
-              />
-            ))}
-          </AnimatePresence>
+        {/* Photo Grid — CSS columns masonry. No AnimatePresence/layout — they fight
+            CSS columns reflow and cause adjacent items to flicker on hover. */}
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-4">
+          {filteredPhotos.map((photo, index) => (
+            <PhotoGridItem
+              key={photo.slug}
+              photo={photo}
+              index={index}
+            />
+          ))}
         </div>
 
         {/* Licensing CTA */}
