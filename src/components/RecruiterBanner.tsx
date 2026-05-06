@@ -52,22 +52,22 @@ export const RecruiterBanner = () => {
           transition={{ type: "spring", damping: 20 }}
         >
           <motion.div
-            className="bg-ctp-surface0 border-4 border-ctp-pink p-4 shadow-brutal relative"
+            className="bg-ctp-surface0 border-4 border-accent p-4 shadow-brutal relative"
             whileHover={{ rotate: -1, scale: 1.02 }}
           >
             {/* Close button */}
             <button
               onClick={handleDismiss}
-              className="absolute -top-2 -right-2 bg-ctp-pink text-ctp-base p-2 shadow-brutal hover:scale-110 transition-transform"
+              className="absolute -top-2 -right-2 bg-accent text-ctp-base p-2 shadow-brutal hover:scale-110 transition-transform"
               aria-label="Dismiss"
             >
               <FaTimes size={14} />
             </button>
 
             <div className="flex items-start gap-3">
-              <FaFileAlt className="text-ctp-pink text-2xl flex-shrink-0 mt-1" />
+              <FaFileAlt className="text-accent text-2xl flex-shrink-0 mt-1" />
               <div>
-                <h3 className="font-black text-ctp-pink uppercase tracking-wider text-sm mb-1">
+                <h3 className="font-black text-accent uppercase tracking-wider text-sm mb-1">
                   Looking for a developer?
                 </h3>
                 <p className="text-xs text-ctp-text mb-3 font-mono">
@@ -76,7 +76,7 @@ export const RecruiterBanner = () => {
                 <Link
                   href="/resume"
                   className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider
-                           bg-ctp-pink text-ctp-base px-3 py-2 hover:bg-ctp-mauve transition-colors
+                           bg-accent text-ctp-base px-3 py-2 hover:opacity-90 transition-opacity
                            shadow-brutal border-2 border-ctp-base"
                   onClick={handleDismiss}
                 >

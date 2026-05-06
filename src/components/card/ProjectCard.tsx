@@ -90,7 +90,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <p className="text-ctp-text mb-4 font-mono text-sm leading-relaxed flex-grow">
         {safeSegments(description, kwRegex).map((seg, k) =>
           seg.bold ? (
-            <strong key={k} className="font-black text-ctp-pink inline-block">
+            <strong key={k} className="font-black text-accent inline-block">
               {seg.text}
             </strong>
           ) : (

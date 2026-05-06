@@ -66,7 +66,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
             </span>
           </div>
           <motion.span
-            className="inline-block text-xs font-black text-ctp-pink uppercase tracking-wider mt-1 px-2 py-1 bg-ctp-surface1"
+            className="inline-block text-xs font-black text-accent uppercase tracking-wider mt-1 px-2 py-1 bg-ctp-surface1"
             whileHover={{ scale: 1.08 }}
           >
             {duration}
@@ -93,7 +93,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
             seg.bold ? (
               <motion.strong
                 key={k}
-                className="font-black text-ctp-pink inline-block"
+                className="font-black text-accent inline-block"
                 whileHover={{ scale: 1.05 }}
               >
                 {seg.text}
@@ -118,7 +118,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: idx * 0.05 }}
               >
-                <span className="text-ctp-pink font-black mr-2 flex-shrink-0">
+                <span className="text-accent font-black mr-2 flex-shrink-0">
                   →
                 </span>
                 <span>
@@ -126,7 +126,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
                     s.bold ? (
                       <motion.strong
                         key={k}
-                        className="font-black text-ctp-pink inline-block"
+                        className="font-black text-accent inline-block"
                         whileHover={{ scale: 1.05 }}
                       >
                         {s.text}
