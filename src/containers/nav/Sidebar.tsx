@@ -87,9 +87,10 @@ export const Sidebar = () => {
   const toggleSidebar = () => setIsOpen((prev) => !prev);
 
   if (!isHydrated) {
-    // Return static placeholder during SSR
+    // SSR placeholder — only reserve sidebar width on md+; on mobile it would
+    // hijack 256px of the row and force a pre-hydration horizontal scroll.
     return (
-      <div className="w-64 h-screen bg-gradient-to-br from-ctp-mantle to-ctp-crust" />
+      <div className="hidden md:block w-64 h-screen bg-gradient-to-br from-ctp-mantle to-ctp-crust" />
     );
   }
 
