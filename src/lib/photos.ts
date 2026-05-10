@@ -35,7 +35,16 @@ export const getPhotos = cache(async (): Promise<Photo[]> => {
  */
 export const getTagDictionary = cache(async (): Promise<TagDictionary> => {
   const data = await fetchPhotosData();
-  return data.tagDictionary ?? { places: [], subjects: [] };
+  const td = data.tagDictionary as unknown;
+  // Tolerate the legacy flat-array shape until the remote photos.json is updated.
+  if (!td || Array.isArray(td) || typeof td !== "object") {
+    return { places: [], subjects: [] };
+  }
+  const obj = td as Partial<TagDictionary>;
+  return {
+    places: Array.isArray(obj.places) ? obj.places : [],
+    subjects: Array.isArray(obj.subjects) ? obj.subjects : [],
+  };
 });
 
 /**
