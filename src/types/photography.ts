@@ -61,3 +61,12 @@ export interface PhotoCollection {
   photos: string[]; // An array of photo slugs
   date: string;
 }
+
+/**
+ * @interface TagDictionary
+ * @description Filterable tags grouped by semantic category — drives the photography filter UI.
+ */
+export interface TagDictionary {
+  places: string[];
+  subjects: string[];
+}

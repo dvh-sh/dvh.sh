@@ -13,7 +13,7 @@
  */
 
 import { unstable_cache } from "next/cache";
-import type { Photo } from "@/types/photography";
+import type { Photo, TagDictionary } from "@/types/photography";
 
 const GITHUB_RAW_URL =
   "https://raw.githubusercontent.com/dvh-sh/.github/main/photos.json";
@@ -21,6 +21,7 @@ const CACHE_TIME = 300; // 5 minutes
 
 interface PhotosFile {
   photos: Photo[];
+  tagDictionary?: TagDictionary;
 }
 
 /**
@@ -43,7 +44,10 @@ export const fetchPhotosData = unstable_cache(
       return JSON.parse(cleaned);
     } catch (error) {
       console.error("Error fetching photos data:", error);
-      return { photos: [] };
+      return {
+        photos: [],
+        tagDictionary: { places: [], subjects: [] },
+      };
     }
   },
   ["photos-data"],

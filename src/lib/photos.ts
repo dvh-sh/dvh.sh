@@ -15,7 +15,7 @@ import { cache } from "react";
 
 import PhotoView from "@/models/photo.model";
 import { fetchPhotosData } from "@/lib/photosCache";
-import type { Photo } from "@/types/photography";
+import type { Photo, TagDictionary } from "@/types/photography";
 import connectDB from "@/utils/db.utils";
 
 /**
@@ -26,6 +26,16 @@ import connectDB from "@/utils/db.utils";
 export const getPhotos = cache(async (): Promise<Photo[]> => {
   const data = await fetchPhotosData();
   return data.photos;
+});
+
+/**
+ * @function getTagDictionary
+ * @description Retrieves the filterable tag dictionary (places + subjects) from the cached manifest.
+ * @returns {Promise<TagDictionary>} A promise resolving to the grouped tag dictionary.
+ */
+export const getTagDictionary = cache(async (): Promise<TagDictionary> => {
+  const data = await fetchPhotosData();
+  return data.tagDictionary ?? { places: [], subjects: [] };
 });
 
 /**

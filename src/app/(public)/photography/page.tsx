@@ -12,7 +12,7 @@
 import { Metadata } from "next";
 
 import PhotographyClient from "@/containers/photography/PhotographyClient";
-import { getPhotos, getPhotoViews } from "@/lib/photos";
+import { getPhotos, getPhotoViews, getTagDictionary } from "@/lib/photos";
 
 export const metadata: Metadata = {
   title: "Photography | David",
@@ -36,15 +36,23 @@ export const metadata: Metadata = {
  * Fetches all photos and their view counts, then passes them to the PhotographyClient for rendering.
  */
 const PhotographyPage = async () => {
-  const photos = await getPhotos();
-  const views = await getPhotoViews();
+  const [photos, views, tagDictionary] = await Promise.all([
+    getPhotos(),
+    getPhotoViews(),
+    getTagDictionary(),
+  ]);
 
   const photosWithViews = photos.map((photo: any) => ({
     ...photo,
     views: views[photo.slug] || 0,
   }));
 
-  return <PhotographyClient photos={photosWithViews} />;
+  return (
+    <PhotographyClient
+      photos={photosWithViews}
+      tagDictionary={tagDictionary}
+    />
+  );
 };
 
 export default PhotographyPage;

@@ -17,7 +17,7 @@ import { motion } from "motion/react";
 import dynamic from "next/dynamic";
 import { useDeferredValue, useMemo, useState } from "react";
 
-import type { Photo } from "@/types/photography";
+import type { Photo, TagDictionary } from "@/types/photography";
 
 import TagFilter from "./TagFilter";
 import PhotoGridItem from "@/containers/photography/PhotoGridItem";
@@ -33,6 +33,7 @@ const LicensingCTA = dynamic(
 
 interface PhotographyClientProps {
   photos: (Photo & { views: number })[];
+  tagDictionary: TagDictionary;
 }
 
 /**
@@ -42,25 +43,14 @@ interface PhotographyClientProps {
  * @param {PhotographyClientProps} props - The component props.
  * @returns {JSX.Element} The rendered photography gallery.
  */
-const PhotographyClient = ({ photos }: PhotographyClientProps) => {
+const PhotographyClient = ({
+  photos,
+  tagDictionary,
+}: PhotographyClientProps) => {
   const [filter, setFilter] = useState<string>("all");
 
   // Defer filter for smooth interactions
   const deferredFilter = useDeferredValue(filter);
-
-  const tags = useMemo(() => {
-    const tagSet = new Set<string>();
-    photos.forEach((photo) => {
-      if (photo.tags?.length) {
-        photo.tags.forEach((tag) => {
-          if (tag?.trim()) {
-            tagSet.add(tag);
-          }
-        });
-      }
-    });
-    return ["all", ...Array.from(tagSet)];
-  }, [photos]);
 
   const filteredPhotos = useMemo(() => {
     if (deferredFilter === "all") return photos;
@@ -88,7 +78,7 @@ const PhotographyClient = ({ photos }: PhotographyClientProps) => {
 
         {/* Tag Filter */}
         <TagFilter
-          tags={tags}
+          tagDictionary={tagDictionary}
           activeFilter={filter}
           onFilterChange={setFilter}
         />
