@@ -326,10 +326,10 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
           );
         })}
 
-        {/* Open-Source Contributions (Projects) */}
+        {/* Select Projects */}
         {PROJECTS_ENABLED && projects.length ? (
           <>
-            <Text style={styles.sectionTitle}>Open-Source Contributions</Text>
+            <Text style={styles.sectionTitle}>Select Projects</Text>
             {projects.map((p, i) => (
               <View key={`pr-${i}`} style={styles.entry}>
                 <View style={styles.entryHeader}>
