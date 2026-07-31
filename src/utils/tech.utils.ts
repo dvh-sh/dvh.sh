@@ -73,10 +73,22 @@ const tech: Tech[] = [
     icon: "SiNextdotjs",
   },
   {
+    slug: "nodejs",
+    title: "Node.js",
+    color: "text-ctp-green",
+    icon: "SiNodedotjs",
+  },
+  {
     slug: "fastify",
     title: "Fastify",
     color: "text-ctp-green",
     icon: "SiFastify",
+  },
+  {
+    slug: "jwt",
+    title: "JWT",
+    color: "text-ctp-pink",
+    icon: "SiJsonwebtokens",
   },
   {
     slug: "express",
