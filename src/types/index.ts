@@ -121,6 +121,7 @@ export interface SkillsData {
   frameworks: string[];
   tools: string[];
   cloud: string[];
+  aiTools?: string[];
 }
 
 /**

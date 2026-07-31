@@ -173,6 +173,24 @@ const tech: Tech[] = [
     color: "text-ctp-yellow",
     icon: "SiCloudflare",
   },
+  {
+    slug: "vercel",
+    title: "Vercel",
+    color: "text-ctp-text",
+    icon: "SiVercel",
+  },
+  {
+    slug: "claudecode",
+    title: "Claude Code",
+    color: "text-ctp-peach",
+    icon: "SiClaude",
+  },
+  {
+    slug: "copilot",
+    title: "GitHub Copilot",
+    color: "text-ctp-text",
+    icon: "SiGithubcopilot",
+  },
 ];
 
 /**

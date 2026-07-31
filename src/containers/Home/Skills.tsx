@@ -40,6 +40,9 @@ const Skills = ({ data }: SkillsProps): JSX.Element => {
       <SkillsSection title="Frameworks & Libraries" skills={data.frameworks} />
       <SkillsSection title="Cloud & Databases" skills={data.cloud} />
       <SkillsSection title="DevOps & Tools" skills={data.tools} />
+      {data.aiTools && data.aiTools.length > 0 && (
+        <SkillsSection title="AI Tools" skills={data.aiTools} />
+      )}
     </section>
   );
 };
