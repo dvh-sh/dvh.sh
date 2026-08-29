@@ -85,7 +85,7 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     lastModified: new Date(photo.date),
     changeFrequency: "yearly",
     priority: 0.7,
-    images: [`${process.env.NEXT_PUBLIC_R2_URL}/${photo.sizes.large}`],
+    images: [`${process.env.NEXT_PUBLIC_R2_URL}/photos/${photo.sizes.large}`],
   }));
 
   return [...staticPages, ...blogPages, ...cookingPages, ...photoPages];

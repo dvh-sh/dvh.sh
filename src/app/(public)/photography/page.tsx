@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     description: "Explore my photography work.",
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_R2_URL}/seal-cove-la-jolla-san-diego-sea-lions-2024-1920.webp`,
+        url: `${process.env.NEXT_PUBLIC_R2_URL}/photos/seal-cove-la-jolla-san-diego-sea-lions-2024-1920.webp`,
         width: 1920,
         height: 1440,
       },

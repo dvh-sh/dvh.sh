@@ -48,7 +48,7 @@ export const generateMetadata = async ({
       description: photo.description,
       images: [
         {
-          url: `${process.env.NEXT_PUBLIC_R2_URL}/${photo.sizes.large}`,
+          url: `${process.env.NEXT_PUBLIC_R2_URL}/photos/${photo.sizes.large}`,
           width: photo.width,
           height: photo.height,
         },
