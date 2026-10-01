@@ -3,7 +3,7 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Mon, May 04 2026
+ * @updated Thu, Oct 01 2026
  *
  * @description
  * Brutalist project card: flat frame, keyword emphasis, clean tech row.
@@ -68,12 +68,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   technologies,
   demoLink,
   sourceLink,
+  featured,
+  highlights,
   keywords,
   index = 0,
 }) => {
   const rotation = useMemo(() => (index % 3) - 1, [index]);
   const kwRegex = buildKeywordRegex(keywords ?? []);
   const techs = Array.isArray(technologies) ? technologies : [];
+  const bullets = Array.isArray(highlights) ? highlights : [];
 
   return (
     <motion.div
@@ -83,6 +86,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       whileHover={{ rotate: 0, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
     >
+      {featured && (
+        <span className="self-start mb-3 px-2 py-1 bg-accent text-ctp-base text-[11px] font-black uppercase tracking-widest">
+          Featured
+        </span>
+      )}
       <h3 className="text-2xl font-black text-accent mb-3 uppercase tracking-wider transform -skew-x-6">
         {String(title ?? "")}
       </h3>
@@ -98,6 +106,29 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           ),
         )}
       </p>
+
+      {bullets.length > 0 && (
+        <ul className="mb-5 space-y-2 font-mono text-sm text-ctp-text">
+          {bullets.map((b, i) => (
+            <li key={`${title}-hl-${i}`} className="flex gap-2">
+              <span className="text-accent font-black" aria-hidden>
+                &gt;
+              </span>
+              <span>
+                {safeSegments(b, kwRegex).map((seg, k) =>
+                  seg.bold ? (
+                    <strong key={k} className="font-black text-accent">
+                      {seg.text}
+                    </strong>
+                  ) : (
+                    <Fragment key={k}>{seg.text}</Fragment>
+                  ),
+                )}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )}
 
       {techs.length > 0 && (
         <div className="mb-5">

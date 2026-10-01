@@ -180,6 +180,36 @@ const tech: Tech[] = [
     icon: "SiVercel",
   },
   {
+    slug: "bun",
+    title: "Bun",
+    color: "text-ctp-rosewater",
+    icon: "SiBun",
+  },
+  {
+    slug: "tailwindcss",
+    title: "Tailwind CSS",
+    color: "text-ctp-sky",
+    icon: "SiTailwindcss",
+  },
+  {
+    slug: "githubactions",
+    title: "GitHub Actions",
+    color: "text-ctp-blue",
+    icon: "SiGithubactions",
+  },
+  {
+    slug: "npm",
+    title: "npm",
+    color: "text-ctp-red",
+    icon: "SiNpm",
+  },
+  {
+    slug: "vitest",
+    title: "Vitest",
+    color: "text-ctp-green",
+    icon: "SiVitest",
+  },
+  {
     slug: "claudecode",
     title: "Claude Code",
     color: "text-ctp-peach",

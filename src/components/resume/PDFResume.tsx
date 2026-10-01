@@ -3,7 +3,7 @@
  * @author David (https://dvh.sh)
  *
  * @created Sun, Aug 25 2025
- * @updated Mon, May 04 2026
+ * @updated Thu, Oct 01 2026
  *
  * @description
  * Engineer/Academic-styled PDF resume using @react-pdf/renderer.
@@ -352,6 +352,14 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
                     <BoldedText text={p.description} regex={kwRegex} />
                   </Text>
                 ) : null}
+                {(p.highlights || []).map((b, j) => (
+                  <View key={`prb-${i}-${j}`} style={styles.bulletLine}>
+                    <Text style={styles.bulletDot}>•</Text>
+                    <Text>
+                      <BoldedText text={b} regex={kwRegex} />
+                    </Text>
+                  </View>
+                ))}
               </View>
             ))}
           </>

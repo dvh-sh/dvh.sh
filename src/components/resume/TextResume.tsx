@@ -3,7 +3,7 @@
  * @author David (https://dvh.sh)
  *
  * @created Sun, Aug 25 2025
- * @updated Mon, Aug 26 2025
+ * @updated Thu, Oct 01 2026
  *
  * @description
  * High contrast resume with WCAG AAA compliance.
@@ -329,7 +329,7 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                 {projects.map((p, idx) => (
                   <div
                     key={`proj-${idx}`}
-                    className="border border-ctp-surface1 p-3"
+                    className={`border border-ctp-surface1 p-3${p.featured ? " md:col-span-2" : ""}`}
                   >
                     <h3 className="font-bold text-ctp-text text-[12px] md:text-[13px]">
                       {p.title}
@@ -345,6 +345,29 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
                         ),
                       )}
                     </p>
+                    {p.highlights?.length ? (
+                      <ul className="mt-1 space-y-0.5">
+                        {p.highlights.map((b, j) => (
+                          <li
+                            key={`projb-${idx}-${j}`}
+                            className="text-[12px] md:text-[13px] text-ctp-text flex"
+                          >
+                            <span className="text-ctp-pink mr-2">•</span>
+                            <span>
+                              {emphasizeHtml(b, kwRegex).map((seg, k) =>
+                                seg.bold ? (
+                                  <strong key={k} className="font-semibold">
+                                    {seg.text}
+                                  </strong>
+                                ) : (
+                                  <Fragment key={k}>{seg.text}</Fragment>
+                                ),
+                              )}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
                     {p.technologies?.length ? (
                       <p className="text-[11px] text-ctp-subtext0 mt-1">
                         <span>Tech:</span> {p.technologies.join(", ")}

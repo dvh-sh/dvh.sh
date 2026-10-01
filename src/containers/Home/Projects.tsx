@@ -3,7 +3,7 @@
  * @author David @dvhsh (https://dvh.sh)
  *
  * @created Wed, Aug 20 2025
- * @updated Mon, May 04 2026
+ * @updated Thu, Oct 01 2026
  *
  * @description
  * Container component to display projects with keyword emphasis.
@@ -43,6 +43,7 @@ const Projects = ({ data, keywords }: ProjectsProps) => {
         {items.map((project, index) => (
           <motion.div
             key={project.title}
+            className={project.featured ? "lg:col-span-2" : undefined}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}

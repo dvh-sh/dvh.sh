@@ -97,6 +97,10 @@ export interface Project {
   technologies: string[];
   demoLink?: string;
   sourceLink?: string;
+  /** Spans the full row on the home page and leads the resume's project list. */
+  featured?: boolean;
+  /** Extra detail bullets, shown for featured projects. */
+  highlights?: string[];
 }
 
 /**
