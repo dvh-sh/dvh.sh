@@ -326,6 +326,39 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
           );
         })}
 
+        {/* Client Work */}
+        {works.length ? (
+          <>
+            <Text style={styles.sectionTitle}>Client Work</Text>
+            {works.map((w, i) => (
+              <View key={`w-${i}`} style={styles.entry}>
+                <View style={styles.entryHeader}>
+                  <Text style={styles.entryTitle}>{w.title}</Text>
+                  <Text style={styles.rightMuted}>{w.date}</Text>
+                </View>
+                <Text>
+                  <BoldedText text={w.shortDescription} regex={kwRegex} />
+                </Text>
+                {w.technologies?.length ? (
+                  <Text style={styles.tinyMuted}>
+                    Tech: {w.technologies.join(", ")}
+                  </Text>
+                ) : null}
+                {w.link ? (
+                  <Link
+                    src={
+                      w.link.startsWith("http") ? w.link : `https://${w.link}`
+                    }
+                    style={styles.rightLink}
+                  >
+                    {prettyUrl(w.link)}
+                  </Link>
+                ) : null}
+              </View>
+            ))}
+          </>
+        ) : null}
+
         {/* Select Projects */}
         {PROJECTS_ENABLED && projects.length ? (
           <>
@@ -360,39 +393,6 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
                     </Text>
                   </View>
                 ))}
-              </View>
-            ))}
-          </>
-        ) : null}
-
-        {/* Client Work */}
-        {works.length ? (
-          <>
-            <Text style={styles.sectionTitle}>Client Work</Text>
-            {works.map((w, i) => (
-              <View key={`w-${i}`} style={styles.entry}>
-                <View style={styles.entryHeader}>
-                  <Text style={styles.entryTitle}>{w.title}</Text>
-                  <Text style={styles.rightMuted}>{w.date}</Text>
-                </View>
-                <Text>
-                  <BoldedText text={w.shortDescription} regex={kwRegex} />
-                </Text>
-                {w.technologies?.length ? (
-                  <Text style={styles.tinyMuted}>
-                    Tech: {w.technologies.join(", ")}
-                  </Text>
-                ) : null}
-                {w.link ? (
-                  <Link
-                    src={
-                      w.link.startsWith("http") ? w.link : `https://${w.link}`
-                    }
-                    style={styles.rightLink}
-                  >
-                    {prettyUrl(w.link)}
-                  </Link>
-                ) : null}
               </View>
             ))}
           </>
