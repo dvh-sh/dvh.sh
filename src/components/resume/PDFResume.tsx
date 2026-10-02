@@ -31,6 +31,12 @@ import {
 
 const PROJECTS_ENABLED = true;
 
+/** Short PDF: the first bullet with a number in it, so each job keeps one concrete metric. */
+const metricBullet = (bullets?: string[]) => {
+  const hit = bullets?.find((b) => /\d/.test(b));
+  return hit ? [hit] : [];
+};
+
 /** First sentence of a description ("Founded X. Built Y." -> "Founded X."). */
 const firstSentence = (text: string) => text.match(/^.*?[.!?](?=\s|$)/)?.[0] ?? text;
 
@@ -160,7 +166,8 @@ const BoldedText = ({
  * @returns {JSX.Element} PDF document component
  */
 /**
- * Short (default): experience shows its first sentence only, no experience or project bullets, and
+ * Short (default): experience shows its first sentence plus its first bullet with a number, no
+ * project bullets, and
  * client work only with a live link. Extended: everything.
  */
 export const PDFResume = ({
@@ -335,7 +342,7 @@ export const PDFResume = ({
                 </Text>
               ) : null}
 
-              {(extended ? exp.bullets || [] : []).map((b, j) => (
+              {(extended ? exp.bullets || [] : metricBullet(exp.bullets)).map((b, j) => (
                 <View key={`b-${i}-${j}`} style={styles.bulletLine}>
                   <Text style={styles.bulletDot}>•</Text>
                   <Text>
