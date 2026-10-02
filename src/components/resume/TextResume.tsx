@@ -48,10 +48,12 @@ export const TextResume: React.FC<TextResumeProps> = ({ data }) => {
 
   const projects =
     Array.isArray(data.projects) && data.projects.length
-      ? data.projects.map((p) => ({
-          ...p,
-          technologies: normalizeTech(p.technologies),
-        }))
+      ? data.projects
+          .filter((p) => p.resume !== false)
+          .map((p) => ({
+            ...p,
+            technologies: normalizeTech(p.technologies),
+          }))
       : [];
 
   const experience: Experience[] = Array.isArray(data.experience)

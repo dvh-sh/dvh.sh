@@ -39,7 +39,8 @@ const metricBullet = (bullets?: string[]) => {
 };
 
 /** First sentence of a description ("Founded X. Built Y." -> "Founded X."). */
-const firstSentence = (text: string) => text.match(/^.*?[.!?](?=\s|$)/)?.[0] ?? text;
+const firstSentence = (text: string) =>
+  text.match(/^.*?[.!?](?=\s|$)/)?.[0] ?? text;
 
 /**
  * @constant styles
@@ -188,17 +189,21 @@ export const PDFResume = ({
 
   // The short PDF lists only client work with a live site to link to.
   const works = Array.isArray(data.works)
-    ? data.works.filter((w) => extended || w.link).map((w) => ({
-        ...w,
-        technologies: normalizeTech(w.technologies),
-      }))
+    ? data.works
+        .filter((w) => extended || w.link)
+        .map((w) => ({
+          ...w,
+          technologies: normalizeTech(w.technologies),
+        }))
     : [];
 
   const education: Education[] = (
     Array.isArray(data.education) ? data.education : []
   ).filter((e) => e.school && e.degree);
 
-  const projects = Array.isArray(data.projects) ? data.projects : [];
+  const projects = (Array.isArray(data.projects) ? data.projects : []).filter(
+    (p) => p.resume !== false,
+  );
 
   // Build keywords regex (supports either "keywords" or legacy "highlightKeywords" in JSON)
   const kwRegex = buildKeywordRegex(
@@ -263,7 +268,6 @@ export const PDFResume = ({
             </>
           ) : null}
         </View>
-
 
         {/* Skills */}
         <Text style={styles.sectionTitle}>Skills</Text>
@@ -339,14 +343,16 @@ export const PDFResume = ({
                 </Text>
               ) : null}
 
-              {(extended ? exp.bullets || [] : metricBullet(exp.bullets)).map((b, j) => (
-                <View key={`b-${i}-${j}`} style={styles.bulletLine}>
-                  <Text style={styles.bulletDot}>•</Text>
-                  <Text>
-                    <BoldedText text={b} regex={kwRegex} />
-                  </Text>
-                </View>
-              ))}
+              {(extended ? exp.bullets || [] : metricBullet(exp.bullets)).map(
+                (b, j) => (
+                  <View key={`b-${i}-${j}`} style={styles.bulletLine}>
+                    <Text style={styles.bulletDot}>•</Text>
+                    <Text>
+                      <BoldedText text={b} regex={kwRegex} />
+                    </Text>
+                  </View>
+                ),
+              )}
             </View>
           );
         })}

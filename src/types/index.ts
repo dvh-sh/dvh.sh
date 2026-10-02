@@ -101,6 +101,8 @@ export interface Project {
   featured?: boolean;
   /** Extra detail bullets, shown for featured projects. */
   highlights?: string[];
+  /** false keeps the project on the home page but off /resume and the PDF. */
+  resume?: boolean;
 }
 
 /**
