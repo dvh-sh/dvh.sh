@@ -165,8 +165,8 @@ const BoldedText = ({
  * @returns {JSX.Element} PDF document component
  */
 /**
- * Short (default): experience shows its first sentence plus its first bullet with a number, no
- * project bullets, and
+ * Short (default): experience shows its first sentence plus its first bullet with a number (no
+ * type/location line), client work has no tech line, no project bullets, and
  * client work only with a live link. Extended: everything.
  */
 export const PDFResume = ({
@@ -326,9 +326,11 @@ export const PDFResume = ({
                   {exp.startDate} - {exp.endDate} · {duration}
                 </Text>
               </View>
-              <Text style={styles.tinyMuted}>
-                {exp.type} • {exp.location}
-              </Text>
+              {extended ? (
+                <Text style={styles.tinyMuted}>
+                  {exp.type} • {exp.location}
+                </Text>
+              ) : null}
 
               {exp.description ? (
                 <Text>
@@ -372,7 +374,7 @@ export const PDFResume = ({
                 <Text>
                   <BoldedText text={w.shortDescription} regex={kwRegex} />
                 </Text>
-                {w.technologies?.length ? (
+                {extended && w.technologies?.length ? (
                   <Text style={styles.tinyMuted}>
                     Tech: {w.technologies.join(", ")}
                   </Text>
