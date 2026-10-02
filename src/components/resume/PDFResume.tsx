@@ -377,7 +377,7 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
           <>
             <Text style={styles.sectionTitle}>Select Projects</Text>
             {projects.map((p, i) => (
-              <View key={`pr-${i}`} style={styles.entry}>
+              <View key={`pr-${i}`} style={styles.entry} wrap={false}>
                 <View style={styles.entryHeader}>
                   <Text style={styles.entryTitle}>{p.title}</Text>
                   {p.demoLink ? (
