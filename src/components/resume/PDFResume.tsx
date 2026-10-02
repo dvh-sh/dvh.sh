@@ -32,6 +32,8 @@ import {
 const PROJECTS_ENABLED = true;
 /** Experience shows only the first sentence of each description, no bullets, to keep the PDF short. */
 const EXPERIENCE_BULLETS = false;
+/** Project highlight bullets in the PDF. Off to keep it short; the web /resume still shows them. */
+const PROJECT_HIGHLIGHTS = false;
 
 /** First sentence of a description ("Founded X. Built Y." -> "Founded X."). */
 const firstSentence = (text: string) => text.match(/^.*?[.!?](?=\s|$)/)?.[0] ?? text;
@@ -400,7 +402,7 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
                     <BoldedText text={p.description} regex={kwRegex} />
                   </Text>
                 ) : null}
-                {(p.highlights || []).map((b, j) => (
+                {(PROJECT_HIGHLIGHTS ? p.highlights || [] : []).map((b, j) => (
                   <View key={`prb-${i}-${j}`} style={styles.bulletLine}>
                     <Text style={styles.bulletDot}>•</Text>
                     <Text>
