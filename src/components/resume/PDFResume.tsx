@@ -7,7 +7,7 @@
  *
  * @description
  * Engineer/Academic-styled PDF resume using @react-pdf/renderer.
- * Small type sizes, dark background, keyword emphasis, duration labels.
+ * Small type sizes, white background (print-friendly), keyword emphasis, duration labels.
  * Auto-paginates to a second page when content overflows A4.
  */
 
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica",
     fontSize: 9, // small base
     lineHeight: 1.32,
-    backgroundColor: "#0f1115",
-    color: "#f3f3f3",
+    backgroundColor: "#ffffff",
+    color: "#111111",
   },
   name: {
     fontSize: 14, // small but bold header
@@ -69,19 +69,19 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   link: {
-    color: "#5ea7ff",
+    color: "#1a4fb5",
     textDecoration: "none",
   },
   location: {
-    color: "#c9c9c9",
+    color: "#555555",
   },
   sectionTitle: {
     fontSize: 10,
     fontWeight: 700,
-    color: "#ececec",
+    color: "#111111",
     marginTop: 6,
     marginBottom: 4,
-    borderBottom: "1px solid #333941",
+    borderBottom: "1px solid #bbbbbb",
     paddingBottom: 2,
   },
   twoColRow: {
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   rightMuted: {
-    color: "#c9c9c9",
+    color: "#555555",
   },
   entry: {
     marginBottom: 6,
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
   tinyMuted: {
     fontSize: 8,
-    color: "#c9c9c9",
+    color: "#555555",
   },
   bulletLine: {
     flexDirection: "row",
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     marginBottom: 1.5,
   },
   rightLink: {
-    color: "#5ea7ff",
+    color: "#1a4fb5",
     textDecoration: "none",
     fontSize: 9,
   },
@@ -250,14 +250,14 @@ export const PDFResume = ({
             <View key={`c-${idx}`} style={{ flexDirection: "row" }}>
               {node}
               {idx < contactNodes.length - 1 ? (
-                <Text style={{ marginHorizontal: 6, color: "#9aa1ab" }}>|</Text>
+                <Text style={{ marginHorizontal: 6, color: "#888888" }}>|</Text>
               ) : null}
             </View>
           ))}
           {data.profile?.location ? (
             <>
               {contactNodes.length ? (
-                <Text style={{ marginHorizontal: 6, color: "#9aa1ab" }}>|</Text>
+                <Text style={{ marginHorizontal: 6, color: "#888888" }}>|</Text>
               ) : null}
               <Text style={styles.location}>{data.profile.location}</Text>
             </>
