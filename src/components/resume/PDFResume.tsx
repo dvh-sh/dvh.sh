@@ -202,7 +202,7 @@ export const PDFResume = ({
   ).filter((e) => e.school && e.degree);
 
   const projects = (Array.isArray(data.projects) ? data.projects : []).filter(
-    (p) => p.resume !== false,
+    (p) => p.resume !== false && (extended || p.shortResume !== false),
   );
 
   // Build keywords regex (supports either "keywords" or legacy "highlightKeywords" in JSON)

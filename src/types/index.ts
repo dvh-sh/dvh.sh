@@ -103,6 +103,8 @@ export interface Project {
   highlights?: string[];
   /** false keeps the project on the home page but off /resume and the PDF. */
   resume?: boolean;
+  /** false keeps the project off the short PDF only. */
+  shortResume?: boolean;
 }
 
 /**
