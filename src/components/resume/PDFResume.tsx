@@ -173,8 +173,9 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
     ? data.experience
     : [];
 
+  // The PDF lists only client work with a live site to link to.
   const works = Array.isArray(data.works)
-    ? data.works.map((w) => ({
+    ? data.works.filter((w) => w.link).map((w) => ({
         ...w,
         technologies: normalizeTech(w.technologies),
       }))
