@@ -99,11 +99,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  // Larger and tinted so titles stand apart from bolded keywords in the body.
+  // Larger so titles stand apart from bolded keywords in the body.
   entryTitle: {
     fontSize: 10,
     fontWeight: 700,
-    color: "#f5c2e7",
   },
   tinyMuted: {
     fontSize: 8,
