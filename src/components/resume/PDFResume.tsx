@@ -33,7 +33,8 @@ const PROJECTS_ENABLED = true;
 
 /** Short PDF: the first bullet with a number in it, so each job keeps one concrete metric. */
 const metricBullet = (bullets?: string[]) => {
-  const hit = bullets?.find((b) => /\d/.test(b));
+  // A standalone count ("45 event", "20+", "30-second"), not a version or name ("OAuth 2.1", "B2C").
+  const hit = bullets?.find((b) => /(?:^|\s)\d[\d,]*(?:\+|%|-|\s)/.test(b));
   return hit ? [hit] : [];
 };
 
