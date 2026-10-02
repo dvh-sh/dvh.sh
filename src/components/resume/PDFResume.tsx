@@ -75,11 +75,6 @@ const styles = StyleSheet.create({
   location: {
     color: "#c9c9c9",
   },
-  sep: {
-    height: 1,
-    backgroundColor: "#333941",
-    marginVertical: 8,
-  },
   sectionTitle: {
     fontSize: 10,
     fontWeight: 700,
@@ -104,8 +99,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  // Larger and tinted so titles stand apart from bolded keywords in the body.
   entryTitle: {
+    fontSize: 10,
     fontWeight: 700,
+    color: "#f5c2e7",
   },
   tinyMuted: {
     fontSize: 8,
@@ -267,7 +265,6 @@ export const PDFResume = ({
           ) : null}
         </View>
 
-        <View style={styles.sep} />
 
         {/* Skills */}
         <Text style={styles.sectionTitle}>Skills</Text>
