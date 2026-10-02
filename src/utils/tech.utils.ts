@@ -180,6 +180,12 @@ const tech: Tech[] = [
     icon: "SiVercel",
   },
   {
+    slug: "redis",
+    title: "Redis",
+    color: "text-ctp-red",
+    icon: "SiRedis",
+  },
+  {
     slug: "bun",
     title: "Bun",
     color: "text-ctp-rosewater",

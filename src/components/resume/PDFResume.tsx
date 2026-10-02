@@ -354,7 +354,9 @@ export const PDFResume = ({
         {/* Client Work */}
         {works.length ? (
           <>
-            <Text style={styles.sectionTitle}>Client Work</Text>
+            <Text style={styles.sectionTitle}>
+              {extended ? "Client Work" : "Select Client Engagements"}
+            </Text>
             {works.map((w, i) => (
               <View key={`w-${i}`} style={styles.entry}>
                 <View style={styles.entryHeader}>
