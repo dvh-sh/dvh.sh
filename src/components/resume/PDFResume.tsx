@@ -30,6 +30,11 @@ import {
 } from "@/utils/text.utils";
 
 const PROJECTS_ENABLED = true;
+/** Experience shows only the first sentence of each description, no bullets, to keep the PDF short. */
+const EXPERIENCE_BULLETS = false;
+
+/** First sentence of a description ("Founded X. Built Y." -> "Founded X."). */
+const firstSentence = (text: string) => text.match(/^.*?[.!?](?=\s|$)/)?.[0] ?? text;
 
 /**
  * @constant styles
@@ -310,11 +315,18 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
 
               {exp.description ? (
                 <Text>
-                  <BoldedText text={exp.description} regex={kwRegex} />
+                  <BoldedText
+                    text={
+                      EXPERIENCE_BULLETS
+                        ? exp.description
+                        : firstSentence(exp.description)
+                    }
+                    regex={kwRegex}
+                  />
                 </Text>
               ) : null}
 
-              {(exp.bullets || []).map((b, j) => (
+              {(EXPERIENCE_BULLETS ? exp.bullets || [] : []).map((b, j) => (
                 <View key={`b-${i}-${j}`} style={styles.bulletLine}>
                   <Text style={styles.bulletDot}>•</Text>
                   <Text>
