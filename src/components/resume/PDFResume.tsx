@@ -306,7 +306,7 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
             <View key={`exp-${i}`} style={styles.entry}>
               <View style={styles.entryHeader}>
                 <Text style={styles.entryTitle}>
-                  {exp.title} — {exp.company}
+                  {exp.title} | {exp.company}
                 </Text>
                 <Text style={styles.rightMuted}>
                   {exp.startDate} - {exp.endDate} · {duration}
