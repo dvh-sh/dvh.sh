@@ -30,10 +30,6 @@ import {
 } from "@/utils/text.utils";
 
 const PROJECTS_ENABLED = true;
-/** Experience shows only the first sentence of each description, no bullets, to keep the PDF short. */
-const EXPERIENCE_BULLETS = false;
-/** Project highlight bullets in the PDF. Off to keep it short; the web /resume still shows them. */
-const PROJECT_HIGHLIGHTS = false;
 
 /** First sentence of a description ("Founded X. Built Y." -> "Founded X."). */
 const firstSentence = (text: string) => text.match(/^.*?[.!?](?=\s|$)/)?.[0] ?? text;
@@ -163,7 +159,17 @@ const BoldedText = ({
  * @param {{ data: PortfolioData }} props - Portfolio data
  * @returns {JSX.Element} PDF document component
  */
-export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
+/**
+ * Short (default): experience shows its first sentence only, no experience or project bullets, and
+ * client work only with a live link. Extended: everything.
+ */
+export const PDFResume = ({
+  data,
+  extended = false,
+}: {
+  data: PortfolioData;
+  extended?: boolean;
+}): JSX.Element => {
   const skills = data.skills || {
     programmingLanguages: [],
     frameworks: [],
@@ -175,9 +181,9 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
     ? data.experience
     : [];
 
-  // The PDF lists only client work with a live site to link to.
+  // The short PDF lists only client work with a live site to link to.
   const works = Array.isArray(data.works)
-    ? data.works.filter((w) => w.link).map((w) => ({
+    ? data.works.filter((w) => extended || w.link).map((w) => ({
         ...w,
         technologies: normalizeTech(w.technologies),
       }))
@@ -320,7 +326,7 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
                 <Text>
                   <BoldedText
                     text={
-                      EXPERIENCE_BULLETS
+                      extended
                         ? exp.description
                         : firstSentence(exp.description)
                     }
@@ -329,7 +335,7 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
                 </Text>
               ) : null}
 
-              {(EXPERIENCE_BULLETS ? exp.bullets || [] : []).map((b, j) => (
+              {(extended ? exp.bullets || [] : []).map((b, j) => (
                 <View key={`b-${i}-${j}`} style={styles.bulletLine}>
                   <Text style={styles.bulletDot}>•</Text>
                   <Text>
@@ -402,7 +408,7 @@ export const PDFResume = ({ data }: { data: PortfolioData }): JSX.Element => {
                     <BoldedText text={p.description} regex={kwRegex} />
                   </Text>
                 ) : null}
-                {(PROJECT_HIGHLIGHTS ? p.highlights || [] : []).map((b, j) => (
+                {(extended ? p.highlights || [] : []).map((b, j) => (
                   <View key={`prb-${i}-${j}`} style={styles.bulletLine}>
                     <Text style={styles.bulletDot}>•</Text>
                     <Text>

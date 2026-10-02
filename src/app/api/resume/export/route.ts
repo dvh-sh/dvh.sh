@@ -3,7 +3,7 @@
  * @author David (https://dvh.sh)
  *
  * @created Sun, Aug 25 2025
- * @updated Mon, Aug 25 2025
+ * @updated Thu, Oct 01 2026
  *
  * @description
  * API endpoint for exporting resume as PDF using @react-pdf/renderer.
@@ -21,22 +21,22 @@ export const runtime = "nodejs";
 /**
  * @function GET
  * @description Generates and streams a PDF resume from portfolio data.
- * @param {NextRequest} _req - Incoming request (unused)
+ * @param {NextRequest} req - `?version=extended` for the full resume; short otherwise
  * @returns {Promise<NextResponse>} Streamed PDF response
  */
-export const GET = async (_req: NextRequest): Promise<NextResponse> => {
+export const GET = async (req: NextRequest): Promise<NextResponse> => {
   try {
     const data = await fetchPortfolioData();
 
     // PDFResume returns a <Document />
-    const element = React.createElement(PDFResume, { data });
+    const extended = req.nextUrl.searchParams.get("version") === "extended";
+    const element = React.createElement(PDFResume, { data, extended });
     const pdfStream = await renderToStream(element as any);
 
     return new NextResponse(pdfStream as any, {
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition":
-          'attachment; filename="david_heffler_resume.pdf"',
+        "Content-Disposition": `attachment; filename="david_heffler_resume${extended ? "_extended" : ""}.pdf"`,
         "Cache-Control": "no-store",
       },
     });
