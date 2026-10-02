@@ -22,6 +22,7 @@ import {
 } from "@react-pdf/renderer";
 import type { PortfolioData, Experience, Education } from "@/types";
 import { calcDuration } from "@/utils/date.utils";
+import { getTechBySlug } from "@/utils/tech.utils";
 import {
   normalizeTech,
   buildKeywordRegex,
@@ -38,6 +39,13 @@ const metricBullet = (bullets?: string[]) => {
   return hit ? [hit] : [];
 };
 
+/** A standalone number with optional $ and trailing + or % (not the 2 in "B2C"). */
+const NUMBER_RE = /(\$?\b\d[\d,]*(?:\.\d+)?\+?%?)/;
+
+/** Skill slugs print as their display names ("nextjs" -> "Next.js"). */
+const skillNames = (slugs: readonly string[] = []) =>
+  slugs.map((slug) => getTechBySlug(slug)?.title ?? slug).join(", ");
+
 /** First sentence of a description ("Founded X. Built Y." -> "Founded X."). */
 const firstSentence = (text: string) =>
   text.match(/^.*?[.!?](?=\s|$)/)?.[0] ?? text;
@@ -48,9 +56,9 @@ const firstSentence = (text: string) =>
  */
 const styles = StyleSheet.create({
   page: {
-    paddingTop: 26,
-    paddingBottom: 26,
-    paddingHorizontal: 30,
+    paddingTop: 20,
+    paddingBottom: 20,
+    paddingHorizontal: 24,
     fontFamily: "Helvetica",
     fontSize: 9, // small base
     lineHeight: 1.32,
@@ -61,6 +69,11 @@ const styles = StyleSheet.create({
     fontSize: 14, // small but bold header
     fontWeight: 700,
     textAlign: "center",
+    marginBottom: 3,
+  },
+  headline: {
+    textAlign: "center",
+    color: "#333333",
     marginBottom: 3,
   },
   contactRow: {
@@ -109,6 +122,17 @@ const styles = StyleSheet.create({
     fontSize: 8,
     color: "#555555",
   },
+  subTitle: {
+    fontWeight: 700,
+    color: "#555555",
+    marginTop: 3,
+    marginBottom: 3,
+  },
+  subEntries: {
+    marginLeft: 10,
+    paddingLeft: 6,
+    borderLeft: "1px solid #bbbbbb",
+  },
   bulletLine: {
     flexDirection: "row",
     marginLeft: 8,
@@ -143,14 +167,23 @@ const BoldedText = ({
   regex: RegExp | null;
 }): JSX.Element => {
   const parts = splitForPdf(text, regex);
-  // parts alternates normal and matched tokens; detect bold by re-testing
+  // parts alternates normal and matched tokens; detect bold by re-testing.
+  // Numbers ("$15,000+", "45", "1,500+") are italicized inside either.
   return (
     <>
       {parts.map((part, i) => {
         const isMatch = regex ? !!part.match(regex) : false;
         return (
           <Text key={i} style={isMatch ? { fontWeight: 700 } : undefined}>
-            {part}
+            {part.split(NUMBER_RE).map((seg, k) =>
+              k % 2 === 1 ? (
+                <Text key={k} style={{ fontStyle: "italic" }}>
+                  {seg}
+                </Text>
+              ) : (
+                seg
+              ),
+            )}
           </Text>
         );
       })}
@@ -165,6 +198,7 @@ const BoldedText = ({
  * @returns {JSX.Element} PDF document component
  */
 /**
+ * Order: Career (client work nested under the entry with clientWork), Projects, Skills, Education.
  * Short (default): experience shows its first sentence plus its first bullet with a number (no
  * type/location line), client work has no tech line, no project bullets, and
  * client work only with a live link. Extended: everything.
@@ -250,6 +284,9 @@ export const PDFResume = ({
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <Text style={styles.name}>{data.profile?.name || ""}</Text>
+        {data.profile?.headline ? (
+          <Text style={styles.headline}>{data.profile.headline}</Text>
+        ) : null}
         <View style={styles.contactRow}>
           {contactNodes.map((node, idx) => (
             <View key={`c-${idx}`} style={{ flexDirection: "row" }}>
@@ -269,51 +306,8 @@ export const PDFResume = ({
           ) : null}
         </View>
 
-        {/* Skills */}
-        <Text style={styles.sectionTitle}>Skills</Text>
-        {skills.programmingLanguages?.length ? (
-          <Text style={styles.skillLine}>
-            <Text style={styles.label}>Languages:</Text>{" "}
-            {skills.programmingLanguages.join(", ")}
-          </Text>
-        ) : null}
-        {skills.frameworks?.length ? (
-          <Text style={styles.skillLine}>
-            <Text style={styles.label}>Frameworks:</Text>{" "}
-            {skills.frameworks.join(", ")}
-          </Text>
-        ) : null}
-        {skills.tools?.length ? (
-          <Text style={styles.skillLine}>
-            <Text style={styles.label}>DevOps/Tools:</Text>{" "}
-            {skills.tools.join(", ")}
-          </Text>
-        ) : null}
-        {skills.cloud?.length ? (
-          <Text style={styles.skillLine}>
-            <Text style={styles.label}>Cloud/DB:</Text>{" "}
-            {skills.cloud.join(", ")}
-          </Text>
-        ) : null}
-
-        {/* Education */}
-        <Text style={styles.sectionTitle}>Education</Text>
-        {education.map((edu, i) => (
-          <View key={`edu-${i}`} style={{ marginBottom: 5 }}>
-            <View style={styles.twoColRow}>
-              <Text>
-                {edu.school} – <Text style={styles.label}>{edu.degree}</Text>
-              </Text>
-              <Text style={styles.rightMuted}>
-                {edu.dates}
-                {edu.expected ? " · Expected" : ""}
-              </Text>
-            </View>
-          </View>
-        ))}
-
-        {/* Experience */}
-        <Text style={styles.sectionTitle}>Experience</Text>
+        {/* Career */}
+        <Text style={styles.sectionTitle}>Career</Text>
         {experience.map((exp, i) => {
           const duration = calcDuration(exp.startDate, exp.endDate);
           return (
@@ -355,44 +349,46 @@ export const PDFResume = ({
                   </View>
                 ),
               )}
+
+              {/* Client work nests under the consultancy it was done through */}
+              {exp.clientWork && works.length ? (
+                <View style={styles.subEntries}>
+                  <Text style={styles.subTitle}>
+                    {extended ? "Client Work" : "Select Client Engagements"}
+                  </Text>
+                  {works.map((w, k) => (
+                    <View key={`w-${k}`} style={styles.entry}>
+                      <View style={styles.entryHeader}>
+                        <Text style={styles.entryTitle}>{w.title}</Text>
+                        <Text style={styles.rightMuted}>{w.date}</Text>
+                      </View>
+                      <Text>
+                        <BoldedText text={w.shortDescription} regex={kwRegex} />
+                      </Text>
+                      {extended && w.technologies?.length ? (
+                        <Text style={styles.tinyMuted}>
+                          Tech: {w.technologies.join(", ")}
+                        </Text>
+                      ) : null}
+                      {w.link ? (
+                        <Link
+                          src={
+                            w.link.startsWith("http")
+                              ? w.link
+                              : `https://${w.link}`
+                          }
+                          style={styles.rightLink}
+                        >
+                          {prettyUrl(w.link)}
+                        </Link>
+                      ) : null}
+                    </View>
+                  ))}
+                </View>
+              ) : null}
             </View>
           );
         })}
-
-        {/* Client Work */}
-        {works.length ? (
-          <>
-            <Text style={styles.sectionTitle}>
-              {extended ? "Client Work" : "Select Client Engagements"}
-            </Text>
-            {works.map((w, i) => (
-              <View key={`w-${i}`} style={styles.entry}>
-                <View style={styles.entryHeader}>
-                  <Text style={styles.entryTitle}>{w.title}</Text>
-                  <Text style={styles.rightMuted}>{w.date}</Text>
-                </View>
-                <Text>
-                  <BoldedText text={w.shortDescription} regex={kwRegex} />
-                </Text>
-                {extended && w.technologies?.length ? (
-                  <Text style={styles.tinyMuted}>
-                    Tech: {w.technologies.join(", ")}
-                  </Text>
-                ) : null}
-                {w.link ? (
-                  <Link
-                    src={
-                      w.link.startsWith("http") ? w.link : `https://${w.link}`
-                    }
-                    style={styles.rightLink}
-                  >
-                    {prettyUrl(w.link)}
-                  </Link>
-                ) : null}
-              </View>
-            ))}
-          </>
-        ) : null}
 
         {/* Select Projects */}
         {PROJECTS_ENABLED && projects.length ? (
@@ -434,6 +430,40 @@ export const PDFResume = ({
             ))}
           </>
         ) : null}
+
+        {/* Skills */}
+        <Text style={styles.sectionTitle}>Skills</Text>
+        {(
+          [
+            ["Languages", skills.programmingLanguages],
+            ["Frameworks", skills.frameworks],
+            ["DevOps/Tools", skills.tools],
+            ["Cloud/DB", skills.cloud],
+            ["AI Tools", skills.aiTools],
+          ] as const
+        ).map(([label, list]) =>
+          list?.length ? (
+            <Text key={label} style={styles.skillLine}>
+              <Text style={styles.label}>{label}:</Text> {skillNames(list)}
+            </Text>
+          ) : null,
+        )}
+
+        {/* Education */}
+        <Text style={styles.sectionTitle}>Education</Text>
+        {education.map((edu, i) => (
+          <View key={`edu-${i}`} style={{ marginBottom: 5 }}>
+            <View style={styles.twoColRow}>
+              <Text>
+                {edu.school}, <Text style={styles.label}>{edu.degree}</Text>
+              </Text>
+              <Text style={styles.rightMuted}>
+                {edu.dates}
+                {edu.expected ? " · Expected" : ""}
+              </Text>
+            </View>
+          </View>
+        ))}
       </Page>
     </Document>
   );

@@ -216,6 +216,18 @@ const tech: Tech[] = [
     icon: "SiVitest",
   },
   {
+    slug: "claude",
+    title: "Claude",
+    color: "text-ctp-peach",
+    icon: "SiClaude",
+  },
+  {
+    slug: "workersai",
+    title: "Cloudflare Workers AI",
+    color: "text-ctp-peach",
+    icon: "SiCloudflare",
+  },
+  {
     slug: "claudecode",
     title: "Claude Code",
     color: "text-ctp-peach",

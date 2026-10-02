@@ -21,6 +21,8 @@ export interface Profile {
   github: string;
   linkedin: string;
   location: string;
+  /** One-line headline under the name on the PDF resume. */
+  headline?: string;
 }
 
 /**
@@ -36,6 +38,8 @@ export interface Experience {
   location: string;
   description: string;
   bullets: string[];
+  /** The PDF nests client work under this entry. */
+  clientWork?: boolean;
 }
 
 /**
